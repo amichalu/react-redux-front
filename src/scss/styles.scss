@@ -1,0 +1,172 @@
+$doc-border-color: #ddd;
+$row-grey-back: #eee;
+$doc-list-font: 'Roboto Mono', monospace;
+$doc-list-font-size: 90%; 
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+.text-ar {
+  text-align: right;
+}
+.text-al {
+  text-align: left;
+}
+.text-ac {
+  text-align: center;
+}
+
+
+.doc-check {
+  width: 1.5em;
+  padding: 0 .5em;
+}
+
+.doc-id {
+  width: 5em;
+}
+
+.doc-number {
+  width: 9em;
+  border-left: 1px solid $doc-border-color;
+}
+
+.doc-type {
+  width: 5.5em;
+  border-left: 1px solid $doc-border-color;
+}
+.div-doc-norm {
+  color: dodgerblue; 
+}
+.div-doc-corr {
+  background-color: #ff6666;
+  color: #fff;
+}
+
+.doc-val {
+  width: 8em;
+  border-left: 1px solid $doc-border-color;
+}
+
+.doc-nip {
+  width: 12em;
+  border-left: 1px solid $doc-border-color;
+}
+
+.doc-customername1 {
+  width: 25em;
+  border-left: 1px solid $doc-border-color;
+  
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  
+}
+
+.doc-list {
+  float: left;
+  font-family: $doc-list-font;
+  font-size: $doc-list-font-size;
+  border-top: 1px solid $doc-border-color;
+  border-left: 1px solid $doc-border-color;
+  border-right: 1px solid $doc-border-color;
+  margin-left: .6em;
+}
+
+.div-cell {
+  float: left;
+}
+
+.div-row {
+  overflow: hidden;
+  width: 100em;
+  cursor: pointer;
+  border-bottom: 1px solid $doc-border-color;
+}
+.div-row-grey {
+  background-color: $row-grey-back
+}
+
+.title-row {
+  background-color: darkcyan;
+  color: ghostwhite;
+  cursor: pointer;
+}
+.row-hover {
+  background-color: #ddd;
+}
+.row-checked {
+  background-color: lightblue;
+}
+
+.p-cell {
+  margin: 0.2em 0.4em;  
+  white-space: nowrap;
+  // width: 90%;
+}
+
+.col-highlighted {
+  background-color: lightyellow;
+}
+
+.div-detail {
+  height: 0px;
+  overflow:hidden;
+}
+
+// ANIMATION !!!!
+.doc-opening {
+    height: 300px;
+    background-color: palegoldenrod;
+    position: relative;
+    -webkit-animation-name: opening; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 0.7s; /* Safari 4.0 - 8.0 */
+    animation-name: opening;
+    animation-duration: 0.7s;
+    -webkit-animation-fill-mode: forwards; /* Safari 4.0 - 8.0 */
+    animation-fill-mode: forwards;
+}
+
+.doc-closing {
+    height: 0px;
+    background-color: palegoldenrod;
+    position: relative;
+    -webkit-animation-name: closing; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 0.7s; /* Safari 4.0 - 8.0 */
+    animation-name: closing;
+    animation-duration: 0.7s;
+    -webkit-animation-fill-mode: forwards; /* Safari 4.0 - 8.0 */
+    animation-fill-mode: forwards;
+}
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes opening {
+    0%   {height: 0px}
+    100% {height: 300px; visibility: visible}
+}
+/* Standard syntax */
+@keyframes opening {
+    0%   {height: 0px}
+    100% {height: 300px; visibility: visible}
+}
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes closing {
+    0%   {height: 300px}
+    100% {height: 0px; visibility: hidden}
+}
+/* Standard syntax */
+@keyframes closing {
+    0%   {height: 300px}
+    100% {height: 0px; visibility: hidden}
+}
+
+.div-button {
+  padding: .3em .5em;
+  margin: .4em .4em;
+  float: left;
+  user-select: none;
+  cursor: pointer;
+  transition: background-color .25s, color .15s, box-shadow .15s, opacity .25s, filter .25s, border .15s;
+}
+.div-button:hover {
+  box-shadow: 5px 5px 10px lightgrey;
+}
+
