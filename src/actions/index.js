@@ -15,7 +15,7 @@ export const requestDocuments = () => ({
 
 export const receiveDocuments = (json) => ({
   type: RECEIVE_DOCUMENTS,
-  items: json.documents,
+  items: setEvenDocuments( json.documents ),
   receivedAt: Date.now()
 })
 
@@ -31,6 +31,15 @@ export const nextPage = () => ({
 export const prevPage = () => ({
     type: PREV_PAGE
 })
+
+const setEvenDocuments = (documents) => {
+  var even = false;
+  for (var i = 0; i < documents.length; i++) {
+    documents[i].even = !even;
+    even = !even;
+  }
+  return documents;
+}
 
 const getUrl = (state) => ("/documents/" + state.documents.order + "/" + state.documents.pageNmb + "/" + state.documents.pageSize + "/" + state.documents.dirOrder)
 
