@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+
 import { fetchDocumentsIfNeeded, invalidateDocuments, prevPage, nextPage, changeOrder } from '../actions'
-
-import {mylog} from '../solidity/apputils';
-
 import DocumentList from '../components/DocumentList'
+import {mylog} from '../solidity/apputils';
 
 class DocumentListContainer extends Component {
   constructor(props) {
@@ -48,6 +47,7 @@ class DocumentListContainer extends Component {
 
   render() {
     mylog("DocumentListContainer.render()")
+    mylog('DocumentListContainer.render() this.props.documents: ', this.props.documents)
     const isFetching = this.props.documents.isFetching || false;
     return <div>
               <div style={{float: "left", margin: ".2em"}}>

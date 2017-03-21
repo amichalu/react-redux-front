@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {mylog, mydir} from '../solidity/apputils';
 
 import DocumentItem from '../components/DocumentItem'
+import {mylog} from '../solidity/apputils';
 
 // DocumentList component  ------------------------------------------------------------------
 class DocumentList extends Component {
@@ -27,7 +27,7 @@ class DocumentList extends Component {
 
   componentWillReceiveProps(nextProps) {
     mylog("DocumentList.componentWillReceiveProps()");
-    mydir(this.prepareDocuments(nextProps.documents.items)); // TO JEST CZARY MARY !!!!!
+    mylog('prepareDocuments(nextProps.documents.items) => ', this.prepareDocuments(nextProps.documents.items)); // TO JEST CZARY MARY !!!!!
   }
 
   shouldComponentUpdate( nextProps, nextState ) {

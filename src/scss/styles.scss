@@ -1,5 +1,7 @@
 $doc-border-color: #ddd;
-$row-grey-back: #eee;
+$even-row-grey-back: #eee;
+$row-hover: #ddd;
+
 $doc-list-font: 'Roboto Mono', monospace;
 $doc-list-font-size: 90%; 
 
@@ -83,7 +85,7 @@ $doc-list-font-size: 90%;
   border-bottom: 1px solid $doc-border-color;
 }
 .div-row-grey {
-  background-color: $row-grey-back
+  background-color: $even-row-grey-back
 }
 
 .title-row {
@@ -92,7 +94,7 @@ $doc-list-font-size: 90%;
   cursor: pointer;
 }
 .row-hover {
-  background-color: #ddd;
+  background-color: $row-hover
 }
 .row-checked {
   background-color: lightblue;
