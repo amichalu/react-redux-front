@@ -13,7 +13,7 @@ import './css/w3.css';
 
 // Enable logger 
 const middleware = [ thunk ]
-if ( process.env.NODE_END !== 'production') {
+if ( process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger())
 }
 

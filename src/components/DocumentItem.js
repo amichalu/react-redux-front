@@ -40,12 +40,12 @@ class DocumentItem extends Component {
     this.state.onCheckClick(event.target.value, event.target.checked);
   }
   onRowClick() {
-    var doc = this.state.document;
-    if (!doc.opened) {
-      doc.opened = !doc.opened;
-      doc.closing = false;
-      this.setState( {document: doc} );
-    }
+//    var doc = this.state.document;
+    // if (!doc.opened) {
+    //   doc.opened = !doc.opened;
+    //   doc.closing = false;
+    //   this.setState( {document: doc} );
+    // }
   }
 
   onClose() {

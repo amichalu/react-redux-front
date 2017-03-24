@@ -3,22 +3,19 @@ import React, { Component } from 'react';
 import DocumentItem from '../components/DocumentItem'
 import {mylog} from '../solidity/apputils';
 
+
 // DocumentList component  ------------------------------------------------------------------
 class DocumentList extends Component {
   constructor(props) {
     super(props);
     mylog("DocumentList.constructor()");
+    this.state = {
+      changeOrder: props.onChangeOrder,
+      toogleDocument: props.onToogle
+    };
     this.onChange = this.onChangeOrder.bind(this);
     this.onCheck = this.onCheck.bind(this);
-    this.order = {
-      dir: 'asc',
-      col: 'number'
-    }
     this.checked = [];
-    this.state = { 
-      documents: this.prepareDocuments( props.documents.items ),
-      changeOrder: props.onChangeOrder
-    };
   }
 
   componentDidMount() {
@@ -27,7 +24,7 @@ class DocumentList extends Component {
 
   componentWillReceiveProps(nextProps) {
     mylog("DocumentList.componentWillReceiveProps()");
-    mylog('prepareDocuments(nextProps.documents.items) => ', this.prepareDocuments(nextProps.documents.items)); // TO JEST CZARY MARY !!!!!
+    this.prepareDocuments(nextProps.documents.items);
   }
 
   shouldComponentUpdate( nextProps, nextState ) {
@@ -36,24 +33,24 @@ class DocumentList extends Component {
   }
 
   prepareDocuments( docs ) {
-    if ( typeof docs !== 'undefined' ) docs.forEach((doc)=>{ doc.checked = this.checked[doc.id] || false });
+    //if ( typeof docs !== 'undefined' ) docs.forEach((doc)=>{ doc.checked = this.checked[doc.id] || false });
+    //if ( typeof docs !== 'undefined' ) docs.forEach((doc)=>{ doc.checked = this.props.documents.selected[doc.id] || false });
     return docs;
   }
 
   onCheck( id, checked ) {
-    checked ? this.checked[id] = checked : delete(this.checked[id]);
+
+    console.log( 'DocumentList.onCheck(): ', id, checked)
+    //checked ? this.checked[id] = checked : delete(this.checked[id]);
+    this.state.toogleDocument( id )
   }
 
   onChangeOrder(col) {
-    this.order.dir = this.order.dir === 'asc' ? 'desc' : 'asc';
-    this.order.col = col;
-    this.state.changeOrder.call(this, this.order);
+    this.state.changeOrder(col);
   }
 
-  getDir( colDir ) {
-    const diri = this.order.dir;
-    const coli = this.order.col;
-    return coli === colDir ? diri === 'asc' ? 'A' : 'V' : '';
+  getDir( order ) {
+    return this.props.documents.order === order ? this.props.documents.dirOrder === 'asc' ? 'A' : 'V' : '';
   }
 
   renderDocument(document, col) {
@@ -76,7 +73,7 @@ class DocumentList extends Component {
           <div className="doc-val div-cell"><p className="text-al p-cell">Akcyza</p></div>
       </div>
       
-    { this.props.documents.items ? this.props.documents.items.map((document,col)=>(this.renderDocument(document,this.order.col))) : ''} </div>;
+    { this.props.documents.items ? this.props.documents.items.map((document,col)=>(this.renderDocument(document,this.props.documents.order))) : ''} </div>;
   }
 }
 

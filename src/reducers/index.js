@@ -1,15 +1,23 @@
 import { combineReducers } from 'redux'
-import { REQUEST_DOCUMENTS, RECEIVE_DOCUMENTS, INVALIDATE_DOCUMENTS, NEXT_PAGE, PREV_PAGE, CHANGE_ORDER} from '../actions'
+import { 
+    REQUEST_DOCUMENTS, 
+    RECEIVE_DOCUMENTS, 
+    INVALIDATE_DOCUMENTS, 
+    NEXT_PAGE, 
+    PREV_PAGE, 
+    CHANGE_ORDER,
+    TOOGLE_DOCUMENT } from '../actions'
 
 const initialState = {
-    // isFetching: false,
-    // items: [],
-    // lastUpdated: '',
-    // didInvalidate: false,
+    isFetching: false,
+    items: [],
+    selectedItems: [],
+    lastUpdated: '',
+    didInvalidate: true,
     pageNmb: 0,
     pageSize: 20,
     order: 'number',
-    dirOrder: 'asc'   
+    dirOrder: 'asc'
 }
 
 const documents = ( state = initialState, action ) => {
@@ -47,13 +55,58 @@ const documents = ( state = initialState, action ) => {
                 didInvalidate: true
             }
         case CHANGE_ORDER:
+            if ( state.order === action.order) {
+                return {
+                    ...state,
+                    order: action.order,
+                    dirOrder: state.dirOrder === 'asc' ? 'desc' : 'asc',
+                    didInvalidate: true                    
+                }
+            }
             return {
                 ...state,
                 order: action.order,
-                dirOrder: action.dirOrder,
+                dirOrder: 'asc',
                 didInvalidate: true
             }
-            
+        case TOOGLE_DOCUMENT:
+
+            let selectedItems = state.selectedItems
+
+            // Row is selected and will be deselected
+            if ( selectedItems[action.id] ) {
+                delete(selectedItems[action.id])
+                return {
+                    ...state,
+                    items: state.items.map( (doc) => {
+                        if (doc.id === action.id) {
+                            return {
+                                ...doc,
+                                checked: false
+                            }
+                        } else return doc
+                    }),
+                    lastUpdated: action.receivedAt,
+                    selectedItems: selectedItems
+                }
+            }
+            // Row is not selected and will be selected
+            else {
+                selectedItems[action.id] = true
+                return {
+                    ...state,
+                    items: state.items.map( (doc) => {
+                        if (doc.id === action.id) {
+                            return {
+                                ...doc,
+                                checked: true
+                            }
+                        } else return doc
+                    }),
+                    selectedItems: selectedItems,
+                    lastUpdated: action.receivedAt
+                }
+            }
         default:
             return state
     }

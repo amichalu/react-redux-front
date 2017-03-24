@@ -4,6 +4,7 @@ export const INVALIDATE_DOCUMENTS = 'INVALIDATE_DOCUMENTS'
 export const NEXT_PAGE = 'NEXT_PAGE'
 export const PREV_PAGE = 'PREV_PAGE'
 export const CHANGE_ORDER = 'CHANGE_ORDER'
+export const TOOGLE_DOCUMENT = 'TOOGLE_DOCUMENT'
 
 export const invalidateDocuments = () => ({
   type: INVALIDATE_DOCUMENTS
@@ -13,16 +14,30 @@ export const requestDocuments = () => ({
   type: REQUEST_DOCUMENTS
 })
 
+const prepareDocuments = (documents) => {
+  var even = false;
+  for (var i = 0; i < documents.length; i++) {
+    documents[i].even = !even;
+    even = !even;
+  }
+  return documents;
+}
+
+export const toogleDocument = (id) => ({
+  type: TOOGLE_DOCUMENT,
+  id: id,
+  receivedAt: Date.now()
+}) 
+
 export const receiveDocuments = (json) => ({
   type: RECEIVE_DOCUMENTS,
-  items: setEvenDocuments( json.documents ),
+  items: prepareDocuments( json.documents ),
   receivedAt: Date.now()
 })
 
-export const changeOrder = ( newOrder ) => ({
+export const changeOrder = ( col = 'number' ) => ({
   type: CHANGE_ORDER,
-  order: newOrder.col || 'number',
-  dirOrder: newOrder.dir || 'asc'
+  order: col
 })
 
 export const nextPage = () => ({
@@ -31,15 +46,6 @@ export const nextPage = () => ({
 export const prevPage = () => ({
     type: PREV_PAGE
 })
-
-const setEvenDocuments = (documents) => {
-  var even = false;
-  for (var i = 0; i < documents.length; i++) {
-    documents[i].even = !even;
-    even = !even;
-  }
-  return documents;
-}
 
 const getUrl = (state) => ("/documents/" + state.documents.order + "/" + state.documents.pageNmb + "/" + state.documents.pageSize + "/" + state.documents.dirOrder)
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import { fetchDocumentsIfNeeded, invalidateDocuments, prevPage, nextPage, changeOrder } from '../actions'
+import { fetchDocumentsIfNeeded, invalidateDocuments, prevPage, nextPage, changeOrder, toogleDocument } from '../actions'
 import DocumentList from '../components/DocumentList'
 import {mylog} from '../solidity/apputils';
 
@@ -10,6 +10,7 @@ class DocumentListContainer extends Component {
     super(props)
     this.handlePageClick = this.handlePageClick.bind(this);
     this.handleRefreshData = this.handleRefreshData.bind(this);
+    this.handleOnToogle = this.handleOnToogle.bind(this);
   }
     
   componentDidMount() {
@@ -45,10 +46,14 @@ class DocumentListContainer extends Component {
     dispatch(fetchDocumentsIfNeeded())
   }
 
+  handleOnToogle(id, checked) {
+    const { dispatch } = this.props
+    dispatch(toogleDocument(id))
+  }
+
   render() {
-    mylog("DocumentListContainer.render()")
     mylog('DocumentListContainer.render() this.props.documents: ', this.props.documents)
-    const isFetching = this.props.documents.isFetching || false;
+    const isFetching = this.props.documents.isFetching || false
     return <div>
               <div style={{float: "left", margin: ".2em"}}>
                 <div className="div-button" style={{color: "white", backgroundColor: "lightslategrey"}} 
@@ -57,23 +62,15 @@ class DocumentListContainer extends Component {
                   onClick={(e) => this.handlePageClick(e, 1)}>Next ❯</div>
                 <div className="div-button" style={{color: "white", backgroundColor: "indianred"}} 
                   onClick={this.handleRefreshData}>Reload { isFetching ? "..." : ""}</div>
-                <div className="div-button" style={{color: "#000"}}>Page: {typeof this.props.documents.pageNmb === undefined ? 1 : this.props.documents.pageNmb + 1}</div>
+                <div className="div-button" style={{color: "#000"}}>Page: {this.props.documents.pageNmb + 1}</div>
               </div>
-              <DocumentList documents={this.props.documents} onChangeOrder={(i,dir)=>(this.onChangeOrder(i,dir))}/>
+              <DocumentList documents={this.props.documents} onChangeOrder={(i,dir)=>(this.onChangeOrder(i,dir))} onToogle={(id,checked)=>(this.handleOnToogle(id,checked))}/>
           </div>;   
   }
 }
 
 const mapStateToProps = state => {
-  // Return object for props
+  console.log('mapStateToProps() ', state)
   return state
-    // isFetching: false || state.isFetching,
-    // docments: [] || state.documents,
-    // lastUpdated: '' || state.lastUpdated,
-    // didInvalidate: false || state.didInvalidate,
-    // pageNmb: 0 || state.pageNmb,
-    // pageSize: 20 || state.pageSize,
-    // order: 'number' || state.order,
-    // dirOrder: 'asc' || state.dirOrder
 }
 export default connect(mapStateToProps)(DocumentListContainer)
