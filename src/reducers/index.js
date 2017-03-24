@@ -20,6 +20,23 @@ const initialState = {
     dirOrder: 'asc'
 }
 
+const setSelectedRow = ( state, items ) => {
+    let selectedItems = state.selectedItems
+    let newItems = items.map( (doc) => {
+        if ( selectedItems[ doc.id ] ) {
+            return {
+                ...doc,
+                checked: true
+            }
+        } 
+        else return { 
+            ...doc,
+            checked: false 
+        }    
+    })
+    return newItems
+}
+
 const documents = ( state = initialState, action ) => {
     console.log( 'reducer: documents() ', state, ' action: ', action )
     switch( action.type ) {
@@ -34,7 +51,7 @@ const documents = ( state = initialState, action ) => {
                 ...state,
                 isFetching: false,
                 didInvalidate: false,
-                items: action.items,
+                items: setSelectedRow( state, action.items ),
                 lastUpdated: action.receivedAt
             }
         case INVALIDATE_DOCUMENTS:
