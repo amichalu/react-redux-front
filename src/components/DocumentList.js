@@ -15,16 +15,6 @@ class DocumentList extends Component {
     };
     this.onChange = this.onChangeOrder.bind(this);
     this.onCheck = this.onCheck.bind(this);
-    this.checked = [];
-  }
-
-  componentDidMount() {
-    mylog("DocumentList.componentDidMount()");
-  }
-
-  componentWillReceiveProps(nextProps) {
-    mylog("DocumentList.componentWillReceiveProps()");
-    this.prepareDocuments(nextProps.documents.items);
   }
 
   shouldComponentUpdate( nextProps, nextState ) {
@@ -32,16 +22,8 @@ class DocumentList extends Component {
     return (nextProps.documents.lastUpdated !== this.props.documents.lastUpdated)
   }
 
-  prepareDocuments( docs ) {
-    //if ( typeof docs !== 'undefined' ) docs.forEach((doc)=>{ doc.checked = this.checked[doc.id] || false });
-    //if ( typeof docs !== 'undefined' ) docs.forEach((doc)=>{ doc.checked = this.props.documents.selected[doc.id] || false });
-    return docs;
-  }
-
   onCheck( id, checked ) {
-
     console.log( 'DocumentList.onCheck(): ', id, checked)
-    //checked ? this.checked[id] = checked : delete(this.checked[id]);
     this.state.toogleDocument( id )
   }
 

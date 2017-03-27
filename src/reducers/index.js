@@ -20,7 +20,27 @@ const initialState = {
     dirOrder: 'asc'
 }
 
-const setSelectedRow = ( state, items ) => {
+const toogle = ( selectedItems, items, toogleDocumentId  ) => {
+    // Row is selected and will be deselected
+    if ( selectedItems[toogleDocumentId] )
+        delete(selectedItems[toogleDocumentId])
+    else 
+        selectedItems[toogleDocumentId] = true 
+    
+    return {
+        items: items.map( (doc) => {
+            if (doc.id === toogleDocumentId) {
+                return {
+                    ...doc,
+                    checked: selectedItems[toogleDocumentId] ? true : false
+                }
+            } else return doc
+        }),
+        selectedItems: selectedItems
+    }
+}
+
+const setSelectedRows = ( state, items ) => {
     let selectedItems = state.selectedItems
     let newItems = items.map( (doc) => {
         if ( selectedItems[ doc.id ] ) {
@@ -51,7 +71,7 @@ const documents = ( state = initialState, action ) => {
                 ...state,
                 isFetching: false,
                 didInvalidate: false,
-                items: setSelectedRow( state, action.items ),
+                items: setSelectedRows( state, action.items ),
                 lastUpdated: action.receivedAt
             }
         case INVALIDATE_DOCUMENTS:
@@ -87,43 +107,14 @@ const documents = ( state = initialState, action ) => {
                 didInvalidate: true
             }
         case TOOGLE_DOCUMENT:
-
-            let selectedItems = state.selectedItems
-
-            // Row is selected and will be deselected
-            if ( selectedItems[action.id] ) {
-                delete(selectedItems[action.id])
-                return {
-                    ...state,
-                    items: state.items.map( (doc) => {
-                        if (doc.id === action.id) {
-                            return {
-                                ...doc,
-                                checked: false
-                            }
-                        } else return doc
-                    }),
-                    lastUpdated: action.receivedAt,
-                    selectedItems: selectedItems
-                }
+            const {items, selectedItems} = toogle( state.selectedItems, state.items, action.id )
+            return {
+                ...state,
+                items: items,
+                lastUpdated: action.receivedAt,
+                selectedItems: selectedItems
             }
-            // Row is not selected and will be selected
-            else {
-                selectedItems[action.id] = true
-                return {
-                    ...state,
-                    items: state.items.map( (doc) => {
-                        if (doc.id === action.id) {
-                            return {
-                                ...doc,
-                                checked: true
-                            }
-                        } else return doc
-                    }),
-                    selectedItems: selectedItems,
-                    lastUpdated: action.receivedAt
-                }
-            }
+            
         default:
             return state
     }

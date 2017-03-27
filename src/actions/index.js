@@ -73,3 +73,9 @@ export const fetchDocumentsIfNeeded = () => (dispatch, getState) => {
     return dispatch(fetchDocuments())
   }
 }
+
+
+
+export const fetchDocumentArticlesIfNeeded = () => (dispatch, getState) => {
+  console.log('fetchDocumentArticlesIfNeeded()')
+}

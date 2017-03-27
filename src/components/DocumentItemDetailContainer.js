@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+
+import { fetchDocumentArticlesIfNeeded } from '../actions'
 import {mylog} from '../solidity/apputils';
 
 // DocumentItemDetail  ------------------------------------------------------------------
-class DocumentItemDetail extends Component {
+class DocumentItemDetailContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,11 +17,22 @@ class DocumentItemDetail extends Component {
     mylog("DocumentItemDetail.constructor()");
   }
 
+  componentDidMount() {
+    console.log('DocumentItemDetailContainer.componentDidMount()')
+    const { dispatch } = this.props
+    dispatch(fetchDocumentArticlesIfNeeded())    
+  }
+
   componentWillReceiveProps(nextProps) {
+    console.log('DocumentItemDetailContainer.componentWillReceiveProps()')
+    const { dispatch } = this.nextProps
+    dispatch(fetchDocumentArticlesIfNeeded())
+
     this.setState( {
       classNameAnim: this.state.document.opened ? "doc-opening" : "doc-closing",
       document: nextProps.document
     });
+
   }
 
   onClose() {
@@ -32,4 +46,8 @@ class DocumentItemDetail extends Component {
   }
 }
 
-export default DocumentItemDetail
+const mapStateToProps = state => {
+  console.log('mapStateToProps() ', state)
+  return state
+}
+export default connect(mapStateToProps)(DocumentItemDetailContainer)
