@@ -3,40 +3,39 @@ import React, { Component } from 'react';
 import DocumentItem from '../components/DocumentItem'
 import {mylog} from '../solidity/apputils';
 
-
 // DocumentList component  ------------------------------------------------------------------
 class DocumentList extends Component {
-  constructor(props) {
-    super(props);
-    mylog("DocumentList.constructor()");
-    this.state = {
-      changeOrder: props.onChangeOrder,
-      toogleDocument: props.onToogle
-    };
-    this.onChange = this.onChangeOrder.bind(this);
-    this.onCheck = this.onCheck.bind(this);
+  constructor() {
+    super()
+    mylog( 'DocumentList.constructor()')
   }
 
   shouldComponentUpdate( nextProps, nextState ) {
-    mylog( 'shouldComponentUpdate() ? ', nextProps.documents.lastUpdated !== this.props.documents.lastUpdated )
-    return (nextProps.documents.lastUpdated !== this.props.documents.lastUpdated)
+    mylog( 'shouldComponentUpdate() ? ', ((nextProps.documents.lastUpdated !== this.props.documents.lastUpdated) || (nextProps.opened.opened !== this.props.opened.opened )) )
+    return ((nextProps.documents.lastUpdated !== this.props.documents.lastUpdated) || (nextProps.opened.opened !== this.props.opened.opened ))
   }
 
-  onCheck( id, checked ) {
-    console.log( 'DocumentList.onCheck(): ', id, checked)
-    this.state.toogleDocument( id )
-  }
+  // onCheckClick(id) {
+  //   console.log( 'DocumentList.onCheck(): ', id)
+  //   this.props.onToogle(id)
+  // }
 
   onChangeOrder(col) {
-    this.state.changeOrder(col);
+    this.props.onChangeOrder(col);
   }
 
-  getDir( order ) {
+  getDir(order) {
     return this.props.documents.order === order ? this.props.documents.dirOrder === 'asc' ? 'A' : 'V' : '';
   }
 
-  renderDocument(document, col) {
-    return <DocumentItem key={document.id} document={document} order_col={col} on_check_click={this.onCheck}/>;
+  renderDocument( document, col ) {
+    return <DocumentItem 
+      key={document.id} 
+      document={document} 
+      order_col={col}
+      onCheckClick={this.props.onToogle}
+      opened={this.props.opened}
+      onRowClick={this.props.onRowClick}/>;
   }
   render() {
     mylog("DocumentList.redner()");
@@ -55,7 +54,7 @@ class DocumentList extends Component {
           <div className="doc-val div-cell"><p className="text-al p-cell">Akcyza</p></div>
       </div>
       
-    { this.props.documents.items ? this.props.documents.items.map((document,col)=>(this.renderDocument(document,this.props.documents.order))) : ''} </div>;
+    { this.props.documents.items.map( (document,col)=>(this.renderDocument(document,this.props.documents.order)) )} </div>;
   }
 }
 
