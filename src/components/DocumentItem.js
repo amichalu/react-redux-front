@@ -43,25 +43,26 @@ class DocumentItem extends Component {
     this.props.onCheckClick(event.target.value, event.target.checked);
   }
 
-  onRowClick(id) {
-    console.log('onRowClick()')
-    var doc = this.state.document
+  // onRowClick(id) {
+  //   console.log('onRowClick()')
+  //   var doc = this.state.document
     
-    if (!doc.opened) {
-      mylog( doc )
-      doc.opened = !doc.opened
-      doc.closing = false
-      this.setState( {document: doc} )
-    }
-    this.props.onRowClick(id)
-  }
+  //   if (!doc.opened) {
+  //     mylog( doc )
+  //     doc.opened = !doc.opened
+  //     doc.closing = false
+  //     this.setState( {document: doc} )
+  //   }
+  //   this.props.onRowClick(id)
+  // }
 
-  onClose() {
+  onClose(id) {
     var doc = this.state.document;
     doc.opened = false;
     doc.closing = true;
     mylog( 'onClose(): ', doc)
-    this.setState( {document: doc} );
+    //this.setState( {document: doc} );
+    this.props.onCloseDetail(id)
   }
 
   render() {
@@ -75,7 +76,7 @@ class DocumentItem extends Component {
 
           <div className="doc-id">{ doc.opened ? 'opened' : ''} { doc.closing ? 'closing' : ''}</div>
           <div className="doc-check div-cell"><input type="checkbox" name="" value={doc.id} onChange={this.onCheckClick} checked={doc.checked ? 'checked' : ''}/></div>
-          <div onClick={ ()=>{this.props.onRowClick(doc.id)} }>
+          <div onClick={ ()=>{this.props.onOpenDetail(doc.id)} }>
           <div className="doc-id div-cell"><p className="text-ar p-cell">{doc.id}</p></div>
           <div className={"doc-number div-cell " + (this.state.col === 'number' && !doc.checked && !this.state.hover ? 'col-highlighted' : '')}><p className="text-al p-cell">{doc.number}</p></div>
           <div className={"doc-type div-cell " + (doc.type === -1 ? 'div-doc-norm' : 'div-doc-corr')}><p className="text-al p-cell">{docType}</p></div>
@@ -87,7 +88,7 @@ class DocumentItem extends Component {
           <div className="doc-val div-cell"><p className="text-ar p-cell">{formatDecimal(doc.excise)}</p></div>
           </div>
         </div>
-        {(doc.opened || doc.closing) ? (<DocumentItemDetail document={this.state.document} onClose={this.onClose}/>) : ('')}
+        {(doc.opening || doc.closing) ? (<DocumentItemDetail document={this.state.document} onCloseDetail={(id)=>(this.onClose(id))}/>) : ('')}
         
       </div>;
   }

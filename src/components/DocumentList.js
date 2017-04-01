@@ -35,7 +35,8 @@ class DocumentList extends Component {
       order_col={col}
       onCheckClick={this.props.onToogle}
       opened={this.props.opened}
-      onRowClick={this.props.onRowClick}/>;
+      onOpenDetail={this.props.onOpenDetail}
+      onCloseDetail={this.props.onCloseDetail}/>;
   }
   render() {
     mylog("DocumentList.redner()");

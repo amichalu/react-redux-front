@@ -6,6 +6,9 @@ export const PREV_PAGE = 'PREV_PAGE'
 export const CHANGE_ORDER = 'CHANGE_ORDER'
 export const TOOGLE_DOCUMENT = 'TOOGLE_DOCUMENT'
 export const OPEN_DOCUMENT = 'OPEN_DOCUMENT'
+export const CLOSE_DOCUMENT = 'CLOSE_DOCUMENT'
+export const CLOSE_ALLDOCUMENTS = 'CLOSE_ALLDOCUMENTS'
+
 
 export const invalidateDocuments = () => ({
   type: INVALIDATE_DOCUMENTS
@@ -33,6 +36,15 @@ export const toogleDocument = (id) => ({
 export const openDocument = (id) => ({
   type: OPEN_DOCUMENT,
   id: id,
+  receivedAt: Date.now()
+})
+export const closeDocument = (id) => ({
+  type: CLOSE_DOCUMENT,
+  id: id,
+  receivedAt: Date.now()
+})
+export const closeAllDocuments = () => ({
+  type: CLOSE_ALLDOCUMENTS,
   receivedAt: Date.now()
 })
 

@@ -28,9 +28,9 @@ class DocumentItemDetail extends Component {
 
   }
 
-  onClose() {
+  onClose(id) {
     this.setState({ classNameAnim: "doc-closing" });
-    this.state.onClose();
+    this.props.onCloseDetail();
   }
   render() {
     return <div className={"div-detail " + this.state.classNameAnim}>DETAIL

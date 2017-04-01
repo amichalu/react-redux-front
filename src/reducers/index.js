@@ -7,7 +7,9 @@ import {
     PREV_PAGE, 
     CHANGE_ORDER,
     TOOGLE_DOCUMENT,
-    OPEN_DOCUMENT } from '../actions'
+    OPEN_DOCUMENT,
+    CLOSE_DOCUMENT,
+    CLOSE_ALLDOCUMENTS } from '../actions'
 
 const initialState = {
     isFetching: false,
@@ -26,7 +28,20 @@ const updateOpen = (id, items) => {
     if (doc.id === id) {
       return {
         ...doc,
-        opened: true
+        opening: true,
+        closing: false
+      }
+    } else return doc
+  })
+}
+
+const updateClose = (id, items) => {
+  return items.map( (doc) => {
+    if (doc.id === id) {
+      return {
+        ...doc,
+        opening: false,
+        closing: true
       }
     } else return doc 
   })
@@ -60,13 +75,15 @@ const updateDocumentsState = ( state, items ) => {
             return {
                 ...doc,
                 checked: true,
-                opened: false
+                opening: false,
+                closing: false
             }
         } 
         else return { 
             ...doc,
             checked: false,
-            opened: false
+            opening: false,
+            closing: false
         }    
     })
     return newItems
@@ -135,7 +152,23 @@ const documents = ( state = initialState, action ) => {
             items: updateOpen(action.id, state.items),
             lastUpdated: action.receivedAt
           }
-            
+        case CLOSE_DOCUMENT:
+          return {
+            ...state,
+            items: updateClose(action.id, state.items),
+            lastUpdated: action.receivedAt
+          }
+        case CLOSE_ALLDOCUMENTS:
+          return {
+            ...state,
+            items: state.items.map( (doc) => ({ 
+                ...doc,
+                opening: false,
+                closing: true
+              }) ),
+              lastUpdated: action.receivedAt
+          }
+          
         default:
           return state
     }
