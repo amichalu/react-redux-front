@@ -8,26 +8,16 @@ import DocumentItemDetail from '../components/DocumentItemDetail'
 class DocumentItem extends Component {
   constructor(props) {
     super(props);
-    var doc = props.document;
-    doc.opened = false;
-    doc.closing = false;
-    this.state = { 
-      document: doc,
-      col: props.order_col,
-      onCheckClick: props.on_check_click
-    };
+    this.state = { hover: false }
     this.onMouseEnterHandler = this.onMouseEnterHandler.bind(this);
     this.onMouseLeaveHandler = this.onMouseLeaveHandler.bind(this);
-    //this.onRowClick = this.onRowClick.bind(this);
     this.onClose = this.onClose.bind(this);
     this.onCheckClick = this.onCheckClick.bind(this);
   };
   componentWillReceiveProps(nextProps) {
     console.log( 'DocumentItem.componentWillReceiveProps()' )
-    this.setState( {
-      document: nextProps.document,
-      col:  nextProps.order_col });
   };
+
   onMouseEnterHandler() {
     this.setState({ hover: true })
   };
@@ -36,35 +26,13 @@ class DocumentItem extends Component {
   };
 
   onCheckClick(event) {
-    // console.log('onCheckClick()')
-    // var doc = this.state.document;
-    // doc.checked = event.target.checked;
-    // this.setState({document: doc});
-    this.props.onCheckClick(event.target.value, event.target.checked);
+    this.props.onCheckClick(event.target.value, event.target.checked)
   }
-
-  // onRowClick(id) {
-  //   console.log('onRowClick()')
-  //   var doc = this.state.document
-    
-  //   if (!doc.opened) {
-  //     mylog( doc )
-  //     doc.opened = !doc.opened
-  //     doc.closing = false
-  //     this.setState( {document: doc} )
-  //   }
-  //   this.props.onRowClick(id)
-  // }
-
   onClose(id) {
-    var doc = this.state.document;
-    doc.opened = false;
-    doc.closing = true;
-    mylog( 'onClose(): ', doc)
-    //this.setState( {document: doc} );
-    this.props.onCloseDetail(id)
+    
   }
-
+  
+  //<div className="doc-id">{ doc.opening ? 'opening' : ''} { doc.closing ? 'closing' : ''}</div>
   render() {
     mylog("DocumentItem.render(): ");
     var doc = this.props.document;
@@ -73,8 +41,7 @@ class DocumentItem extends Component {
     return <div>
         <div className={"div-row " + (doc.even ? 'div-row-grey' : '') + " " + (this.state.hover ? 'row-hover' : '') + " " + (doc.checked ? 'row-checked' : '')} 
         onMouseEnter={this.onMouseEnterHandler} onMouseLeave={this.onMouseLeaveHandler}>
-
-          <div className="doc-id">{ doc.opened ? 'opened' : ''} { doc.closing ? 'closing' : ''}</div>
+        
           <div className="doc-check div-cell"><input type="checkbox" name="" value={doc.id} onChange={this.onCheckClick} checked={doc.checked ? 'checked' : ''}/></div>
           <div onClick={ ()=>{this.props.onOpenDetail(doc.id)} }>
           <div className="doc-id div-cell"><p className="text-ar p-cell">{doc.id}</p></div>
@@ -88,7 +55,7 @@ class DocumentItem extends Component {
           <div className="doc-val div-cell"><p className="text-ar p-cell">{formatDecimal(doc.excise)}</p></div>
           </div>
         </div>
-        {(doc.opening || doc.closing) ? (<DocumentItemDetail document={this.state.document} onCloseDetail={(id)=>(this.onClose(id))}/>) : ('')}
+        {(doc.opening || doc.closing) ? (<DocumentItemDetail document={this.props.document} onCloseDetail={(id)=>{this.props.onCloseDetail(id)}}/>) : ('')}
         
       </div>;
   }

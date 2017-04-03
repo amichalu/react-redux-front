@@ -77,7 +77,7 @@ class DocumentListContainer extends Component {
                   onClick={(e) => this.handlePageClick(e, 1)}>Next ❯</div>
                 <div className="div-button" style={{color: "white", backgroundColor: "indianred"}} 
                   onClick={this.handleRefreshData}>Reload { isFetching ? "..." : ""}</div>
-                <div className="div-button" style={{color: "white", backgroundColor: "indianred"}} 
+                <div className="div-button" style={{color: "white", backgroundColor: "lightslategrey"}} 
                   onClick={this.handleCloseAllDocuments}>Close all</div>                  
                 <div className="div-button" style={{color: "#000"}}>Page: {this.props.documents.pageNmb + 1}</div>
               </div>

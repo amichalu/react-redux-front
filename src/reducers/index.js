@@ -149,15 +149,16 @@ const documents = ( state = initialState, action ) => {
         case OPEN_DOCUMENT:
           return {
             ...state,
-            items: updateOpen(action.id, state.items),
-            lastUpdated: action.receivedAt
+            items: updateOpen(action.id, state.items)
+            //lastUpdated: action.receivedAt
           }
         case CLOSE_DOCUMENT:
           return {
             ...state,
-            items: updateClose(action.id, state.items),
-            lastUpdated: action.receivedAt
+            items: updateClose(action.id, state.items)
+            //lastUpdated: action.receivedAt
           }
+        //TODO It mustn't change state for all documents !!!!!
         case CLOSE_ALLDOCUMENTS:
           return {
             ...state,

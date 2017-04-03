@@ -11,14 +11,9 @@ class DocumentList extends Component {
   }
 
   shouldComponentUpdate( nextProps, nextState ) {
-    mylog( 'shouldComponentUpdate() ? ', ((nextProps.documents.lastUpdated !== this.props.documents.lastUpdated) || (nextProps.opened.opened !== this.props.opened.opened )) )
-    return ((nextProps.documents.lastUpdated !== this.props.documents.lastUpdated) || (nextProps.opened.opened !== this.props.opened.opened ))
+    mylog( 'DocumentList.shouldComponentUpdate() ? ', nextProps.documents.lastUpdated !== this.props.documents.lastUpdated)
+    return nextProps.documents.lastUpdated !== this.props.documents.lastUpdated
   }
-
-  // onCheckClick(id) {
-  //   console.log( 'DocumentList.onCheck(): ', id)
-  //   this.props.onToogle(id)
-  // }
 
   onChangeOrder(col) {
     this.props.onChangeOrder(col);

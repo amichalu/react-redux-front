@@ -6,31 +6,22 @@ import {mylog} from '../solidity/apputils';
 class DocumentItemDetail extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      onClose: props.onClose,
-      document: props.document,
-      classNameAnim: props.document ? "doc-opening" : "doc-closing"
-    };
-    this.onClose = this.onClose.bind(this);
     mylog("DocumentItemDetail.constructor()");
-  }
-
-  componentDidMount() {
-    console.log('DocumentItemDetailContainer.componentDidMount()')
+    this.state = {      
+      classNameAnim: props.document.opening ? "doc-opening" : "doc-closing"
+    }
+    this.onClose = this.onClose.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('DocumentItemDetailContainer.componentWillReceiveProps()')
+    console.log('DocumentItemDetailContainer.componentWillReceiveProps()', nextProps)
     this.setState( {
-      classNameAnim: this.state.document.opened ? "doc-opening" : "doc-closing",
-      document: nextProps.document
+      classNameAnim: nextProps.document.opening ? "doc-opening" : "doc-closing",
     });
-
   }
 
-  onClose(id) {
-    this.setState({ classNameAnim: "doc-closing" });
-    this.props.onCloseDetail();
+  onClose() {
+    this.props.onCloseDetail(this.props.document.id);
   }
   render() {
     return <div className={"div-detail " + this.state.classNameAnim}>DETAIL
