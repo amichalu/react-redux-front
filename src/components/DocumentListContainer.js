@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import spiner from '../images/ripple.svg';
 
 import { 
   fetchDocumentsIfNeeded, 
@@ -8,10 +9,12 @@ import {
   nextPage, 
   changeOrder, 
   toogleDocument, 
+  toogleSpinner,
   openDocument, 
   closeDocument, 
   closeAllDocuments,
-  fetchDocumentDetail } from '../actions'
+  fetchDocumentDetail
+ } from '../actions'
 import DocumentList from '../components/DocumentList'
 
 class DocumentListContainer extends Component {
@@ -63,6 +66,7 @@ class DocumentListContainer extends Component {
 
   handleOnOpenDetail(id) {
     const { dispatch } = this.props
+    dispatch(toogleSpinner(id))
     dispatch(fetchDocumentDetail(id))
   }  
   handleOnCloseDetail(id) {
@@ -79,7 +83,10 @@ class DocumentListContainer extends Component {
     console.log( 'DocumentListContainer.componentWillReceiveProps()' )
     const { dispatch } = this.props
     if (nextProps.documentDetail.documentId 
-      && (this.props.documentDetail.documentId !== nextProps.documentDetail.documentId)) dispatch(openDocument(nextProps.documentDetail.documentId))
+      && (this.props.documentDetail.documentId !== nextProps.documentDetail.documentId)) {
+        dispatch(toogleSpinner(nextProps.documentDetail.documentId))
+        dispatch(openDocument(nextProps.documentDetail.documentId))
+      }
   }
 
   render() {
@@ -92,7 +99,7 @@ class DocumentListContainer extends Component {
                 <div className="div-button" style={{color: "white", backgroundColor: "lightslategrey"}} 
                   onClick={(e) => this.handlePageClick(e, 1)}>Next ❯</div>
                 <div className="div-button" style={{color: "white", backgroundColor: "indianred"}} 
-                  onClick={this.handleRefreshData}>Reload { isFetching ? "..." : ""}</div>
+                  onClick={this.handleRefreshData}>Reload {isFetching ? (<img src={spiner} alt=''/>) : ('')}</div>
                 <div className="div-button" style={{color: "white", backgroundColor: "lightslategrey"}} 
                   onClick={this.handleCloseAllDocuments}>Close all</div>                  
                 <div className="div-button" style={{color: "#000"}}>Page: {this.props.documents.pageNmb + 1}</div>

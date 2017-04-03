@@ -6,6 +6,7 @@ export const NEXT_PAGE = 'NEXT_PAGE'
 export const PREV_PAGE = 'PREV_PAGE'
 export const CHANGE_ORDER = 'CHANGE_ORDER'
 export const TOOGLE_DOCUMENT = 'TOOGLE_DOCUMENT'
+export const TOOGLE_SPINNER = 'TOOGLE_SPINNER'
 export const OPEN_DOCUMENT = 'OPEN_DOCUMENT'
 export const CLOSE_DOCUMENT = 'CLOSE_DOCUMENT'
 export const CLOSE_ALLDOCUMENTS = 'CLOSE_ALLDOCUMENTS'
@@ -36,6 +37,11 @@ export const toogleDocument = (id) => ({
   id: id,
   receivedAt: Date.now()
 }) 
+export const toogleSpinner = (id) => ({
+  type: TOOGLE_SPINNER,
+  id: id,
+  receivedAt: Date.now()  
+})
 
 export const openDocument = (id) => ({
   type: OPEN_DOCUMENT,

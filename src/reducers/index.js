@@ -7,6 +7,7 @@ import {
     PREV_PAGE, 
     CHANGE_ORDER,
     TOOGLE_DOCUMENT,
+    TOOGLE_SPINNER,
     OPEN_DOCUMENT,
     CLOSE_DOCUMENT,
     CLOSE_ALLDOCUMENTS,
@@ -85,6 +86,7 @@ const updateDocumentsState = ( state, items, receivedAt ) => {
                 checked: true,
                 opening: false,
                 closing: false,
+                spinner: false,
                 lastUpdated: receivedAt
             }
         } 
@@ -93,6 +95,7 @@ const updateDocumentsState = ( state, items, receivedAt ) => {
             checked: false,
             opening: false,
             closing: false,
+            spinner: false,
             lastUpdated: receivedAt
         }    
     })
@@ -165,6 +168,19 @@ const documents = ( state = initialState, action ) => {
             ...state,
             items: updateClose(action.id, state.items, action.receivedAt)
           }
+        case TOOGLE_SPINNER:
+          return {
+            ...state,
+            items: state.items.map( (doc) => { 
+                if ( doc.id === action.id ) {
+                    return {
+                        ...doc,
+                        spinner: !doc.spinner,
+                        lastUpdated: action.receivedAt
+                    }
+                } else return doc
+            })
+          }        
         case CLOSE_ALLDOCUMENTS:
           return {
             ...state,
@@ -193,6 +209,7 @@ const initialStateDocDetail = {
     documentId: null
 }
 const documentDetail = ( state = initialStateDocDetail, action ) => {
+    console.log('documentDetail() reducer, state:', state)
     switch (action.type) {
         case REQUEST_DOCUMENTDETAIL:
          return {
