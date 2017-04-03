@@ -9,7 +9,10 @@ import {
     TOOGLE_DOCUMENT,
     OPEN_DOCUMENT,
     CLOSE_DOCUMENT,
-    CLOSE_ALLDOCUMENTS } from '../actions'
+    CLOSE_ALLDOCUMENTS,
+    REQUEST_DOCUMENTDETAIL, 
+    RECEIVE_DOCUMENTDETAIL
+} from '../actions'
 
 const initialState = {
     isFetching: false,
@@ -23,31 +26,34 @@ const initialState = {
     dirOrder: 'asc'
 }
 
-const updateOpen = (id, items) => {
+// Document list reducer
+const updateOpen = (id, items, receivedAt) => {
   return items.map( (doc) => {
     if (doc.id === id) {
       return {
         ...doc,
         opening: true,
-        closing: false
+        closing: false,
+        lastUpdated: receivedAt
       }
     } else return doc
   })
 }
 
-const updateClose = (id, items) => {
+const updateClose = (id, items, receivedAt) => {
   return items.map( (doc) => {
     if (doc.id === id) {
       return {
         ...doc,
         opening: false,
-        closing: true
+        closing: true,
+        lastUpdated: receivedAt
       }
     } else return doc 
   })
 }
 
-const toogle = ( selectedItems, items, toogleDocumentId  ) => {
+const toogle = (selectedItems, items, toogleDocumentId, receivedAt ) => {
     // Row is selected and will be deselected
     if ( selectedItems[toogleDocumentId] )
         delete(selectedItems[toogleDocumentId])
@@ -60,7 +66,8 @@ const toogle = ( selectedItems, items, toogleDocumentId  ) => {
             if (doc.id === parseInt(toogleDocumentId, 10)) {
                 return {
                     ...doc,
-                    checked: selectedItems[toogleDocumentId] ? true : false
+                    checked: selectedItems[toogleDocumentId] ? true : false,
+                    lastUpdated: receivedAt
                 }
             } else return doc
         }),
@@ -69,7 +76,7 @@ const toogle = ( selectedItems, items, toogleDocumentId  ) => {
 }
 
 // Set selected documents after page change, set opened
-const updateDocumentsState = ( state, items ) => {
+const updateDocumentsState = ( state, items, receivedAt ) => {
     let selectedItems = state.selectedItems
     let newItems = items.map( (doc) => {
         if ( selectedItems[ doc.id ] ) {
@@ -77,21 +84,22 @@ const updateDocumentsState = ( state, items ) => {
                 ...doc,
                 checked: true,
                 opening: false,
-                closing: false
+                closing: false,
+                lastUpdated: receivedAt
             }
         } 
         else return { 
             ...doc,
             checked: false,
             opening: false,
-            closing: false
+            closing: false,
+            lastUpdated: receivedAt
         }    
     })
     return newItems
 }
 
 const documents = ( state = initialState, action ) => {
-    console.log( 'reducer: documents() ', state, ' action: ', action )
     switch( action.type ) {
         case REQUEST_DOCUMENTS:            
           return {
@@ -104,7 +112,7 @@ const documents = ( state = initialState, action ) => {
               ...state,
               isFetching: false,
               didInvalidate: false,
-              items: updateDocumentsState( state, action.items ),
+              items: updateDocumentsState( state, action.items, action.receivedAt ),
               lastUpdated: action.receivedAt
           }
         case INVALIDATE_DOCUMENTS:
@@ -140,7 +148,7 @@ const documents = ( state = initialState, action ) => {
               didInvalidate: true
           }
         case TOOGLE_DOCUMENT:
-          const {items, selectedItems} = toogle( state.selectedItems, state.items, action.id )
+          const {items, selectedItems} = toogle( state.selectedItems, state.items, action.id, action.receivedAt )
           return {
             ...state,
             items: items,
@@ -150,53 +158,65 @@ const documents = ( state = initialState, action ) => {
         case OPEN_DOCUMENT:
           return {
             ...state,
-            items: updateOpen(action.id, state.items)
-            //lastUpdated: action.receivedAt
+            items: updateOpen(action.id, state.items, action.receivedAt)
           }
         case CLOSE_DOCUMENT:
           return {
             ...state,
-            items: updateClose(action.id, state.items)
-            //lastUpdated: action.receivedAt
+            items: updateClose(action.id, state.items, action.receivedAt)
           }
-        //TODO It mustn't change state for all documents !!!!!
         case CLOSE_ALLDOCUMENTS:
           return {
             ...state,
-            items: state.items.map( (doc) => ({ 
-                ...doc,
-                opening: false,
-                closing: true
-              }) ),
-              lastUpdated: action.receivedAt
+            items: state.items.map( (doc) => { 
+                if ( doc.opening ) {
+                    return {
+                        ...doc,
+                        opening: false,
+                        closing: true,
+                        lastUpdated: action.receivedAt
+                    }
+                } else return doc
+            }),
+            lastUpdated: action.receivedAt
           }
-          
         default:
           return state
     }
 }
 
-// const initialStateOpened = {
-//     opened: false,
-//     id: null
-// }
-
-// const opened = ( state = initialStateOpened, action ) => {
-//   console.log( 'reducer: documents() ', state, ' action: ', action )
-//   switch( action.type ) {
-//     case TOOGLE_OPENED:
-//       if (state.opened && state.id !== action.id) return state
-//       return {
-//         opened: state.opened ? false : true,
-//         id: opened ? action.id : null
-//       }        
-//     default:
-//       return state
-//   }
-// }
+// Document detail reducer
+const initialStateDocDetail = {
+    isFetching: false,
+    data: null,
+    lastUpdated: '',
+    documentId: null
+}
+const documentDetail = ( state = initialStateDocDetail, action ) => {
+    switch (action.type) {
+        case REQUEST_DOCUMENTDETAIL:
+         return {
+              ...state,
+              isFetching: true
+            }
+        case RECEIVE_DOCUMENTDETAIL:
+          return {
+              ...state,
+              isFetching: false,
+              documentId: action.id,
+              data: action.document,
+              lastUpdated: action.receivedAt
+          }
+        case CLOSE_DOCUMENT:
+          return initialStateDocDetail
+        default:
+            return state
+    }
+}
 
 const rootReducer = combineReducers({
-    documents
+    documents,
+    documentDetail
 })
 
 export default rootReducer;

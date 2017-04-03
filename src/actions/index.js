@@ -1,3 +1,4 @@
+// Document's list actions
 export const REQUEST_DOCUMENTS = 'REQUEST_DOCUMENTS'
 export const RECEIVE_DOCUMENTS = 'RECEIVE_DOCUMENTS'
 export const INVALIDATE_DOCUMENTS = 'INVALIDATE_DOCUMENTS'
@@ -9,6 +10,9 @@ export const OPEN_DOCUMENT = 'OPEN_DOCUMENT'
 export const CLOSE_DOCUMENT = 'CLOSE_DOCUMENT'
 export const CLOSE_ALLDOCUMENTS = 'CLOSE_ALLDOCUMENTS'
 
+// Document detail actions
+export const REQUEST_DOCUMENTDETAIL = 'REQUEST_DOCUMENTDETAIL'
+export const RECEIVE_DOCUMENTDETAIL = 'RECEIVE_DOCUMENTDETAIL'
 
 export const invalidateDocuments = () => ({
   type: INVALIDATE_DOCUMENTS
@@ -93,8 +97,27 @@ export const fetchDocumentsIfNeeded = () => (dispatch, getState) => {
   }
 }
 
-
-
 export const fetchDocumentArticlesIfNeeded = () => (dispatch, getState) => {
   console.log('fetchDocumentArticlesIfNeeded()')
 }
+
+// Document detail actions
+export const requestDocumentDetail = () => ({
+  type: REQUEST_DOCUMENTDETAIL
+})
+export const receiveDocumentDetail = (json, id) => ({
+  type: RECEIVE_DOCUMENTDETAIL,
+  document: json,
+  id: id,
+  receivedAt: Date.now()
+})
+
+const getUrlDocumentDetail = (id) => ("/documentarticles/" + id)
+
+export const fetchDocumentDetail = id => (dispatch) => {
+  dispatch(requestDocumentDetail())
+  return fetch( getUrlDocumentDetail(id) )
+    .then(response => response.json())
+    .then(json => dispatch(receiveDocumentDetail(json, id)))
+}
+

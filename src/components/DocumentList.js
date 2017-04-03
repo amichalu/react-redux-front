@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 
 import DocumentItem from '../components/DocumentItem'
-import {mylog} from '../solidity/apputils';
 
 // DocumentList component  ------------------------------------------------------------------
 class DocumentList extends Component {
   constructor() {
     super()
-    mylog( 'DocumentList.constructor()')
+    console.log( 'DocumentList.constructor()')
   }
-
-  //shouldComponentUpdate( nextProps, nextState ) {
-    //mylog( 'DocumentList.shouldComponentUpdate() ? ', nextProps.documents.lastUpdated !== this.props.documents.lastUpdated)
-    //return nextProps.documents.lastUpdated !== this.props.documents.lastUpdated
-  //}
 
   onChangeOrder(col) {
     this.props.onChangeOrder(col);
@@ -26,15 +20,15 @@ class DocumentList extends Component {
   renderDocument( document, col ) {
     return <DocumentItem 
       key={document.id} 
-      document={document} 
-      order_col={col}
+      document={document}
+      documentDetail={this.props.documentDetail}
+      order={col}
       onCheckClick={this.props.onToogle}
-      opened={this.props.opened}
       onOpenDetail={this.props.onOpenDetail}
-      onCloseDetail={this.props.onCloseDetail}/>;
+      onCloseDetail={this.props.onCloseDetail}/>
   }
   render() {
-    mylog("DocumentList.redner()");
+    console.log("DocumentList.redner()")
 
     return <div className="doc-list">
         <div className="div-row title-row">
@@ -50,7 +44,7 @@ class DocumentList extends Component {
           <div className="doc-val div-cell"><p className="text-al p-cell">Akcyza</p></div>
       </div>
       
-    { this.props.documents.items.map( (document,col)=>(this.renderDocument(document,this.props.documents.order)) )} </div>;
+    { this.props.documents.items.map( (document, col)=>(this.renderDocument(document, this.props.documents.order)) )} </div>;
   }
 }
 

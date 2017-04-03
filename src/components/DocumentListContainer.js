@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import { fetchDocumentsIfNeeded, invalidateDocuments, prevPage, nextPage, changeOrder, toogleDocument, openDocument, closeDocument, closeAllDocuments } from '../actions'
+import { 
+  fetchDocumentsIfNeeded, 
+  invalidateDocuments, 
+  prevPage, 
+  nextPage, 
+  changeOrder, 
+  toogleDocument, 
+  openDocument, 
+  closeDocument, 
+  closeAllDocuments,
+  fetchDocumentDetail } from '../actions'
 import DocumentList from '../components/DocumentList'
-import {mylog} from '../solidity/apputils';
 
 class DocumentListContainer extends Component {
   constructor(props) {
@@ -54,7 +63,7 @@ class DocumentListContainer extends Component {
 
   handleOnOpenDetail(id) {
     const { dispatch } = this.props
-    dispatch(openDocument(id))
+    dispatch(fetchDocumentDetail(id))
   }  
   handleOnCloseDetail(id) {
     const { dispatch } = this.props
@@ -66,8 +75,15 @@ class DocumentListContainer extends Component {
     dispatch(closeAllDocuments())    
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log( 'DocumentListContainer.componentWillReceiveProps()' )
+    const { dispatch } = this.props
+    if (nextProps.documentDetail.documentId 
+      && (this.props.documentDetail.documentId !== nextProps.documentDetail.documentId)) dispatch(openDocument(nextProps.documentDetail.documentId))
+  }
+
   render() {
-    mylog('DocumentListContainer.render() this.props.documents: ', this.props.documents)
+    console.log('DocumentListContainer.render() this.props.documents: ', this.props.documents)
     const isFetching = this.props.documents.isFetching || false
     return <div>
               <div style={{float: "left", margin: ".2em"}}>
@@ -82,7 +98,9 @@ class DocumentListContainer extends Component {
                 <div className="div-button" style={{color: "#000"}}>Page: {this.props.documents.pageNmb + 1}</div>
               </div>
 
-              <DocumentList documents={this.props.documents} opened={this.props.opened} 
+              <DocumentList 
+                documents={this.props.documents}
+                documentDetail={this.props.documentDetail}
                 onChangeOrder={(i,dir)=>(this.handleOnChangeOrder(i,dir))}
                 onToogle={(id)=>(this.handleOnToogle(id))}
                 onOpenDetail={(id)=>(this.handleOnOpenDetail(id))}
@@ -92,7 +110,6 @@ class DocumentListContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('mapStateToProps() ', state)
   return state
 }
 export default connect(mapStateToProps)(DocumentListContainer)
