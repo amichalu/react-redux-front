@@ -10,10 +10,10 @@ class DocumentList extends Component {
     mylog( 'DocumentList.constructor()')
   }
 
-  shouldComponentUpdate( nextProps, nextState ) {
-    mylog( 'DocumentList.shouldComponentUpdate() ? ', nextProps.documents.lastUpdated !== this.props.documents.lastUpdated)
-    return nextProps.documents.lastUpdated !== this.props.documents.lastUpdated
-  }
+  //shouldComponentUpdate( nextProps, nextState ) {
+    //mylog( 'DocumentList.shouldComponentUpdate() ? ', nextProps.documents.lastUpdated !== this.props.documents.lastUpdated)
+    //return nextProps.documents.lastUpdated !== this.props.documents.lastUpdated
+  //}
 
   onChangeOrder(col) {
     this.props.onChangeOrder(col);

@@ -53,10 +53,11 @@ const toogle = ( selectedItems, items, toogleDocumentId  ) => {
         delete(selectedItems[toogleDocumentId])
     // Row is not selected and will be selected
     else 
-        selectedItems[toogleDocumentId] = true     
+        selectedItems[toogleDocumentId] = true
+
     return {
         items: items.map( (doc) => {
-            if (doc.id === toogleDocumentId) {
+            if (doc.id === parseInt(toogleDocumentId, 10)) {
                 return {
                     ...doc,
                     checked: selectedItems[toogleDocumentId] ? true : false
