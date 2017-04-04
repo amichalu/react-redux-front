@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
 @import url("https://fonts.googleapis.com/css?family=Lato");
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("https://www.w3schools.com/w3css/4/w3.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 /* Rules for sizing the icon. */
 .material-icons.md-18 {
   font-size: 18px; }
@@ -14,6 +15,9 @@
 
 .material-icons.md-48 {
   font-size: 48px; }
+
+.material-icons {
+  vertical-align: -14%; }
 
 .text-ar {
   text-align: right; }
@@ -167,13 +171,27 @@
 .button-margin {
   margin: 5px; }
 
+.button-paddind-reload {
+  padding: 0.4em 0.8em; }
+
 .button-inner-align {
   display: inline-flex;
   vertical-align: middle;
   align-items: center; }
 
 .button-size {
-  height: 3em; }
+  height: 3em;
+  width: 8em; }
+
+.button-reload-size {
+  height: 3em;
+  width: 7em; }
+
+.reload-anim {
+  background-image: url(../images/reload.svg);
+  background-position: 90% center;
+  background-repeat: no-repeat;
+  background-size: 24px 24px; }
 
 .div-button:hover {
   box-shadow: 5px 5px 10px lightgrey; }
