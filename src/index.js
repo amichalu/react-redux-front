@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import reducer from './reducers'
 import DocumentListContainer from './components/DocumentListContainer';
 import './css/styles.css';
-import './css/w3.css';
+//import './css/w3.css';
 
 // Enable logger 
 const middleware = [ thunk ]

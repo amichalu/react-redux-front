@@ -1,6 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import spiner from '../images/ripple.svg';
+
+import spiner from '../images/ripple.svg'
+import next from '../images/ic_keyboard_arrow_right_black_24px.svg'
+import prev from '../images/ic_keyboard_arrow_left_black_24px.svg'
+import refresh from '../images/ic_refresh_black_24px.svg'
+
 
 import { 
   fetchDocumentsIfNeeded, 
@@ -89,30 +94,39 @@ class DocumentListContainer extends Component {
       }
   }
 
+  //<i className="material-icons md-24" style={{ marginLeft: "5px"}}>fast_forward</i>
   render() {
     console.log('DocumentListContainer.render() this.props.documents: ', this.props.documents)
     const isFetching = this.props.documents.isFetching || false
-    return <div>
-              <div style={{float: "left", margin: ".2em"}}>
-                <div className="div-button" style={{color: "white", backgroundColor: "lightslategrey"}} 
-                  onClick={(e) => this.handlePageClick(e, -1)}>❮ Previous</div>
-                <div className="div-button" style={{color: "white", backgroundColor: "lightslategrey"}} 
-                  onClick={(e) => this.handlePageClick(e, 1)}>Next ❯</div>
-                <div className="div-button" style={{color: "white", backgroundColor: "indianred"}} 
-                  onClick={this.handleRefreshData}>Reload {isFetching ? (<img src={spiner} alt=''/>) : ('')}</div>
-                <div className="div-button" style={{color: "white", backgroundColor: "lightslategrey"}} 
-                  onClick={this.handleCloseAllDocuments}>Close all</div>                  
-                <div className="div-button" style={{color: "#000"}}>Page: {this.props.documents.pageNmb + 1}</div>
-              </div>
+    return <div> 
+          
+      <div className="w3-container">
+          <div className="w3-bar">
 
-              <DocumentList 
-                documents={this.props.documents}
-                documentDetail={this.props.documentDetail}
-                onChangeOrder={(i,dir)=>(this.handleOnChangeOrder(i,dir))}
-                onToogle={(id)=>(this.handleOnToogle(id))}
-                onOpenDetail={(id)=>(this.handleOnOpenDetail(id))}
-                onCloseDetail={(id)=>(this.handleOnCloseDetail(id))}/>
-          </div>;   
+            <button className="w3-button w3-small w3-white w3-border w3-round-small w3-padding-small button-margin button-size button-inner-align" 
+              onClick={(e) => this.handlePageClick(e, -1)}><span>Previous</span><img style={{ margin: "0px 5px"}} src={prev}/></button>
+
+            <button className="w3-button w3-small w3-white w3-border w3-round-small w3-padding-small button-margin button-size button-inner-align" 
+              onClick={(e) => this.handlePageClick(e, 1)}><span>Next</span><img style={{ margin: "0px 5px"}} src={next}/></button>
+
+            <button className="w3-button w3-small w3-white w3-border w3-round-small w3-padding-small button-margin button-size button-inner-align" 
+              onClick={this.handleRefreshData}><span>Reload</span>{isFetching ? (<img src={spiner} size="" alt=''/>) : (<img style={{ margin: "0px 5px"}} src={refresh}/>)}</button>
+
+            <button className="w3-button w3-small w3-white w3-border w3-round-small w3-padding-small button-margin button-size button-inner-align"  
+              onClick={this.handleCloseAllDocuments}>Close all</button>
+
+            <div className="div-button button-margin" style={{color: "#000"}}>Page: {this.props.documents.pageNmb + 1}</div>
+          </div>
+
+          <DocumentList 
+            documents={this.props.documents}
+            documentDetail={this.props.documentDetail}
+            onChangeOrder={(i,dir)=>(this.handleOnChangeOrder(i,dir))}
+            onToogle={(id)=>(this.handleOnToogle(id))}
+            onOpenDetail={(id)=>(this.handleOnOpenDetail(id))}
+            onCloseDetail={(id)=>(this.handleOnCloseDetail(id))}/>
+      </div>
+  </div>;   
   }
 }
 

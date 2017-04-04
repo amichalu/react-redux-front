@@ -1,4 +1,20 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
+@import url("https://fonts.googleapis.com/css?family=Lato");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://www.w3schools.com/w3css/4/w3.css");
+/* Rules for sizing the icon. */
+.material-icons.md-18 {
+  font-size: 18px; }
+
+.material-icons.md-24 {
+  font-size: 24px; }
+
+.material-icons.md-36 {
+  font-size: 36px; }
+
+.material-icons.md-48 {
+  font-size: 48px; }
+
 .text-ar {
   text-align: right; }
 
@@ -48,7 +64,7 @@
 .doc-list {
   float: left;
   font-family: "Roboto Mono", monospace;
-  font-size: 90%;
+  font-size: 80%;
   border-top: 1px solid #ddd;
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
@@ -148,13 +164,16 @@
     height: 0px;
     visibility: hidden; } }
 
-.div-button {
-  padding: .3em .5em;
-  margin: .4em .4em;
-  float: left;
-  user-select: none;
-  cursor: pointer;
-  transition: background-color .25s, color .15s, box-shadow .15s, opacity .25s, filter .25s, border .15s; }
+.button-margin {
+  margin: 5px; }
+
+.button-inner-align {
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center; }
+
+.button-size {
+  height: 3em; }
 
 .div-button:hover {
   box-shadow: 5px 5px 10px lightgrey; }
