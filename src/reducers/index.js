@@ -247,7 +247,12 @@ const documentDetail = ( state = initialStateDocDetail, action ) => {
               lastUpdated: action.receivedAt
           }
         case CLOSE_DOCUMENT:
-          return initialStateDocDetail
+          return {
+              ...state,
+              isFetching: false,
+              data: null,
+              documentId: null
+          }
         default:
             return state
     }

@@ -82,11 +82,15 @@ class DocumentListContainer extends Component {
     dispatch(toogleAllDocuments(selectAll))
   }
 
+  // It's solution how to dispatch new action as a consequence of another action:
+  // First we dispatch TOOGLE_SPINNER, REQUEST_DOCUMENTDETAIL, RECEIVE_DOCUMENTDETAIL through handleOnOpenDetail()
+  // and here we check if we received the new document's details
+  // and then we dispatch TOOGLE_SPINNER, OPEN_DOCUMENT  
   componentWillReceiveProps(nextProps) {
     console.log( 'DocumentListContainer.componentWillReceiveProps()' )
     const { dispatch } = this.props
-    if (nextProps.documentDetail.documentId 
-      && (this.props.documentDetail.documentId !== nextProps.documentDetail.documentId)) {
+    if (this.props.documentDetail.lastUpdated !== nextProps.documentDetail.lastUpdated) {
+        // New document's details received so we need turn off the spinner and open document panel
         dispatch(toogleSpinner(nextProps.documentDetail.documentId))
         dispatch(openDocument(nextProps.documentDetail.documentId))
       }
@@ -109,6 +113,7 @@ class DocumentListContainer extends Component {
               <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={this.handleCloseAllDocuments}>
                 Close all<i className="w3-padding-small fa fa-compress"></i></a>
             </div>
+
             <DocumentList 
               documents={this.props.documents}
               documentDetail={this.props.documentDetail}
@@ -117,7 +122,7 @@ class DocumentListContainer extends Component {
               onToogleAllDocuments={(selectAll)=>(this.handleOnToogleAllDocuments(selectAll))}
               onOpenDetail={(id)=>(this.handleOnOpenDetail(id))}
               onCloseDetail={(id)=>(this.handleOnCloseDetail(id))}/>
-            <div className="div-button button-margin" style={{color: "#000"}}>Page: {this.props.documents.pageNmb + 1}</div>
+            <div className="button-margin" style={{color: "#000"}}>Page: {this.props.documents.pageNmb + 1}</div>
           </div>
 
   </div>;// root div

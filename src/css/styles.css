@@ -2,23 +2,6 @@
 @import url("https://fonts.googleapis.com/css?family=Lato");
 @import url("https://www.w3schools.com/w3css/4/w3.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-/* Rules for sizing the icon. */
-.material-icons.md-18 {
-  font-size: 18px; }
-
-.material-icons.md-24 {
-  font-size: 24px; }
-
-.material-icons.md-36 {
-  font-size: 36px; }
-
-.material-icons.md-48 {
-  font-size: 48px; }
-
-.material-icons {
-  vertical-align: -14%; }
-
 .text-ar {
   text-align: right; }
 
@@ -199,6 +182,3 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 18px 18px; }
-
-.div-button:hover {
-  box-shadow: 5px 5px 10px lightgrey; }

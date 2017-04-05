@@ -17,7 +17,7 @@ class DocumentList extends Component {
   getOrderElement(order) {
     const el =  (this.props.documents.order === order ? (this.props.documents.dirOrder === 'asc' ? 1 : 2) : 0)
     if (!el) return ''
-    return el === 1 ? <i className="fa fa-sort-amount-asc" style={{ float: "right"}}aria-hidden="true"></i> : <i className="fa fa-sort-amount-desc" style={{ float: "right"}}aria-hidden="true"></i>
+    return el === 1 ? <i className="fa fa-sort-amount-asc w3-padding-small" style={{ float: "right"}}aria-hidden="true"></i> : <i className="fa fa-sort-amount-desc w3-padding-small" style={{ float: "right"}}aria-hidden="true"></i>
   }
   onToogleAllDocuments(event) {
     this.props.onToogleAllDocuments(event.target.checked)

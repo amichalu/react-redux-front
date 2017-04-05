@@ -3,25 +3,19 @@ $even-row-grey-back: #f9f9f9;
 $row-hover: #ddd;
 
 $doc-list-font: 'Roboto Mono', monospace;
-$doc-list-font-size: 90%; 
+$doc-list-font-size: 90%;
 
 $button-font: 'Lato', sans-serif;
 
+// Google fonts
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 @import url('https://fonts.googleapis.com/css?family=Lato');
+
+//w3school
 @import url('https://www.w3schools.com/w3css/4/w3.css');
 
 // Font awesome
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
-
-// Google icons and material design sizes
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-/* Rules for sizing the icon. */
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
-.material-icons {vertical-align:-14%}
 
 .text-ar {
   text-align: right;
@@ -37,10 +31,6 @@ $button-font: 'Lato', sans-serif;
   float: left;
   font-family: $doc-list-font;
   font-size: $doc-list-font-size;
-  // border-top: 1px solid $doc-border-color;
-  // border-left: 1px solid $doc-border-color;
-  // border-right: 1px solid $doc-border-color;
-  //margin-left: .6em;
 }
 
 .div-cell {
@@ -51,13 +41,11 @@ $button-font: 'Lato', sans-serif;
   overflow: hidden;
   width: 100em;
   cursor: pointer;
-  //border-bottom: 1px solid $doc-border-color;
 }
 .div-row-grey {
   background-color: $even-row-grey-back
 }
 .title-row {
-  //background-color: darkcyan;
   color: grey;
   cursor: pointer;
 }
@@ -202,8 +190,5 @@ $button-font: 'Lato', sans-serif;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 18px 18px;
-}
-.div-button:hover {
-  box-shadow: 5px 5px 10px lightgrey;
 }
 
