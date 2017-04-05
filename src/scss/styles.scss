@@ -1,9 +1,9 @@
 $doc-border-color: #ddd;
-$even-row-grey-back: #efefef;
+$even-row-grey-back: #f9f9f9;
 $row-hover: #ddd;
 
 $doc-list-font: 'Roboto Mono', monospace;
-$doc-list-font-size: 80%; 
+$doc-list-font-size: 90%; 
 
 $button-font: 'Lato', sans-serif;
 
@@ -33,60 +33,14 @@ $button-font: 'Lato', sans-serif;
   text-align: center;
 }
 
-.doc-check {
-  width: 1.5em;
-  padding: 0 .5em;
-}
-
-.doc-id {
-  width: 5em;
-}
-
-.doc-number {
-  width: 9em;
-  border-left: 1px solid $doc-border-color;
-}
-
-.doc-type {
-  width: 5.5em;
-  border-left: 1px solid $doc-border-color;
-}
-.div-doc-norm {
-  color: dodgerblue; 
-}
-.div-doc-corr {
-  background-color: #ff6666;
-  color: #fff;
-}
-
-.doc-val {
-  width: 8em;
-  border-left: 1px solid $doc-border-color;
-}
-
-.doc-nip {
-  width: 12em;
-  border-left: 1px solid $doc-border-color;
-}
-
-.doc-customername1 {
-  width: 25em;
-  border-left: 1px solid $doc-border-color;
-  
-  overflow: hidden;
-  text-overflow:ellipsis;
-  white-space: nowrap;
-  
-}
-
 .doc-list {
   float: left;
   font-family: $doc-list-font;
   font-size: $doc-list-font-size;
-  border-top: 1px solid $doc-border-color;
-  border-left: 1px solid $doc-border-color;
-  border-right: 1px solid $doc-border-color;
-  margin-left: .6em;
+  // border-top: 1px solid $doc-border-color;
+  // border-left: 1px solid $doc-border-color;
+  // border-right: 1px solid $doc-border-color;
+  //margin-left: .6em;
 }
 
 .div-cell {
@@ -97,32 +51,70 @@ $button-font: 'Lato', sans-serif;
   overflow: hidden;
   width: 100em;
   cursor: pointer;
-  border-bottom: 1px solid $doc-border-color;
+  //border-bottom: 1px solid $doc-border-color;
 }
 .div-row-grey {
   background-color: $even-row-grey-back
 }
-
 .title-row {
-  background-color: darkcyan;
-  color: ghostwhite;
+  //background-color: darkcyan;
+  color: grey;
   cursor: pointer;
 }
 .row-hover {
-  background-color: $row-hover
+  background-color: $row-hover;
 }
 .row-checked {
   background-color: lightblue;
 }
-
 .p-cell {
-  margin: 0.2em 0.4em;  
+  padding: 0.2em 0.2em;
+  margin: 0.2em 0.4em;
   white-space: nowrap;
-  // width: 90%;
+  height: 1.8em;
 }
-
 .col-highlighted {
   background-color: lightyellow;
+}
+
+.doc-check {
+  width: 1.5em;
+  padding: 0 .5em;
+  height: 1.9em;
+  cursor: auto;
+}
+.input-checkbox {
+  margin-top: 0.5em;
+}
+.doc-id {
+  width: 5em;
+  cursor: auto;
+}
+.doc-number {
+  width: 9em;
+}
+.doc-type {
+  width: 5.5em;
+  cursor: auto;
+}
+.div-doc-norm {
+  color: dodgerblue; 
+}
+.div-doc-corr {
+  background-color: #ff6666;
+  color: #fff;
+}
+.doc-val {
+  width: 8em;
+}
+.doc-nip {
+  width: 12em;
+}
+.doc-customername1 {
+  width: 25em;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
 
 .div-detail {
@@ -176,7 +168,10 @@ $button-font: 'Lato', sans-serif;
 }
 
 .button-margin {
-  margin: 5px;
+  margin: 8px 8px 8px 0px;
+}
+.button-style {
+  color: #616161;
 }
 
 .button-paddind-reload {
@@ -201,6 +196,12 @@ $button-font: 'Lato', sans-serif;
   background-position: 90% center;
   background-repeat: no-repeat;
   background-size: 24px 24px;
+}
+.request-documentdetail-spinner {
+  background-image: url(../images/reload.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
 }
 .div-button:hover {
   box-shadow: 5px 5px 10px lightgrey;

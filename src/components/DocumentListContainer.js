@@ -1,14 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-//import spiner from '../images/ripple.svg'
-import spiner from '../images/reload.svg'
-
-import next from '../images/ic_keyboard_arrow_right_black_24px.svg'
-import prev from '../images/ic_keyboard_arrow_left_black_24px.svg'
-import refresh from '../images/ic_refresh_black_24px.svg'
-
-
 import { 
   fetchDocumentsIfNeeded, 
   invalidateDocuments, 
@@ -96,44 +88,34 @@ class DocumentListContainer extends Component {
       }
   }
 
-  //<i className="material-icons md-24" style={{ marginLeft: "5px"}}>fast_forward</i>
-  //<img src={spiner} style={{ margin: "0px 5px"}} width="24" height="24" alt=''/>
-  //<img style={{ margin: "0px 5px"}} src={refresh}/>
-  //{isFetching ? ('....') : ('')}
   render() {
     console.log('DocumentListContainer.render() this.props.documents: ', this.props.documents)
-    //const isFetching = this.props.documents.isFetching || false
     const reloadAnimClass = 'w3-padding-small fa fa-refresh' + ((this.props.documents.isFetching || false) ? ' w3-spin' : '')
 
-    return <div> 
-          
-      <div className="w3-container">
-          <div className="w3-bar">
+    return <div>
 
-            <a className="w3-button w3-border w3-round w3-padding-small button-margin" href="#" onClick={(e) => this.handlePageClick(e, -1)}>
-              Backward<i className="w3-padding-small fa fa-arrow-left" aria-hidden="true"></i></a>
-              
-            <a className="w3-button w3-border w3-round w3-padding-small button-margin" href="#" onClick={(e) => this.handlePageClick(e, 1)}>
-              Forward<i className="w3-padding-small fa fa-arrow-right"></i></a>
-            
-            <a className="w3-button w3-border w3-round w3-padding-small button-margin" href="#" onClick={this.handleRefreshData}>
-              Reload<i className={reloadAnimClass}></i></a>
-
-            <a className="w3-button w3-border w3-round w3-padding-small button-margin" href="#" onClick={this.handleCloseAllDocuments}>
-              Close all<i className="w3-padding-small fa fa-compress"></i></a>
-
+          <div className="w3-container">
+            <div className="w3-bar">
+              <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={(e) => this.handlePageClick(e, -1)}>
+                Backward<i className="w3-padding-small fa fa-arrow-left" aria-hidden="true"></i></a>
+              <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={(e) => this.handlePageClick(e, 1)}>
+                Forward<i className="w3-padding-small fa fa-arrow-right"></i></a>
+              <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={this.handleRefreshData}>
+                Reload<i className={reloadAnimClass}></i></a>
+              <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={this.handleCloseAllDocuments}>
+                Close all<i className="w3-padding-small fa fa-compress"></i></a>
+            </div>
+            <DocumentList 
+              documents={this.props.documents}
+              documentDetail={this.props.documentDetail}
+              onChangeOrder={(i,dir)=>(this.handleOnChangeOrder(i,dir))}
+              onToogle={(id)=>(this.handleOnToogle(id))}
+              onOpenDetail={(id)=>(this.handleOnOpenDetail(id))}
+              onCloseDetail={(id)=>(this.handleOnCloseDetail(id))}/>
             <div className="div-button button-margin" style={{color: "#000"}}>Page: {this.props.documents.pageNmb + 1}</div>
           </div>
 
-          <DocumentList 
-            documents={this.props.documents}
-            documentDetail={this.props.documentDetail}
-            onChangeOrder={(i,dir)=>(this.handleOnChangeOrder(i,dir))}
-            onToogle={(id)=>(this.handleOnToogle(id))}
-            onOpenDetail={(id)=>(this.handleOnOpenDetail(id))}
-            onCloseDetail={(id)=>(this.handleOnCloseDetail(id))}/>
-      </div>
-  </div>;   
+  </div>;// root div
   }
 }
 

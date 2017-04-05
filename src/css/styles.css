@@ -28,51 +28,10 @@
 .text-ac {
   text-align: center; }
 
-.doc-check {
-  width: 1.5em;
-  padding: 0 .5em; }
-
-.doc-id {
-  width: 5em; }
-
-.doc-number {
-  width: 9em;
-  border-left: 1px solid #ddd; }
-
-.doc-type {
-  width: 5.5em;
-  border-left: 1px solid #ddd; }
-
-.div-doc-norm {
-  color: dodgerblue; }
-
-.div-doc-corr {
-  background-color: #ff6666;
-  color: #fff; }
-
-.doc-val {
-  width: 8em;
-  border-left: 1px solid #ddd; }
-
-.doc-nip {
-  width: 12em;
-  border-left: 1px solid #ddd; }
-
-.doc-customername1 {
-  width: 25em;
-  border-left: 1px solid #ddd;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap; }
-
 .doc-list {
   float: left;
   font-family: "Roboto Mono", monospace;
-  font-size: 80%;
-  border-top: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  margin-left: .6em; }
+  font-size: 90%; }
 
 .div-cell {
   float: left; }
@@ -80,15 +39,13 @@
 .div-row {
   overflow: hidden;
   width: 100em;
-  cursor: pointer;
-  border-bottom: 1px solid #ddd; }
+  cursor: pointer; }
 
 .div-row-grey {
-  background-color: #efefef; }
+  background-color: #f9f9f9; }
 
 .title-row {
-  background-color: darkcyan;
-  color: ghostwhite;
+  color: grey;
   cursor: pointer; }
 
 .row-hover {
@@ -98,11 +55,52 @@
   background-color: lightblue; }
 
 .p-cell {
+  padding: 0.2em 0.2em;
   margin: 0.2em 0.4em;
-  white-space: nowrap; }
+  white-space: nowrap;
+  height: 1.8em; }
 
 .col-highlighted {
   background-color: lightyellow; }
+
+.doc-check {
+  width: 1.5em;
+  padding: 0 .5em;
+  height: 1.9em;
+  cursor: auto; }
+
+.input-checkbox {
+  margin-top: 0.5em; }
+
+.doc-id {
+  width: 5em;
+  cursor: auto; }
+
+.doc-number {
+  width: 9em; }
+
+.doc-type {
+  width: 5.5em;
+  cursor: auto; }
+
+.div-doc-norm {
+  color: dodgerblue; }
+
+.div-doc-corr {
+  background-color: #ff6666;
+  color: #fff; }
+
+.doc-val {
+  width: 8em; }
+
+.doc-nip {
+  width: 12em; }
+
+.doc-customername1 {
+  width: 25em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
 
 .div-detail {
   height: 0px;
@@ -169,7 +167,10 @@
     visibility: hidden; } }
 
 .button-margin {
-  margin: 5px; }
+  margin: 8px 8px 8px 0px; }
+
+.button-style {
+  color: #616161; }
 
 .button-paddind-reload {
   padding: 0.4em 0.8em; }
@@ -192,6 +193,12 @@
   background-position: 90% center;
   background-repeat: no-repeat;
   background-size: 24px 24px; }
+
+.request-documentdetail-spinner {
+  background-image: url(../images/reload.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 18px 18px; }
 
 .div-button:hover {
   box-shadow: 5px 5px 10px lightgrey; }

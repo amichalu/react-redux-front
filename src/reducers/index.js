@@ -75,6 +75,19 @@ const toogle = (selectedItems, items, toogleDocumentId, receivedAt ) => {
         selectedItems: selectedItems
     }
 }
+const toogleAllDocuments = (selectedItems, items, set = false, receivedAt) => {
+    if (!set) selectedItems = []
+    return {
+        items: items.map( (doc) => {
+            return {
+                ...doc,
+                checked: set,
+                lastUpdated: receivedAt
+            }
+        }),
+        selectedItems: selectedItems
+    }
+}
 
 // Set selected documents after page change, set opened
 const updateDocumentsState = ( state, items, receivedAt ) => {

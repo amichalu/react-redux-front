@@ -3,8 +3,6 @@ import {formatDecimal} from '../solidity/numbers'
 
 import DocumentItemDetail from '../components/DocumentItemDetail'
 
-import spinner from '../images/ripple.svg'
-
 // DocumentItem  ------------------------------------------------------------------
 class DocumentItem extends Component {
   constructor(props) {
@@ -32,15 +30,16 @@ class DocumentItem extends Component {
     console.log("DocumentItem.render(): ")
     const doc = this.props.document
     const col = this.props.order
-    const docType = (doc.type === -2) ? 'Kor' : 'Fak VAT'
+    const docType = (doc.type === -2) ? 'Corr' : 'Inv VAT'
+    const openDocumentDetailAnim = 'doc-id div-cell' + (this.props.document.spinner || false ? ' request-documentdetail-spinner' : '')
     
     return <div>
         <div className={"div-row " + (doc.even ? 'div-row-grey' : '') + " " + (this.state.hover ? 'row-hover' : '') + " " + (doc.checked ? 'row-checked' : '')} 
         onMouseEnter={this.onMouseEnterHandler} onMouseLeave={this.onMouseLeaveHandler}>
         
-          <div className="doc-check div-cell"><input type="checkbox" name="" value={doc.id} onChange={this.onCheckClick} checked={doc.checked ? 'checked' : ''}/></div>
+          <div className="doc-check div-cell"><input className="input-checkbox" type="checkbox" name="" value={doc.id} onChange={this.onCheckClick} checked={doc.checked ? 'checked' : ''}/></div>
           <div onClick={ ()=>{this.props.onOpenDetail(doc.id)} }>
-          <div className="doc-id div-cell"><p className="text-ar p-cell">{this.props.document.spinner ? (<img src={spinner} alt=''/>) : (doc.id) } </p></div>
+          <div className={openDocumentDetailAnim}><p className='text-ar p-cell'>{this.props.document.spinner || false ? ('') : (doc.id) }</p></div>
           <div className={"doc-number div-cell " + (col === 'number' && !doc.checked && !this.state.hover ? 'col-highlighted' : '')}><p className="text-al p-cell">{doc.number}</p></div>
           <div className={"doc-type div-cell " + (doc.type === -1 ? 'div-doc-norm' : 'div-doc-corr')}><p className="text-al p-cell">{docType}</p></div>
           <div className={"doc-number div-cell " + (col === 'date'  && !doc.checked && !this.state.hover ? 'col-highlighted' : '')}><p className="text-al p-cell">{doc.date}</p></div>
