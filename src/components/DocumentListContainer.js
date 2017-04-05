@@ -7,7 +7,8 @@ import {
   prevPage, 
   nextPage, 
   changeOrder, 
-  toogleDocument, 
+  toogleDocument,
+  toogleAllDocuments,
   toogleSpinner,
   openDocument, 
   closeDocument, 
@@ -72,10 +73,13 @@ class DocumentListContainer extends Component {
     const { dispatch } = this.props
     dispatch(closeDocument(id))
   }  
-
   handleCloseAllDocuments() {
     const { dispatch } = this.props
     dispatch(closeAllDocuments())    
+  }
+  handleOnToogleAllDocuments(selectAll) {
+    const { dispatch } = this.props
+    dispatch(toogleAllDocuments(selectAll))
   }
 
   componentWillReceiveProps(nextProps) {
@@ -110,6 +114,7 @@ class DocumentListContainer extends Component {
               documentDetail={this.props.documentDetail}
               onChangeOrder={(i,dir)=>(this.handleOnChangeOrder(i,dir))}
               onToogle={(id)=>(this.handleOnToogle(id))}
+              onToogleAllDocuments={(selectAll)=>(this.handleOnToogleAllDocuments(selectAll))}
               onOpenDetail={(id)=>(this.handleOnOpenDetail(id))}
               onCloseDetail={(id)=>(this.handleOnCloseDetail(id))}/>
             <div className="div-button button-margin" style={{color: "#000"}}>Page: {this.props.documents.pageNmb + 1}</div>

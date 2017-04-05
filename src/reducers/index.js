@@ -7,6 +7,7 @@ import {
     PREV_PAGE, 
     CHANGE_ORDER,
     TOOGLE_DOCUMENT,
+    TOOGLE_ALL_DOCUMENTS,
     TOOGLE_SPINNER,
     OPEN_DOCUMENT,
     CLOSE_DOCUMENT,
@@ -75,14 +76,15 @@ const toogle = (selectedItems, items, toogleDocumentId, receivedAt ) => {
         selectedItems: selectedItems
     }
 }
-const toogleAllDocuments = (selectedItems, items, set = false, receivedAt) => {
-    if (!set) selectedItems = []
+const toogleAllDocuments = (items, action) => {
+    var selectedItems = []
     return {
         items: items.map( (doc) => {
+            if (action.selectAll) selectedItems[doc.id] = true
             return {
                 ...doc,
-                checked: set,
-                lastUpdated: receivedAt
+                checked: action.selectAll,
+                lastUpdated: action.receivedAt
             }
         }),
         selectedItems: selectedItems
@@ -169,6 +171,13 @@ const documents = ( state = initialState, action ) => {
             ...state,
             items: items,
             lastUpdated: action.receivedAt,
+            selectedItems: selectedItems
+          }
+        case TOOGLE_ALL_DOCUMENTS:
+          var {items, selectedItems} = toogleAllDocuments( state.items, action )
+          return {
+            ...state,
+            items: items,
             selectedItems: selectedItems
           }
         case OPEN_DOCUMENT:

@@ -7,6 +7,7 @@ class DocumentList extends Component {
   constructor() {
     super()
     console.log( 'DocumentList.constructor()')
+    //this.onToogleAllDocuments = this.onToogleAllDocuments.bind(this)
   }
 
   onChangeOrder(col) {
@@ -17,6 +18,9 @@ class DocumentList extends Component {
     const el =  (this.props.documents.order === order ? (this.props.documents.dirOrder === 'asc' ? 1 : 2) : 0)
     if (!el) return ''
     return el === 1 ? <i className="fa fa-sort-amount-desc" style={{ float: "right"}}aria-hidden="true"></i> : <i className="fa fa-sort-amount-asc" style={{ float: "right"}}aria-hidden="true"></i>
+  }
+  onToogleAllDocuments(event) {
+    this.props.onToogleAllDocuments(event.target.checked)
   }
 
   renderDocument( document, col ) {
@@ -34,7 +38,7 @@ class DocumentList extends Component {
 
     return <div className="doc-list w3-border w3-round">
         <div className="div-row title-row">
-          <div className="doc-check div-cell"><input type="checkbox" className="input-checkbox" name="" value=""/></div>
+          <div className="doc-check div-cell"><input type="checkbox" className="input-checkbox" name="" value="" onClick={(e)=>(this.onToogleAllDocuments(e))}/></div>
           <div className="doc-id div-cell"><p className="text-ar p-cell">ID</p></div>
           <div className="doc-number div-cell" onClick={()=>this.onChangeOrder('number')}><p className="text-al p-cell ">Numer {this.getOrderElement('number')} </p></div>
           <div className="doc-type div-cell"><p className="text-al p-cell">Rodzaj</p></div>
