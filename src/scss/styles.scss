@@ -108,11 +108,13 @@ $button-font: 'Lato', sans-serif;
 .div-detail {
   height: 0px;
   overflow:hidden;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
-// Document detail animation
+//Document detail animation
 .doc-opening {
-    height: 300px;
+    //max-height: 100%;
     background-color: palegoldenrod;
     position: relative;
     -webkit-animation-name: opening; /* Safari 4.0 - 8.0 */
@@ -137,22 +139,22 @@ $button-font: 'Lato', sans-serif;
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes opening {
     0%   {height: 0px}
-    100% {height: 300px; visibility: visible}
+    100% {height: 200px; visibility: visible}
 }
 /* Standard syntax */
 @keyframes opening {
     0%   {height: 0px}
-    100% {height: 300px; visibility: visible}
+    100% {height: 200px; visibility: visible}
 }
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes closing {
-    0%   {height: 300px}
-    100% {height: 0px; visibility: hidden}
+    0%   {height: 200px}
+    100% {height: 0px; visibility: hidden;}
 }
 /* Standard syntax */
 @keyframes closing {
-    0%   {height: 300px}
-    100% {height: 0px; visibility: hidden}
+    0%   {height: 200px}
+    100% {height: 0px; visibility: hidden;}
 }
 
 .button-margin {

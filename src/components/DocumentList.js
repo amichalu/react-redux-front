@@ -7,7 +7,6 @@ class DocumentList extends Component {
   constructor() {
     super()
     console.log( 'DocumentList.constructor()')
-    //this.onToogleAllDocuments = this.onToogleAllDocuments.bind(this)
   }
 
   onChangeOrder(col) {

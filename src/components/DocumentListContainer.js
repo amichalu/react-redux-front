@@ -82,7 +82,7 @@ class DocumentListContainer extends Component {
     dispatch(toogleAllDocuments(selectAll))
   }
 
-  // It's solution how to dispatch new action as a consequence of another action:
+  // It's a solution how to dispatch the new action as a consequence of another action:
   // First we dispatch TOOGLE_SPINNER, REQUEST_DOCUMENTDETAIL, RECEIVE_DOCUMENTDETAIL through handleOnOpenDetail()
   // and here we check if we received the new document's details
   // and then we dispatch TOOGLE_SPINNER, OPEN_DOCUMENT  

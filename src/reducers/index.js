@@ -236,7 +236,8 @@ const documentDetail = ( state = initialStateDocDetail, action ) => {
         case REQUEST_DOCUMENTDETAIL:
          return {
               ...state,
-              isFetching: true
+              isFetching: true,
+              data: null
             }
         case RECEIVE_DOCUMENTDETAIL:
           return {
@@ -250,7 +251,7 @@ const documentDetail = ( state = initialStateDocDetail, action ) => {
           return {
               ...state,
               isFetching: false,
-              data: null,
+              //data: null,
               documentId: null
           }
         default:

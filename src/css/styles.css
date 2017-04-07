@@ -87,10 +87,11 @@
 
 .div-detail {
   height: 0px;
-  overflow: hidden; }
+  overflow: hidden;
+  margin-top: 0px;
+  margin-bottom: 0px; }
 
 .doc-opening {
-  height: 300px;
   background-color: palegoldenrod;
   position: relative;
   -webkit-animation-name: opening;
@@ -122,7 +123,7 @@
   0% {
     height: 0px; }
   100% {
-    height: 300px;
+    height: 200px;
     visibility: visible; } }
 
 /* Standard syntax */
@@ -130,13 +131,13 @@
   0% {
     height: 0px; }
   100% {
-    height: 300px;
+    height: 200px;
     visibility: visible; } }
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes closing {
   0% {
-    height: 300px; }
+    height: 200px; }
   100% {
     height: 0px;
     visibility: hidden; } }
@@ -144,7 +145,7 @@
 /* Standard syntax */
 @keyframes closing {
   0% {
-    height: 300px; }
+    height: 200px; }
   100% {
     height: 0px;
     visibility: hidden; } }
