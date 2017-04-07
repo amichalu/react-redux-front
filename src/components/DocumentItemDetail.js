@@ -43,7 +43,7 @@ class DocumentItemDetail extends Component {
         <span onClick={this.onClose} className="w3-button w3-display-topright">X</span>
 
         <table className="w3-table-all w3-card-2">
-        <tr><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>
+        <tr><th>Nr</th><th>Article name</th><th>Price</th><th></th><th></th><th></th><th></th><th></th></tr>
         {this.props.documentDetail.data ? this.renderArticles() : ''}
         </table>
 
