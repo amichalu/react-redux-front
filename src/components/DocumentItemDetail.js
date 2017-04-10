@@ -24,28 +24,30 @@ class DocumentItemDetail extends Component {
 
   renderArticles() {
     var id = 1
-    return this.props.documentDetail.data.articles.map((art) => (      
-      <tr key={art.id.toString()}>
+    return this.props.articles.items[this.props.document.id].articles.map((art,k) => (      
+      <tr key={k}>
         <td>{id++}</td>      
         <td>{art.artname1}</td>
-        <td>{art.artprice}</td>
+        <td><p className="text-ar art-cell">{art.artprice}</p></td>
         <td>{art.arttaxlabel}</td>
         <td>{art.artunit}</td>
-        <td>{art.quantity}</td>
-        <td>{art.nettovalue}</td>
-        <td>{art.bruttovalue}</td>
+        <td><p className="text-ar art-cell">{art.quantity}</p></td>
+        <td><p className="text-ar art-cell">{art.nettovalue}</p></td>
+        <td><p className="text-ar art-cell">{art.bruttovalue}</p></td>
       </tr>
     ))
   }
   render() {
-    const w3class = "w3-panel w3-light-grey w3-leftbar w3-border-blue"
+    console.log("DocumentItemDetail.render()")
+    const w3class = "w3-panel w3-leftbar w3-border-blue"
     return <div className={w3class + " div-detail " + this.state.classNameAnim}>
         <span onClick={this.onClose} className="w3-button w3-display-topright">X</span>
 
-        <table className="w3-table-all w3-card-2">
-        <tr><th>Nr</th><th>Article name</th><th>Price</th><th></th><th></th><th></th><th></th><th></th></tr>
-        {this.props.documentDetail.data ? this.renderArticles() : ''}
-        </table>
+        <table className="w3-table w3-bordered w3-border"><tbody>
+          <tr className=""><th>Nr</th><th>Article name</th><th>Price</th><th></th><th></th><th></th><th></th><th></th></tr>
+          {this.props.articles.items ? this.renderArticles() : ''}
+        </tbody></table>
+        
 
       </div>
   }  

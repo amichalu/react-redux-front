@@ -125,12 +125,21 @@ export const receiveDocumentDetail = (json, id) => ({
   receivedAt: Date.now()
 })
 
+// This is called by fetch() in fetchDocumentDetail()
+// We dispatch RECEIVE_DOCUMENTDETAIL, TOOGLE_SPINNER & OPEN_DOCUMENT
+export const receiveDocumentDetailActions = (json, id) => (dispatch) => {
+  dispatch(receiveDocumentDetail(json,id))
+  dispatch(toogleSpinner(id))
+  dispatch(openDocument(id))
+}
+
 const getUrlDocumentDetail = (id) => ("/documentarticles/" + id)
 
 export const fetchDocumentDetail = id => (dispatch) => {
   dispatch(requestDocumentDetail())
   return fetch( getUrlDocumentDetail(id) )
     .then(response => response.json())
-    .then(json => dispatch(receiveDocumentDetail(json, id)))
+    .then(json => dispatch(receiveDocumentDetailActions(json, id)))
 }
+
 

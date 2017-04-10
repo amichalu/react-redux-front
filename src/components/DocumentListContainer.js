@@ -66,8 +66,17 @@ class DocumentListContainer extends Component {
 
   handleOnOpenDetail(id) {
     const { dispatch } = this.props
-    dispatch(toogleSpinner(id))
-    dispatch(fetchDocumentDetail(id))
+    var alreadyOpened = false;
+    this.props.documents.items.forEach((doc)=>{
+      if (doc.id === id && doc.opening) {
+        alreadyOpened = true
+        return
+      }
+    })
+    if (!alreadyOpened) {
+      dispatch(toogleSpinner(id))
+      dispatch(fetchDocumentDetail(id))
+    }
   }  
   handleOnCloseDetail(id) {
     const { dispatch } = this.props
@@ -80,20 +89,6 @@ class DocumentListContainer extends Component {
   handleOnToogleAllDocuments(selectAll) {
     const { dispatch } = this.props
     dispatch(toogleAllDocuments(selectAll))
-  }
-
-  // It's a solution how to dispatch the new action as a consequence of another action:
-  // First we dispatch TOOGLE_SPINNER, REQUEST_DOCUMENTDETAIL, RECEIVE_DOCUMENTDETAIL through handleOnOpenDetail()
-  // and here we check if we received the new document's details
-  // and then we dispatch TOOGLE_SPINNER, OPEN_DOCUMENT  
-  componentWillReceiveProps(nextProps) {
-    console.log( 'DocumentListContainer.componentWillReceiveProps()' )
-    const { dispatch } = this.props
-    if (this.props.documentDetail.lastUpdated !== nextProps.documentDetail.lastUpdated) {
-        // New document's details received so we need turn off the spinner and open document panel
-        dispatch(toogleSpinner(nextProps.documentDetail.documentId))
-        dispatch(openDocument(nextProps.documentDetail.documentId))
-      }
   }
 
   render() {
@@ -116,7 +111,7 @@ class DocumentListContainer extends Component {
 
             <DocumentList 
               documents={this.props.documents}
-              documentDetail={this.props.documentDetail}
+              articles={this.props.articles}
               onChangeOrder={(i,dir)=>(this.handleOnChangeOrder(i,dir))}
               onToogle={(id)=>(this.handleOnToogle(id))}
               onToogleAllDocuments={(selectAll)=>(this.handleOnToogleAllDocuments(selectAll))}

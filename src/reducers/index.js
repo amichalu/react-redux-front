@@ -228,10 +228,11 @@ const initialStateDocDetail = {
     isFetching: false,
     data: null,
     lastUpdated: '',
-    documentId: null
+    //documentId: null,
+    items: []
 }
-const documentDetail = ( state = initialStateDocDetail, action ) => {
-    console.log('documentDetail() reducer, state:', state)
+const articles = ( state = initialStateDocDetail, action ) => {
+    console.log('documentDetail() reducer, state:', state, action.type)
     switch (action.type) {
         case REQUEST_DOCUMENTDETAIL:
          return {
@@ -240,19 +241,16 @@ const documentDetail = ( state = initialStateDocDetail, action ) => {
               data: null
             }
         case RECEIVE_DOCUMENTDETAIL:
-          return {
-              ...state,
-              isFetching: false,
-              documentId: action.id,
-              data: action.document,
+          console.log("reducer RECEIVE_DOCUMENTDETAIL")
+          var newItems = state.items;
+          newItems[action.id] = {
+              articles: action.document.articles,
               lastUpdated: action.receivedAt
           }
-        case CLOSE_DOCUMENT:
           return {
               ...state,
-              isFetching: false,
-              //data: null,
-              documentId: null
+              lastUpdated: action.receivedAt,
+              items: newItems
           }
         default:
             return state
@@ -261,7 +259,7 @@ const documentDetail = ( state = initialStateDocDetail, action ) => {
 
 const rootReducer = combineReducers({
     documents,
-    documentDetail
+    articles
 })
 
 export default rootReducer;

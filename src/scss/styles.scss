@@ -112,10 +112,14 @@ $button-font: 'Lato', sans-serif;
   margin-bottom: 0px;
 }
 
+.art-cell {
+  margin: 0px;
+}
+
 //Document detail animation
 .doc-opening {
     //max-height: 100%;
-    background-color: palegoldenrod;
+    //background-color: palegoldenrod;
     position: relative;
     -webkit-animation-name: opening; /* Safari 4.0 - 8.0 */
     -webkit-animation-duration: 0.7s; /* Safari 4.0 - 8.0 */
@@ -127,7 +131,7 @@ $button-font: 'Lato', sans-serif;
 
 .doc-closing {
     height: 0px;
-    background-color: palegoldenrod;
+    //background-color: palegoldenrod;
     position: relative;
     -webkit-animation-name: closing; /* Safari 4.0 - 8.0 */
     -webkit-animation-duration: 0.7s; /* Safari 4.0 - 8.0 */

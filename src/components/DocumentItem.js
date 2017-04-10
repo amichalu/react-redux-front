@@ -53,7 +53,7 @@ class DocumentItem extends Component {
         {(doc.opening || doc.closing) ? (<DocumentItemDetail 
             document={this.props.document} 
             onCloseDetail={(id)=>{this.props.onCloseDetail(id)}}
-            documentDetail={this.props.documentDetail}/>) : ('')}
+            articles={this.props.articles}/>) : ('')}
         
       </div>
   }

@@ -26,7 +26,7 @@ class DocumentList extends Component {
     return <DocumentItem 
       key={document.id} 
       document={document}
-      documentDetail={this.props.documentDetail}
+      articles={this.props.articles}
       order={col}
       onCheckClick={this.props.onToogle}
       onOpenDetail={this.props.onOpenDetail}
