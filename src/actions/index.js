@@ -13,7 +13,6 @@ export const CLOSE_DOCUMENT = 'CLOSE_DOCUMENT'
 export const CLOSE_ALLDOCUMENTS = 'CLOSE_ALLDOCUMENTS'
 
 // Document detail actions
-export const REQUEST_DOCUMENTDETAIL = 'REQUEST_DOCUMENTDETAIL'
 export const RECEIVE_DOCUMENTDETAIL = 'RECEIVE_DOCUMENTDETAIL'
 
 export const invalidateDocuments = () => ({
@@ -115,9 +114,6 @@ export const fetchDocumentArticlesIfNeeded = () => (dispatch, getState) => {
 }
 
 // Document detail actions
-export const requestDocumentDetail = () => ({
-  type: REQUEST_DOCUMENTDETAIL
-})
 export const receiveDocumentDetail = (json, id) => ({
   type: RECEIVE_DOCUMENTDETAIL,
   document: json,
@@ -136,7 +132,6 @@ export const receiveDocumentDetailActions = (json, id) => (dispatch) => {
 const getUrlDocumentDetail = (id) => ("/documentarticles/" + id)
 
 export const fetchDocumentDetail = id => (dispatch) => {
-  dispatch(requestDocumentDetail())
   return fetch( getUrlDocumentDetail(id) )
     .then(response => response.json())
     .then(json => dispatch(receiveDocumentDetailActions(json, id)))
