@@ -34,22 +34,23 @@ class DocumentList extends Component {
   }
   render() {
     console.log("DocumentList.redner()")
-
-    return <div className="doc-list w3-border w3-round">
-        <div className="div-row title-row">
-          <div className="doc-check div-cell"><input type="checkbox" className="input-checkbox" name="" value="" onClick={(e)=>(this.onToogleAllDocuments(e))}/></div>
-          <div className="doc-id div-cell"><p className="text-ar p-cell">ID</p></div>
-          <div className="doc-number div-cell" onClick={()=>this.onChangeOrder('number')}><p className="text-al p-cell ">Numer {this.getOrderElement('number')} </p></div>
-          <div className="doc-type div-cell"><p className="text-al p-cell">Rodzaj</p></div>
-          <div className="doc-number div-cell" onClick={()=>this.onChangeOrder('date')}><p className="text-al p-cell">Data {this.getOrderElement('date')}</p></div>
-          <div className="doc-customername1 div-cell text-al" onClick={()=>this.onChangeOrder('custname1')}><p className="p-cell">Kontrahent {this.getOrderElement('custname1')}</p></div>
-          <div className="doc-nip div-cell" onClick={()=>this.onChangeOrder('custnip')}><p className="text-al p-cell">NIP {this.getOrderElement('custnip')}</p></div>
-          <div className="doc-val div-cell" onClick={()=>this.onChangeOrder('netto')}><p className="text-al p-cell">Netto {this.getOrderElement('netto')}</p></div>
-          <div className="doc-val div-cell" onClick={()=>this.onChangeOrder('brutto')}><p className="text-al p-cell">Brutto {this.getOrderElement('brutto')}</p></div>
-          <div className="doc-val div-cell" onClick={()=>this.onChangeOrder('excise')}><p className="text-al p-cell">Akcyza {this.getOrderElement('excise')}</p></div>
-      </div>
+     
+    return <div className="w3-border w3-round w3-medium">
       
-    { this.props.documents.items.map( (document, col)=>(this.renderDocument(document, this.props.documents.order)) )} </div>;
+        <div className="w3-row">
+          <div className="w3-col w3-left doc-check"><input type="checkbox" className="input-checkbox" name="" value="" onClick={(e)=>(this.onToogleAllDocuments(e))}/></div>
+          <div className="w3-col w3-left doc-id"><p className="text-ar p-cell">ID</p></div>
+          <div className="w3-col w3-left doc-number" onClick={()=>this.onChangeOrder('number')}><p className="text-al p-cell ">Numer {this.getOrderElement('number')} </p></div>
+          <div className="w3-col w3-left doc-type"><p className="text-al p-cell">Rodzaj</p></div>
+          <div className="w3-col w3-left doc-number" onClick={()=>this.onChangeOrder('date')}><p className="text-al p-cell">Data {this.getOrderElement('date')}</p></div>
+          <div className="w3-col w3-right doc-nip " onClick={()=>this.onChangeOrder('custnip')}><p className="text-al p-cell">NIP {this.getOrderElement('custnip')}</p></div>
+          <div className="w3-col w3-right doc-val " onClick={()=>this.onChangeOrder('netto')}><p className="text-al p-cell">Netto {this.getOrderElement('netto')}</p></div>
+          <div className="w3-col w3-right doc-val " onClick={()=>this.onChangeOrder('brutto')}><p className="text-al p-cell">Brutto {this.getOrderElement('brutto')}</p></div>
+          <div className="w3-col w3-right doc-val " onClick={()=>this.onChangeOrder('excise')}><p className="text-al p-cell">Akcyza {this.getOrderElement('excise')}</p></div>
+          <div className="w3-rest text-al" onClick={()=>this.onChangeOrder('custname1')}><p className="p-cell">Kontrahent {this.getOrderElement('custname1')}</p></div>
+        </div>
+      
+    { this.props.documents.items.map( (document, col)=>(this.renderDocument(document, this.props.documents.order)) )}</div>;
   }
 }
 

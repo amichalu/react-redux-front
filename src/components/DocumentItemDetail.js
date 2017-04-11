@@ -46,7 +46,7 @@ class DocumentItemDetail extends Component {
         <span onClick={this.onClose} className="w3-button w3-display-topright">X</span>
 
         <header className="w3-container w3-amber">
-          <h5>Invoice Nmb: {d.id}</h5>
+          <h5>Invoice Nmb: {d.number}</h5>
         </header>
 
         <div className="w3-container w3-padding-small">
@@ -54,24 +54,46 @@ class DocumentItemDetail extends Component {
           <div className="w3-cell-row">
 
             <div className="w3-container w3-cell w3-mobile w3-padding-small" style={{width: "50%"}}>
-              <form className="w3-container">
-                <label className="w3-text-gray">Document Nmb</label>
-                <input className="w3-input w3-padding-small" type="text" value={d.id}/>
-                <label className="w3-text-gray">Place of Invoice</label>
-                <input className="w3-input w3-padding-small" type="text" value={d.location}/>
-                <label className="w3-text-gray">Date</label>
-                <input className="w3-input w3-padding-small" type="text" value={d.date}/>
-                <label className="w3-text-gray">Payment</label>
-                <input className="w3-input w3-padding-small" type="text" value={d.paymethod_name}/>
-                <label className="w3-text-gray">Period from:</label>
-                <input className="w3-input w3-padding-small" type="text" value={d.period_startdate}/>
-                <label className="w3-text-gray">Period to:</label>
-                <input className="w3-input w3-padding-small" type="text" value={d.period_enddate}/>                
+              <form className="w3-container w3-padding-small">
+
+                <div className="w3-cell-row">
+                  <div className="w3-cell" style={{width: "50%"}}>    
+                    <label className="w3-text-gray">Document Nmb</label>
+                    <input className="w3-input w3-padding-small" type="text" value={d.number}/>
+                  </div>
+                  <div className="w3-cell" style={{width: "50%"}}>    
+                    <label className="w3-text-gray">Place of Invoice</label>
+                    <input className="w3-input w3-padding-small" type="text" value={d.location}/>
+                  </div>
+                </div>
+
+                <div className="w3-cell-row">
+                  <div className="w3-cell" style={{width: "50%"}}>    
+                    <label className="w3-text-gray">Date</label>
+                    <input className="w3-input w3-padding-small" type="text" value={d.date}/>
+                  </div>
+                  <div className="w3-cell" style={{width: "50%"}}>    
+                    <label className="w3-text-gray">Payment</label>
+                    <input className="w3-input w3-padding-small" type="text" value={d.paymethod_name}/>
+                  </div>
+                </div>
+
+                <div className="w3-cell-row">
+                  <div className="w3-cell" style={{width: "50%"}}>
+                    <label className="w3-text-gray">Period from:</label>
+                    <input className="w3-input w3-padding-small" type="text" value={d.period_startdate}/>
+                  </div>
+                  <div className="w3-cell" style={{width: "50%"}}>
+                    <label className="w3-text-gray">Period to:</label>
+                    <input className="w3-input w3-padding-small" type="text" value={d.period_enddate}/>                
+                  </div>
+                </div>
+
               </form>
             </div>
 
-            <div className="w3-container w3-cell w3-mobile" style={{width: "50%"}}>
-              <form className="w3-container">
+            <div className="w3-cell w3-mobile w3-padding-small" style={{width: "50%"}}>
+              <form className="w3-padding-small">
                 <label className="w3-text-gray">Customer name I</label>
                 <input className="w3-input w3-padding-small" type="text" value={d.custname1}/>
                 <label className="w3-text-gray">Customer Name II</label>
