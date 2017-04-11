@@ -3,9 +3,9 @@ $even-row-grey-back: #f9f9f9;
 $row-hover: #ddd;
 
 $doc-list-font: 'Roboto Mono', monospace;
-$doc-list-font-size: 90%;
+$doc-list-font-size: 75%;
 
-$button-font: 'Lato', sans-serif;
+$document-detail-height: 800px;
 
 // Google fonts
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
@@ -111,7 +111,6 @@ $button-font: 'Lato', sans-serif;
   margin-top: 0px;
   margin-bottom: 0px;
 }
-
 .art-cell {
   margin: 0px;
 }
@@ -143,21 +142,21 @@ $button-font: 'Lato', sans-serif;
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes opening {
     0%   {height: 0px}
-    100% {height: 200px; visibility: visible}
+    100% {height: $document-detail-height; visibility: visible}
 }
 /* Standard syntax */
 @keyframes opening {
     0%   {height: 0px}
-    100% {height: 200px; visibility: visible}
+    100% {height: $document-detail-height; visibility: visible}
 }
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes closing {
-    0%   {height: 200px}
+    0%   {height: $document-detail-height}
     100% {height: 0px; visibility: hidden;}
 }
 /* Standard syntax */
 @keyframes closing {
-    0%   {height: 200px}
+    0%   {height: $document-detail-height}
     100% {height: 0px; visibility: hidden;}
 }
 
@@ -185,6 +184,7 @@ $button-font: 'Lato', sans-serif;
   height: 3em;
   width: 7em;
 }
+
 .reload-anim {
   background-image: url(../images/reload.svg);
   background-position: 90% center;

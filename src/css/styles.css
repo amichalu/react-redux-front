@@ -14,7 +14,7 @@
 .doc-list {
   float: left;
   font-family: "Roboto Mono", monospace;
-  font-size: 90%; }
+  font-size: 75%; }
 
 .div-cell {
   float: left; }
@@ -124,7 +124,7 @@
   0% {
     height: 0px; }
   100% {
-    height: 200px;
+    height: 800px;
     visibility: visible; } }
 
 /* Standard syntax */
@@ -132,13 +132,13 @@
   0% {
     height: 0px; }
   100% {
-    height: 200px;
+    height: 800px;
     visibility: visible; } }
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes closing {
   0% {
-    height: 200px; }
+    height: 800px; }
   100% {
     height: 0px;
     visibility: hidden; } }
@@ -146,7 +146,7 @@
 /* Standard syntax */
 @keyframes closing {
   0% {
-    height: 200px; }
+    height: 800px; }
   100% {
     height: 0px;
     visibility: hidden; } }
