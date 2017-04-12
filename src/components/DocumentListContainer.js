@@ -107,6 +107,7 @@ class DocumentListContainer extends Component {
                 Reload<i className={reloadAnimClass}></i></a>
               <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={this.handleCloseAllDocuments}>
                 Close all<i className="w3-padding-small fa fa-compress"></i></a>
+              <div className="button-margin w3-right w3-padding-small">Page: {this.props.documents.pageNmb + 1}</div>
             </div>
 
             <DocumentList 
@@ -117,7 +118,7 @@ class DocumentListContainer extends Component {
               onToogleAllDocuments={(selectAll)=>(this.handleOnToogleAllDocuments(selectAll))}
               onOpenDetail={(id)=>(this.handleOnOpenDetail(id))}
               onCloseDetail={(id)=>(this.handleOnCloseDetail(id))}/>
-            <div className="button-margin" style={{color: "#000"}}>Page: {this.props.documents.pageNmb + 1}</div>
+            
           </div>
 
   </div>;// root div

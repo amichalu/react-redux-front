@@ -55,6 +55,9 @@
 .doc-number {
   width: 9em; }
 
+.hover-div div:hover {
+  background-color: #628e2f !important; }
+
 .doc-type {
   width: 5.5em;
   cursor: auto; }

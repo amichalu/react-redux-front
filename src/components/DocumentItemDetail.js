@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {formatDecimal} from '../solidity/numbers'
+import {formatDecimal, roundFloat} from '../solidity/numbers'
 
 // DocumentItemDetail  ------------------------------------------------------------------
 class DocumentItemDetail extends Component {
@@ -48,11 +48,12 @@ class DocumentItemDetail extends Component {
     for (var i = 0; i < articles.length; i++) {
       tBrutto += parseFloat(articles[i].bruttovalue)
       tNetto += parseFloat(articles[i].nettovalue)
+      console.log( articles[i].bruttovalue, ": ", parseFloat(articles[i].bruttovalue), " tNetto:", tNetto )      
     }
 
     return <table className="w3-table w3-striped">
         <tr><th className="w3-right-align w3-padding-small">Total Netto</th><th className="w3-right-align w3-padding-small">Total Brutto</th></tr>
-        <tr><td className="w3-right-align w3-padding-small">{formatDecimal(tNetto)}</td><td className="w3-right-align w3-padding-small">{formatDecimal(tBrutto)}</td></tr>
+        <tr><td className="w3-right-align w3-padding-small">{formatDecimal(roundFloat(tNetto,2))}</td><td className="w3-right-align w3-padding-small">{formatDecimal(roundFloat(tBrutto, 2))}</td></tr>
       </table>;    
   }
 
@@ -129,7 +130,7 @@ class DocumentItemDetail extends Component {
             <table className="w3-table-all"><tbody>
               <tr className="w3-yellow">
                 <th>Nmb</th>
-                <th>Article's' name</th>
+                <th>Article's name</th>
                 <th>Price</th>
                 <th>Tax Rate</th>
                 <th>Unit</th>

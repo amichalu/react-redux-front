@@ -26,7 +26,6 @@ class DocumentItem extends Component {
     this.props.onCheckClick(event.target.value, event.target.checked)
   }
   getHighlightedColClass(col) {
-    //col-highlighted
     return this.props.order === col && !this.props.document.checked && !this.state.hover ? 'w3-theme-l4' : ''
   }
 

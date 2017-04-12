@@ -15,7 +15,7 @@ $document-detail-height: 400px;
 @import url('https://www.w3schools.com/w3css/4/w3.css');
 @import url('https://www.w3schools.com/lib/w3-theme-light-green.css');
 
-// Font awesome
+//Font awesome
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
 
 .text-ar {
@@ -81,6 +81,10 @@ $document-detail-height: 400px;
 }
 .doc-number {
   width: 9em;
+}
+
+.hover-div div:hover {
+  background-color: #628e2f!important;
 }
 .doc-type {
   width: 5.5em;
