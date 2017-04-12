@@ -5,7 +5,6 @@ import {formatDecimal, roundFloat} from '../solidity/numbers'
 class DocumentItemDetail extends Component {
   constructor(props) {
     super(props)
-    console.log("DocumentItemDetail.constructor()");
     this.state = {      
       classNameAnim: props.document.opening ? "doc-opening" : "doc-closing"
     }
@@ -13,7 +12,6 @@ class DocumentItemDetail extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    //console.log('DocumentItemDetailContainer.componentWillReceiveProps()', nextProps)
     this.setState( {
       classNameAnim: nextProps.document.opening ? "doc-opening" : "doc-closing",
     })
@@ -48,13 +46,12 @@ class DocumentItemDetail extends Component {
     for (var i = 0; i < articles.length; i++) {
       tBrutto += parseFloat(articles[i].bruttovalue)
       tNetto += parseFloat(articles[i].nettovalue)
-      console.log( articles[i].bruttovalue, ": ", parseFloat(articles[i].bruttovalue), " tNetto:", tNetto )      
     }
 
-    return <table className="w3-table w3-striped">
+    return <table className="w3-table w3-striped"><tbody>
         <tr><th className="w3-right-align w3-padding-small">Total Netto</th><th className="w3-right-align w3-padding-small">Total Brutto</th></tr>
         <tr><td className="w3-right-align w3-padding-small">{formatDecimal(roundFloat(tNetto,2))}</td><td className="w3-right-align w3-padding-small">{formatDecimal(roundFloat(tBrutto, 2))}</td></tr>
-      </table>;    
+      </tbody></table>;    
   }
 
   render() {
@@ -78,33 +75,33 @@ class DocumentItemDetail extends Component {
                 <div className="w3-cell-row">
                   <div className="w3-cell" style={{width: "50%"}}>    
                     <label className="w3-text-gray">Document Nmb</label>
-                    <input className="w3-input w3-padding-small" type="text" value={d.number}/>
+                    <input className="w3-input w3-padding-small" type="text" defaultValue={d.number}/>
                   </div>
                   <div className="w3-cell" style={{width: "50%"}}>    
                     <label className="w3-text-gray">Place of Invoice</label>
-                    <input className="w3-input w3-padding-small" type="text" value={d.location}/>
+                    <input className="w3-input w3-padding-small" type="text" defaultValue={d.location}/>
                   </div>
                 </div>
 
                 <div className="w3-cell-row">
                   <div className="w3-cell" style={{width: "50%"}}>    
                     <label className="w3-text-gray">Date</label>
-                    <input className="w3-input w3-padding-small" type="text" value={d.date}/>
+                    <input className="w3-input w3-padding-small" type="text" defaultValue={d.date}/>
                   </div>
                   <div className="w3-cell" style={{width: "50%"}}>    
                     <label className="w3-text-gray">Payment</label>
-                    <input className="w3-input w3-padding-small" type="text" value={d.paymethod_name}/>
+                    <input className="w3-input w3-padding-small" type="text" defaultValue={d.paymethod_name}/>
                   </div>
                 </div>
 
                 <div className="w3-cell-row">
                   <div className="w3-cell" style={{width: "50%"}}>
                     <label className="w3-text-gray">Period from:</label>
-                    <input className="w3-input w3-padding-small" type="text" value={d.period_startdate}/>
+                    <input className="w3-input w3-padding-small" type="text" defaultValue={d.period_startdate}/>
                   </div>
                   <div className="w3-cell" style={{width: "50%"}}>
                     <label className="w3-text-gray">Period to:</label>
-                    <input className="w3-input w3-padding-small" type="text" value={d.period_enddate}/>                
+                    <input className="w3-input w3-padding-small" type="text" defaultValue={d.period_enddate}/>                
                   </div>
                 </div>
 
@@ -114,13 +111,13 @@ class DocumentItemDetail extends Component {
             <div className="w3-cell w3-mobile w3-padding-small" style={{width: "50%"}}>
               <form className="w3-padding-small">
                 <label className="w3-text-gray">Customer Name 1</label>
-                <input className="w3-input w3-padding-small" type="text" value={d.custname1}/>
+                <input className="w3-input w3-padding-small" type="text" defaultValue={d.custname1}/>
                 <label className="w3-text-gray">Customer Name 2</label>
-                <input className="w3-input w3-padding-small" type="text" value={d.custname2}/>
+                <input className="w3-input w3-padding-small" type="text" defaultValue={d.custname2}/>
                 <label className="w3-text-gray">VAT ID</label>
-                <input className="w3-input w3-padding-small" type="text" value={d.custnip}/>
+                <input className="w3-input w3-padding-small" type="text" defaultValue={d.custnip}/>
                 <label className="w3-text-gray">Internal Account Nmb</label>
-                <input className="w3-input w3-padding-small" type="text" value={d.custaccnmb}/>
+                <input className="w3-input w3-padding-small" type="text" defaultValue={d.custaccnmb}/>
               </form>
             </div>
           

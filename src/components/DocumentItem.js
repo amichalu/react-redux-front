@@ -7,13 +7,12 @@ import DocumentItemDetail from '../components/DocumentItemDetail'
 class DocumentItem extends Component {
   constructor(props) {
     super(props)
-    this.state = { hover: false, fetching: false }
+    this.state = { hover: false }
     this.onMouseEnterHandler = this.onMouseEnterHandler.bind(this)
     this.onMouseLeaveHandler = this.onMouseLeaveHandler.bind(this)
     this.onCheckClick = this.onCheckClick.bind(this)
   }
   shouldComponentUpdate( nextProps, nextState ) {
-    //console.log( 'DocumentItem.shouldComponentUpdate() ? ', nextProps.document.lastUpdated !== this.props.document.lastUpdated || this.state.hover !== nextState.hover)
     return nextProps.document.lastUpdated !== this.props.document.lastUpdated || this.state.hover !== nextState.hover
   }
   onMouseEnterHandler() {
@@ -30,9 +29,8 @@ class DocumentItem extends Component {
   }
 
   render() {
-    console.log("DocumentItem.render(): ")
+    console.log("DocumentItem.render()")
     const doc = this.props.document
-    const col = this.props.order
     const docType = (doc.type === -2) ? 'Corr' : 'Inv VAT'
     const openDocumentDetailAnim = 'w3-cell w3-left doc-id' + (this.props.document.spinner || false ? ' request-documentdetail-spinner' : '')
     
@@ -44,7 +42,7 @@ class DocumentItem extends Component {
           <div onClick={ ()=>{this.props.onOpenDetail(doc.id)} }>    
             <div className={openDocumentDetailAnim}><p className='text-ar p-cell'>{this.props.document.spinner || false ? ('') : (doc.id) }</p></div>
             <div className={"w3-cell w3-left doc-number " + this.getHighlightedColClass('number')}><p className="text-al p-cell">{doc.number}</p></div>
-            <div className={"w3-cell w3-left doc-type " + (doc.type === -1 ? 'div-doc-norm' : 'div-doc-corr')}><p className="text-al p-cell">{docType}</p></div>
+            <div className={"w3-cell w3-left doc-type " + (doc.type === -1 ? 'div-doc-norm' : 'div-doc-corr')}><p className="text-ac p-cell">{docType}</p></div>
             <div className={"w3-cell w3-left doc-number " + this.getHighlightedColClass('date')}><p className="text-al p-cell">{doc.date}</p></div>
             <div className={"w3-cell w3-right doc-val " + this.getHighlightedColClass('excise')}><p className="text-ar p-cell">{formatDecimal(doc.excise)}</p></div>
             <div className={"w3-cell w3-right doc-val " + this.getHighlightedColClass('brutto')}><p className="text-ar p-cell">{formatDecimal(doc.brutto)}</p></div>

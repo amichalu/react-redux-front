@@ -12,7 +12,6 @@ import {
     OPEN_DOCUMENT,
     CLOSE_DOCUMENT,
     CLOSE_ALLDOCUMENTS,
-    REQUEST_DOCUMENTDETAIL, 
     RECEIVE_DOCUMENTDETAIL
 } from '../actions'
 
@@ -166,7 +165,7 @@ const documents = ( state = initialState, action ) => {
               didInvalidate: true
           }
         case TOOGLE_DOCUMENT:
-          const {items, selectedItems} = toogle( state.selectedItems, state.items, action.id, action.receivedAt )
+          var {items, selectedItems} = toogle( state.selectedItems, state.items, action.id, action.receivedAt )
           return {
             ...state,
             items: items,
@@ -174,7 +173,7 @@ const documents = ( state = initialState, action ) => {
             selectedItems: selectedItems
           }
         case TOOGLE_ALL_DOCUMENTS:
-          var {items, selectedItems} = toogleAllDocuments( state.items, action )
+          ({items, selectedItems} = toogleAllDocuments( state.items, action ))
           return {
             ...state,
             items: items,

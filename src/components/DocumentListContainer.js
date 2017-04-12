@@ -10,7 +10,6 @@ import {
   toogleDocument,
   toogleAllDocuments,
   toogleSpinner,
-  openDocument, 
   closeDocument, 
   closeAllDocuments,
   fetchDocumentDetail
@@ -92,9 +91,8 @@ class DocumentListContainer extends Component {
   }
 
   render() {
-    console.log('DocumentListContainer.render() this.props.documents: ', this.props.documents)
+    console.log('DocumentListContainer.render()')
     const reloadAnimClass = 'w3-padding-small fa fa-refresh' + ((this.props.documents.isFetching || false) ? ' w3-spin' : '')
-    //w3-container
     return <div>
 
           <div className="w3-container">

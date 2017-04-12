@@ -1,15 +1,9 @@
-$doc-border-color: #ddd;
+
 $even-row-grey-back: #f9f9f9;
-$row-hover: #ddd;
-
-$doc-list-font: 'Roboto Mono', monospace;
-$doc-list-font-size: 75%;
-
 $document-detail-height: 400px;
 
 // Google fonts
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
-@import url('https://fonts.googleapis.com/css?family=Lato');
+//@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 
 //w3school
 @import url('https://www.w3schools.com/w3css/4/w3.css');
@@ -18,6 +12,7 @@ $document-detail-height: 400px;
 //Font awesome
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
 
+// Common
 .text-ar {
   text-align: right;
 }
@@ -28,30 +23,9 @@ $document-detail-height: 400px;
   text-align: center;
 }
 
-.doc-list {
-  float: left;
-  font-family: $doc-list-font;
-  font-size: $doc-list-font-size;
-}
-
-// .div-cell {
-//   float: left;
-// }
-
-// .div-row {
-//   overflow: hidden;
-//   width: 100%;
-//   cursor: pointer;
-// }
+// List of documents styles
 .div-row-grey {
   background-color: $even-row-grey-back
-}
-.title-row {
-  color: grey;
-  cursor: pointer;
-}
-.row-hover {
-  background-color: $row-hover;
 }
 .row-checked {
   background-color: lightblue;
@@ -62,10 +36,10 @@ $document-detail-height: 400px;
   white-space: nowrap;
   height: 1.8em;
 }
-.col-highlighted {
-  background-color: lightyellow;
+.hover-div div:hover {
+  background-color: #628e2f!important;
+  cursor: pointer;
 }
-
 .doc-check {
   width: 1.5em;
   padding: 0 .5em;
@@ -82,10 +56,6 @@ $document-detail-height: 400px;
 .doc-number {
   width: 9em;
 }
-
-.hover-div div:hover {
-  background-color: #628e2f!important;
-}
 .doc-type {
   width: 5.5em;
   cursor: auto;
@@ -94,7 +64,7 @@ $document-detail-height: 400px;
   color: dodgerblue; 
 }
 .div-doc-corr {
-  background-color: #ff6666;
+  background-color: #f44336;
   color: #fff;
 }
 .doc-val {
@@ -103,13 +73,8 @@ $document-detail-height: 400px;
 .doc-nip {
   width: 11em;
 }
-.doc-customername1 {
-  //min-width: 200px;
-  //overflow: hidden;
-  text-overflow:ellipsis;
-  white-space: nowrap;
-}
 
+// Document detail styles
 .div-detail {
   height: 0px;
   overflow:hidden;
@@ -119,12 +84,11 @@ $document-detail-height: 400px;
 }
 .art-cell {
   margin: 0px;
+  white-space: nowrap;
 }
 
 //Document detail animation
 .doc-opening {
-    //max-height: 100%;
-    //background-color: palegoldenrod;
     position: relative;
     -webkit-animation-name: opening; /* Safari 4.0 - 8.0 */
     -webkit-animation-duration: 0.7s; /* Safari 4.0 - 8.0 */
@@ -136,7 +100,6 @@ $document-detail-height: 400px;
 
 .doc-closing {
     height: 0px;
-    //background-color: palegoldenrod;
     position: relative;
     -webkit-animation-name: closing; /* Safari 4.0 - 8.0 */
     -webkit-animation-duration: 0.7s; /* Safari 4.0 - 8.0 */
@@ -173,30 +136,6 @@ $document-detail-height: 400px;
   color: #616161;
 }
 
-.button-paddind-reload {
-  padding: 0.4em 0.8em;
-}
-
-.button-inner-align {
-  display: inline-flex;
-  vertical-align: middle;
-  align-items: center;
-}
-.button-size {
-  height: 3em;
-  width: 8em;
-}
-.button-reload-size {
-  height: 3em;
-  width: 7em;
-}
-
-.reload-anim {
-  background-image: url(../images/reload.svg);
-  background-position: 90% center;
-  background-repeat: no-repeat;
-  background-size: 24px 24px;
-}
 .request-documentdetail-spinner {
   background-image: url(../images/reload.svg);
   background-position: center center;

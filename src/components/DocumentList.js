@@ -4,10 +4,6 @@ import DocumentItem from '../components/DocumentItem'
 
 // DocumentList component  ------------------------------------------------------------------
 class DocumentList extends Component {
-  constructor() {
-    super()
-    console.log( 'DocumentList.constructor()')
-  }
 
   onChangeOrder(col) {
     this.props.onChangeOrder(col);
@@ -36,14 +32,14 @@ class DocumentList extends Component {
     return this.props.documents.order === col ? 'w3-theme-d2' : ''
   }
   render() {
-    console.log("DocumentList.redner()")
+    console.log("DocumentList.render()")
     return <div className="w3-border w3-round w3-medium">
 
         <div className="w3-row w3-theme-d1 w3-text-white"> {/* table header */}
           <div className="w3-col w3-left doc-check"><input type="checkbox" className="input-checkbox" name="" value="" onClick={(e)=>(this.onToogleAllDocuments(e))}/></div>
           <div className="w3-col w3-left doc-id"><p className="text-ar p-cell">id</p></div>
           <div className="hover-div"><div className={"w3-col w3-left doc-number " + this.getHighlightedColClass('number')}  onClick={()=>this.onChangeOrder('number')}><p className="text-al p-cell ">Inv Nmb {this.getOrderElement('number')} </p></div></div>
-          <div className="w3-col w3-left doc-type"><p className="text-al p-cell">Inv Type</p></div>
+          <div className="w3-col w3-left doc-type"><p className="text-ac p-cell">Inv Type</p></div>
           <div className="hover-div"><div className={"w3-col w3-left doc-number " + this.getHighlightedColClass('date')} onClick={()=>this.onChangeOrder('date')}><p className="text-al p-cell">Date {this.getOrderElement('date')}</p></div></div>
           <div className="hover-div"><div className={"w3-col w3-right doc-val " + this.getHighlightedColClass('excise')} onClick={()=>this.onChangeOrder('excise')}><p className="text-al p-cell">Excise {this.getOrderElement('excise')}</p></div></div>
           <div className="hover-div"><div className={"w3-col w3-right doc-val " + this.getHighlightedColClass('brutto')} onClick={()=>this.onChangeOrder('brutto')}><p className="text-al p-cell">Brutto {this.getOrderElement('brutto')}</p></div></div>
