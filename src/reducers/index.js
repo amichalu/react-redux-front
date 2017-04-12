@@ -227,10 +227,8 @@ const initialStateDocDetail = {
     items: []
 }
 const articles = ( state = initialStateDocDetail, action ) => {
-    console.log('documentDetail() reducer, state:', state, action.type)
     switch (action.type) {
         case RECEIVE_DOCUMENTDETAIL:
-          console.log("reducer RECEIVE_DOCUMENTDETAIL")
           var newItems = state.items;
           newItems[action.id] = {
               articles: action.document.articles

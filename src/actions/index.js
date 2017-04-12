@@ -109,10 +109,6 @@ export const fetchDocumentsIfNeeded = () => (dispatch, getState) => {
   }
 }
 
-export const fetchDocumentArticlesIfNeeded = () => (dispatch, getState) => {
-  console.log('fetchDocumentArticlesIfNeeded()')
-}
-
 // Document detail actions
 export const receiveDocumentDetail = (json, id) => ({
   type: RECEIVE_DOCUMENTDETAIL,
