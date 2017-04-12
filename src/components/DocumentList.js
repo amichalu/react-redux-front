@@ -32,25 +32,29 @@ class DocumentList extends Component {
       onOpenDetail={this.props.onOpenDetail}
       onCloseDetail={this.props.onCloseDetail}/>
   }
+  getHighlightedColClass(col) {
+    return this.props.documents.order === col ? 'w3-theme-d2' : ''
+  }
   render() {
     console.log("DocumentList.redner()")
-     
     return <div className="w3-border w3-round w3-medium">
-      
-        <div className="w3-row">
+
+        <div className="w3-row w3-theme-d1 w3-text-white"> {/* table header */}
           <div className="w3-col w3-left doc-check"><input type="checkbox" className="input-checkbox" name="" value="" onClick={(e)=>(this.onToogleAllDocuments(e))}/></div>
           <div className="w3-col w3-left doc-id"><p className="text-ar p-cell">ID</p></div>
-          <div className="w3-col w3-left doc-number" onClick={()=>this.onChangeOrder('number')}><p className="text-al p-cell ">Numer {this.getOrderElement('number')} </p></div>
+          <div className={"w3-col w3-left doc-number " + this.getHighlightedColClass('number')}  onClick={()=>this.onChangeOrder('number')}><p className="text-al p-cell ">Numer {this.getOrderElement('number')} </p></div>
           <div className="w3-col w3-left doc-type"><p className="text-al p-cell">Rodzaj</p></div>
-          <div className="w3-col w3-left doc-number" onClick={()=>this.onChangeOrder('date')}><p className="text-al p-cell">Data {this.getOrderElement('date')}</p></div>
-          <div className="w3-col w3-right doc-nip " onClick={()=>this.onChangeOrder('custnip')}><p className="text-al p-cell">NIP {this.getOrderElement('custnip')}</p></div>
-          <div className="w3-col w3-right doc-val " onClick={()=>this.onChangeOrder('netto')}><p className="text-al p-cell">Netto {this.getOrderElement('netto')}</p></div>
-          <div className="w3-col w3-right doc-val " onClick={()=>this.onChangeOrder('brutto')}><p className="text-al p-cell">Brutto {this.getOrderElement('brutto')}</p></div>
-          <div className="w3-col w3-right doc-val " onClick={()=>this.onChangeOrder('excise')}><p className="text-al p-cell">Akcyza {this.getOrderElement('excise')}</p></div>
-          <div className="w3-rest text-al" onClick={()=>this.onChangeOrder('custname1')}><p className="p-cell">Kontrahent {this.getOrderElement('custname1')}</p></div>
+          <div className={"w3-col w3-left doc-number " + this.getHighlightedColClass('date')} onClick={()=>this.onChangeOrder('date')}><p className="text-al p-cell">Data {this.getOrderElement('date')}</p></div>          
+          <div className={"w3-col w3-right doc-val " + this.getHighlightedColClass('excise')} onClick={()=>this.onChangeOrder('excise')}><p className="text-al p-cell">Akcyza {this.getOrderElement('excise')}</p></div>
+          <div className={"w3-col w3-right doc-val " + this.getHighlightedColClass('brutto')} onClick={()=>this.onChangeOrder('brutto')}><p className="text-al p-cell">Brutto {this.getOrderElement('brutto')}</p></div>
+          <div className={"w3-col w3-right doc-val " + this.getHighlightedColClass('netto')} onClick={()=>this.onChangeOrder('netto')}><p className="text-al p-cell">Netto {this.getOrderElement('netto')}</p></div>          
+          <div className={"w3-col w3-right doc-nip " + this.getHighlightedColClass('custnip')} onClick={()=>this.onChangeOrder('custnip')}><p className="text-al p-cell">NIP {this.getOrderElement('custnip')}</p></div>
+          <div className={"w3-rest text-al " + this.getHighlightedColClass('custname1')} onClick={()=>this.onChangeOrder('custname1')}><p className="p-cell">Kontrahent {this.getOrderElement('custname1')}</p></div>
         </div>
-      
-    { this.props.documents.items.map( (document, col)=>(this.renderDocument(document, this.props.documents.order)) )}</div>;
+        {/* list od documents */}
+        { this.props.documents.items.map( (document, col)=>(this.renderDocument(document, this.props.documents.order)) )}
+
+    </div>;
   }
 }
 

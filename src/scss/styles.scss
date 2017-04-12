@@ -13,6 +13,7 @@ $document-detail-height: 400px;
 
 //w3school
 @import url('https://www.w3schools.com/w3css/4/w3.css');
+@import url('https://www.w3schools.com/lib/w3-theme-light-green.css');
 
 // Font awesome
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
@@ -33,15 +34,15 @@ $document-detail-height: 400px;
   font-size: $doc-list-font-size;
 }
 
-.div-cell {
-  float: left;
-}
+// .div-cell {
+//   float: left;
+// }
 
-.div-row {
-  overflow: hidden;
-  width: 100%;
-  cursor: pointer;
-}
+// .div-row {
+//   overflow: hidden;
+//   width: 100%;
+//   cursor: pointer;
+// }
 .div-row-grey {
   background-color: $even-row-grey-back
 }
@@ -96,11 +97,11 @@ $document-detail-height: 400px;
   width: 8em;
 }
 .doc-nip {
-  width: 12em;
+  width: 11em;
 }
 .doc-customername1 {
-  //width: 30%;
-  overflow: hidden;
+  //min-width: 200px;
+  //overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;
 }

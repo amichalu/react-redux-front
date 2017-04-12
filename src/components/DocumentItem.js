@@ -25,29 +25,33 @@ class DocumentItem extends Component {
   onCheckClick(event) {
     this.props.onCheckClick(event.target.value, event.target.checked)
   }
+  getHighlightedColClass(col) {
+    //col-highlighted
+    return this.props.order === col && !this.props.document.checked && !this.state.hover ? 'w3-theme-l4' : ''
+  }
 
   render() {
     console.log("DocumentItem.render(): ")
     const doc = this.props.document
     const col = this.props.order
     const docType = (doc.type === -2) ? 'Corr' : 'Inv VAT'
-    const openDocumentDetailAnim = 'doc-id div-cell' + (this.props.document.spinner || false ? ' request-documentdetail-spinner' : '')
+    const openDocumentDetailAnim = 'w3-cell w3-left doc-id' + (this.props.document.spinner || false ? ' request-documentdetail-spinner' : '')
     
     return <div>
-        <div className={"div-row " + (doc.even ? 'div-row-grey' : '') + " " + (this.state.hover ? 'row-hover' : '') + " " + (doc.checked ? 'row-checked' : '')} 
-        onMouseEnter={this.onMouseEnterHandler} onMouseLeave={this.onMouseLeaveHandler}>
+        <div className={"w3-row " + (doc.even ? 'div-row-grey' : '') + " " + (this.state.hover ? 'w3-theme-l3' : '') + " " + (doc.checked ? 'row-checked' : '')} 
+          onMouseEnter={this.onMouseEnterHandler} onMouseLeave={this.onMouseLeaveHandler}>
         
-          <div className="doc-check div-cell"><input className="input-checkbox" type="checkbox" name="" value={doc.id} onChange={this.onCheckClick} checked={doc.checked ? 'checked' : ''}/></div>
-          <div onClick={ ()=>{this.props.onOpenDetail(doc.id)} }>
-          <div className={openDocumentDetailAnim}><p className='text-ar p-cell'>{this.props.document.spinner || false ? ('') : (doc.id) }</p></div>
-          <div className={"doc-number div-cell " + (col === 'number' && !doc.checked && !this.state.hover ? 'col-highlighted' : '')}><p className="text-al p-cell">{doc.number}</p></div>
-          <div className={"doc-type div-cell " + (doc.type === -1 ? 'div-doc-norm' : 'div-doc-corr')}><p className="text-al p-cell">{docType}</p></div>
-          <div className={"doc-number div-cell " + (col === 'date'  && !doc.checked && !this.state.hover ? 'col-highlighted' : '')}><p className="text-al p-cell">{doc.date}</p></div>
-          <div className={"doc-customername1 div-cell text-al " + (col === 'custname1' && !doc.checked && !this.state.hover ? 'col-highlighted' : '')}><p className="p-cell">{doc.custname1}</p></div>
-          <div className="doc-nip div-cell"><p className="text-al p-cell">{doc.custnip}</p></div>
-          <div className={"doc-val div-cell " + (col === 'netto' && !doc.checked && !this.state.hover ? 'col-highlighted' : '')}><p className="text-ar p-cell">{formatDecimal(doc.netto)}</p></div>
-          <div className={"doc-val div-cell " + (col === 'brutto' && !doc.checked && !this.state.hover ? 'col-highlighted' : '')}><p className="text-ar p-cell">{formatDecimal(doc.brutto)}</p></div>
-          <div className="doc-val div-cell"><p className="text-ar p-cell">{formatDecimal(doc.excise)}</p></div>
+          <div className="w3-cell w3-left doc-check"><input className="input-checkbox" type="checkbox" name="" value={doc.id} onChange={this.onCheckClick} checked={doc.checked ? 'checked' : ''}/></div>
+          <div onClick={ ()=>{this.props.onOpenDetail(doc.id)} }>    
+            <div className={openDocumentDetailAnim}><p className='text-ar p-cell'>{this.props.document.spinner || false ? ('') : (doc.id) }</p></div>
+            <div className={"w3-cell w3-left doc-number " + this.getHighlightedColClass('number')}><p className="text-al p-cell">{doc.number}</p></div>
+            <div className={"w3-cell w3-left doc-type " + (doc.type === -1 ? 'div-doc-norm' : 'div-doc-corr')}><p className="text-al p-cell">{docType}</p></div>
+            <div className={"w3-cell w3-left doc-number " + this.getHighlightedColClass('date')}><p className="text-al p-cell">{doc.date}</p></div>
+            <div className={"w3-cell w3-right doc-val " + this.getHighlightedColClass('excise')}><p className="text-ar p-cell">{formatDecimal(doc.excise)}</p></div>
+            <div className={"w3-cell w3-right doc-val " + this.getHighlightedColClass('brutto')}><p className="text-ar p-cell">{formatDecimal(doc.brutto)}</p></div>
+            <div className={"w3-cell w3-right doc-val " + this.getHighlightedColClass('netto')}><p className="text-ar p-cell">{formatDecimal(doc.netto)}</p></div>
+            <div className={"w3-cell w3-right doc-nip " + this.getHighlightedColClass('custnip')}><p className="text-al p-cell">{doc.custnip}</p></div>
+            <div className={"w3-rest doc-customername1 text-al " + this.getHighlightedColClass('custname1')}><p className="p-cell" style={{minWidth: "200px"}}>{doc.custname1}</p></div>
           </div>
         </div>
         {(doc.opening || doc.closing) ? (<DocumentItemDetail 

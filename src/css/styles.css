@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
 @import url("https://fonts.googleapis.com/css?family=Lato");
 @import url("https://www.w3schools.com/w3css/4/w3.css");
+@import url("https://www.w3schools.com/lib/w3-theme-light-green.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
 .text-ar {
   text-align: right; }
@@ -15,14 +16,6 @@
   float: left;
   font-family: "Roboto Mono", monospace;
   font-size: 75%; }
-
-.div-cell {
-  float: left; }
-
-.div-row {
-  overflow: hidden;
-  width: 100%;
-  cursor: pointer; }
 
 .div-row-grey {
   background-color: #f9f9f9; }
@@ -77,10 +70,9 @@
   width: 8em; }
 
 .doc-nip {
-  width: 12em; }
+  width: 11em; }
 
 .doc-customername1 {
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap; }
 
