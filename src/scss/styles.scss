@@ -33,6 +33,7 @@ $document-detail-height: 400px;
 .p-cell {
   padding: 0.2em 0.2em;
   margin: 0.2em 0.4em;
+  white-space: nowrap;
   height: 1.8em;
 }
 .hover-div div:hover {
