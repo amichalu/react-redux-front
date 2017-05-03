@@ -6,9 +6,9 @@ import {
     NEXT_PAGE, 
     PREV_PAGE, 
     CHANGE_ORDER,
-    TOOGLE_DOCUMENT,
-    TOOGLE_ALL_DOCUMENTS,
-    TOOGLE_SPINNER,
+    TOGGLE_DOCUMENT,
+    TOGGLE_ALL_DOCUMENTS,
+    TOGGLE_SPINNER,
     OPEN_DOCUMENT,
     CLOSE_DOCUMENT,
     CLOSE_ALLDOCUMENTS,
@@ -165,7 +165,7 @@ const documents = ( state = initialState, action ) => {
               dirOrder: 'asc',
               didInvalidate: true
           }
-        case TOOGLE_DOCUMENT:
+        case TOGGLE_DOCUMENT:
           var {items, selectedItems} = toogle( state.selectedItems, state.items, action.id, action.receivedAt )
           return {
             ...state,
@@ -173,7 +173,7 @@ const documents = ( state = initialState, action ) => {
             lastUpdated: action.receivedAt,
             selectedItems: selectedItems
           }
-        case TOOGLE_ALL_DOCUMENTS:
+        case TOGGLE_ALL_DOCUMENTS:
           ({items, selectedItems} = toogleAllDocuments( state.items, action ))
           return {
             ...state,
@@ -190,7 +190,7 @@ const documents = ( state = initialState, action ) => {
             ...state,
             items: updateClose(action.id, state.items, action.receivedAt)
           }
-        case TOOGLE_SPINNER:
+        case TOGGLE_SPINNER:
           return {
             ...state,
             items: state.items.map( (doc) => { 

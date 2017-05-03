@@ -15,7 +15,7 @@ class DocumentList extends Component {
     return el === 1 ? <i className="fa fa-sort-amount-asc w3-padding-small" style={{ float: "right"}}aria-hidden="true"></i> : <i className="fa fa-sort-amount-desc w3-padding-small" style={{ float: "right"}}aria-hidden="true"></i>
   }
   onToogleAllDocuments(event) {
-    this.props.onToogleAllDocuments(event.target.checked)
+    this.props.onToggleAllDocuments(event.target.checked)
   }
 
   renderDocument( document, col ) {
@@ -24,7 +24,7 @@ class DocumentList extends Component {
       document={document}
       articles={this.props.articles}
       order={col}
-      onCheckClick={this.props.onToogle}
+      onCheckClick={this.props.onToggle}
       onOpenDetail={this.props.onOpenDetail}
       onCloseDetail={this.props.onCloseDetail}/>
   }

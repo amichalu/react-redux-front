@@ -5,12 +5,11 @@ import {
   fetchDocumentsIfNeeded, 
   invalidateDocuments, 
   prevPage, 
-  //changePage,
   nextPage, 
   changeOrder, 
-  toogleDocument,
-  toogleAllDocuments,
-  toogleSpinner,
+  toggleDocument,
+  toggleAllDocuments,
+  toggleSpinner,
   closeDocument, 
   closeAllDocuments,
   fetchDocumentDetail
@@ -18,32 +17,10 @@ import {
 import DocumentList from '../components/DocumentList'
 
 class DocumentListContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.handleOnOpenDetail = this.handleOnOpenDetail.bind(this)
-  }
 
   componentDidMount() {
     this.props.fetchDocumentsIfNeeded();
   }
-
-  handleOnOpenDetail(id) {
-    const { dispatch } = this.props
-    var alreadyOpened = false;
-    this.props.documents.items.forEach((doc)=>{
-      if (doc.id === id && doc.opening) {
-        alreadyOpened = true
-        return
-      }
-    })
-    if (!alreadyOpened) {
-      dispatch(toogleSpinner(id))
-      dispatch(fetchDocumentDetail(id))
-    }
-  }  
- 
-
-
 
   render() {
     console.log('DocumentListContainer.render()')
@@ -67,9 +44,9 @@ class DocumentListContainer extends Component {
               documents={this.props.documents}
               articles={this.props.articles}
               onChangeOrder={(i,dir)=>(this.props.onChangeOrder(i,dir))}
-              onToogle={(id)=>(this.props.onToggle(id))}
-              onToogleAllDocuments={(selectAll)=>(this.props.onToggleAllDocuments(selectAll))}
-              onOpenDetail={(id)=>(this.handleOnOpenDetail(id))}
+              onToggle={(id)=>(this.props.onToggle(id))}
+              onToggleAllDocuments={(selectAll)=>(this.props.onToggleAllDocuments(selectAll))}
+              onOpenDetail={this.props.onOpenDetail}
               onCloseDetail={(id)=>(this.props.onCloseDetail(id))}/>
             
           </div>
@@ -107,16 +84,19 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(fetchDocumentsIfNeeded())
     },
     onToggle: ( id ) => {
-      dispatch(toogleDocument(id))
+      dispatch(toggleDocument(id))
     },
     onToggleAllDocuments: ( selectAll ) => {
-      dispatch(toogleAllDocuments(selectAll))
+      dispatch(toggleAllDocuments(selectAll))
     },
     onCloseDetail: (id) => {
       dispatch(closeDocument(id))
     },
     onCloseAllDocuments: () => {
       dispatch(closeAllDocuments())    
+    },
+    onOpenDetail: (id) => {
+      dispatch(fetchDocumentDetail(id))
     }
   }
 }
