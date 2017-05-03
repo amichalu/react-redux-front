@@ -79,8 +79,22 @@ export const nextPage = () => ({
     type: NEXT_PAGE
 })
 export const prevPage = () => ({
-    type: PREV_PAGE
+  type: PREV_PAGE
 })
+
+// export const changePage = (dispatch, incr) => {
+//   console.log("changePage")
+//   if ( incr === -1 && getState().documents.pageNmb > 0 ) {
+//     dispatch(prevPage())
+//     dispatch(invalidateDocuments())
+//     dispatch(fetchDocumentsIfNeeded())
+//   }
+//   if ( incr === 1 ) {
+//     dispatch(nextPage())
+//     dispatch(invalidateDocuments())
+//     dispatch(fetchDocumentsIfNeeded())
+//   }  
+// }
 
 const getUrl = (state) => ("/documents/" + state.documents.order + "/" + state.documents.pageNmb + "/" + state.documents.pageSize + "/" + state.documents.dirOrder)
 

@@ -5,6 +5,7 @@ import {
   fetchDocumentsIfNeeded, 
   invalidateDocuments, 
   prevPage, 
+  //changePage,
   nextPage, 
   changeOrder, 
   toogleDocument,
@@ -19,48 +20,11 @@ import DocumentList from '../components/DocumentList'
 class DocumentListContainer extends Component {
   constructor(props) {
     super(props)
-    this.handlePageClick = this.handlePageClick.bind(this)
-    this.handleRefreshData = this.handleRefreshData.bind(this)
-    this.handleOnToogle = this.handleOnToogle.bind(this)
     this.handleOnOpenDetail = this.handleOnOpenDetail.bind(this)
-    this.handleCloseAllDocuments = this.handleCloseAllDocuments.bind(this)
   }
 
   componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(fetchDocumentsIfNeeded())
-  }
-
-  handlePageClick( e, incr ) {
-    const { dispatch } = this.props
-    if ( incr === -1 && this.props.documents.pageNmb > 0 ) {
-      dispatch(prevPage())
-      dispatch(invalidateDocuments())
-      dispatch(fetchDocumentsIfNeeded())
-    }
-    if ( incr === 1 ) {
-      dispatch(nextPage())
-      dispatch(invalidateDocuments())
-      dispatch(fetchDocumentsIfNeeded())
-    }
-  }
-
-  handleOnChangeOrder( order ) {
-    const { dispatch } = this.props
-    dispatch(changeOrder(order))
-    dispatch(invalidateDocuments())
-    dispatch(fetchDocumentsIfNeeded())
-  }
-
-  handleRefreshData() {
-    const { dispatch } = this.props
-    dispatch(invalidateDocuments())
-    dispatch(fetchDocumentsIfNeeded())
-  }
-
-  handleOnToogle(id) {
-    const { dispatch } = this.props
-    dispatch(toogleDocument(id))
+    this.props.fetchDocumentsIfNeeded();
   }
 
   handleOnOpenDetail(id) {
@@ -77,18 +41,9 @@ class DocumentListContainer extends Component {
       dispatch(fetchDocumentDetail(id))
     }
   }  
-  handleOnCloseDetail(id) {
-    const { dispatch } = this.props
-    dispatch(closeDocument(id))
-  }  
-  handleCloseAllDocuments() {
-    const { dispatch } = this.props
-    dispatch(closeAllDocuments())    
-  }
-  handleOnToogleAllDocuments(selectAll) {
-    const { dispatch } = this.props
-    dispatch(toogleAllDocuments(selectAll))
-  }
+ 
+
+
 
   render() {
     console.log('DocumentListContainer.render()')
@@ -97,13 +52,13 @@ class DocumentListContainer extends Component {
 
           <div className="w3-container">
             <div className="w3-bar">
-              <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={(e) => this.handlePageClick(e, -1)}>
+              <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={(e) => this.props.onPageClick(e, -1)}>
                 Backward<i className="w3-padding-small fa fa-arrow-left" aria-hidden="true"></i></a>
-              <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={(e) => this.handlePageClick(e, 1)}>
+              <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={(e) => this.props.onPageClick(e, 1)}>
                 Forward<i className="w3-padding-small fa fa-arrow-right"></i></a>
-              <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={this.handleRefreshData}>
+              <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={this.props.onRefreshData}>
                 Reload<i className={reloadAnimClass}></i></a>
-              <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={this.handleCloseAllDocuments}>
+              <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={this.props.onCloseAllDocuments}>
                 Close all<i className="w3-padding-small fa fa-compress"></i></a>
               <div className="button-margin w3-right w3-padding-small">Page: {this.props.documents.pageNmb + 1}</div>
             </div>
@@ -111,11 +66,11 @@ class DocumentListContainer extends Component {
             <DocumentList 
               documents={this.props.documents}
               articles={this.props.articles}
-              onChangeOrder={(i,dir)=>(this.handleOnChangeOrder(i,dir))}
-              onToogle={(id)=>(this.handleOnToogle(id))}
-              onToogleAllDocuments={(selectAll)=>(this.handleOnToogleAllDocuments(selectAll))}
+              onChangeOrder={(i,dir)=>(this.props.onChangeOrder(i,dir))}
+              onToogle={(id)=>(this.props.onToggle(id))}
+              onToogleAllDocuments={(selectAll)=>(this.props.onToggleAllDocuments(selectAll))}
               onOpenDetail={(id)=>(this.handleOnOpenDetail(id))}
-              onCloseDetail={(id)=>(this.handleOnCloseDetail(id))}/>
+              onCloseDetail={(id)=>(this.props.onCloseDetail(id))}/>
             
           </div>
 
@@ -123,7 +78,53 @@ class DocumentListContainer extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  
+  return {
+
+    fetchDocumentsIfNeeded: () => {
+      dispatch(fetchDocumentsIfNeeded())
+    },
+    onPageClick: (e, incr) => {
+      if ( incr === -1 ) {
+        dispatch(prevPage())
+        dispatch(invalidateDocuments())
+        dispatch(fetchDocumentsIfNeeded())
+      }
+      if ( incr === 1 ) {
+        dispatch(nextPage())
+        dispatch(invalidateDocuments())
+        dispatch(fetchDocumentsIfNeeded())
+      }
+    },
+    onChangeOrder: ( order ) => {    
+      dispatch(changeOrder(order))
+      dispatch(invalidateDocuments())
+      dispatch(fetchDocumentsIfNeeded())
+    },
+    onRefreshData: () => {
+      dispatch(invalidateDocuments())
+      dispatch(fetchDocumentsIfNeeded())
+    },
+    onToggle: ( id ) => {
+      dispatch(toogleDocument(id))
+    },
+    onToggleAllDocuments: ( selectAll ) => {
+      dispatch(toogleAllDocuments(selectAll))
+    },
+    onCloseDetail: (id) => {
+      dispatch(closeDocument(id))
+    },
+    onCloseAllDocuments: () => {
+      dispatch(closeAllDocuments())    
+    }
+  }
+}
+
 const mapStateToProps = state => {
   return state
 }
-export default connect(mapStateToProps)(DocumentListContainer)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DocumentListContainer)

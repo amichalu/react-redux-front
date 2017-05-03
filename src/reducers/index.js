@@ -144,9 +144,10 @@ const documents = ( state = initialState, action ) => {
               didInvalidate: true
           }
         case PREV_PAGE:
+        console.log("PREV_PAGE reducer:", state.pageNmb)
           return {
               ...state,
-              pageNmb: state.pageNmb - 1,
+              pageNmb: state.pageNmb > 0 ? state.pageNmb - 1 : state.pageNmb,
               didInvalidate: true
           }
         case CHANGE_ORDER:
