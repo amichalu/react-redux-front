@@ -38,7 +38,7 @@ class DocumentList extends Component {
         <div className="w3-row w3-theme-d1 w3-text-white"> {/* table header */}
           <div className="w3-col w3-left doc-check"><input type="checkbox" className="input-checkbox" name="" value="" onClick={(e)=>(this.onToogleAllDocuments(e))}/></div>
           <div className="w3-col w3-left doc-id"><p className="text-ar p-cell">id</p></div>
-          <div className="hover-div"><div className={"w3-col w3-left doc-number " + this.getHighlightedColClass('number')}  onClick={()=>this.onChangeOrder('number')}><p className="text-al p-cell ">Inv Nmb {this.getOrderElement('number')} </p></div></div>
+          <div className="hover-div"><div className={"w3-col w3-left doc-number " + this.getHighlightedColClass('number')}  onClick={()=>this.onChangeOrder('number')}><p className="text-al p-cell">Inv Nmb {this.getOrderElement('number')} </p></div></div>
           <div className="w3-col w3-left doc-type"><p className="text-ac p-cell">Inv Type</p></div>
           <div className="hover-div"><div className={"w3-col w3-left doc-number " + this.getHighlightedColClass('date')} onClick={()=>this.onChangeOrder('date')}><p className="text-al p-cell">Date {this.getOrderElement('date')}</p></div></div>
           <div className="hover-div"><div className={"w3-col w3-right doc-val " + this.getHighlightedColClass('excise')} onClick={()=>this.onChangeOrder('excise')}><p className="text-al p-cell">Excise {this.getOrderElement('excise')}</p></div></div>
@@ -47,7 +47,7 @@ class DocumentList extends Component {
           <div className="hover-div"><div className={"w3-col w3-right doc-nip " + this.getHighlightedColClass('custnip')} onClick={()=>this.onChangeOrder('custnip')}><p className="text-al p-cell">VAT ID {this.getOrderElement('custnip')}</p></div></div>
           <div className="hover-div"><div className={"w3-rest text-al " + this.getHighlightedColClass('custname1')} onClick={()=>this.onChangeOrder('custname1')}><p className="p-cell">Customer {this.getOrderElement('custname1')}</p></div></div>
         </div>
-        {/* list od documents */}
+        {/* list of documents */}
         { this.props.documents.items.map( (document, col)=>(this.renderDocument(document, this.props.documents.order)) )}
 
     </div>;

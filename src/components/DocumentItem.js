@@ -40,15 +40,15 @@ class DocumentItem extends Component {
         
           <div className="w3-cell w3-left doc-check"><input className="input-checkbox" type="checkbox" name="" value={doc.id} onChange={this.onCheckClick} checked={doc.checked ? 'checked' : ''}/></div>
           <div onClick={ ()=>{this.props.onOpenDetail(doc.id)} }>    
-            <div className={openDocumentDetailAnim}><p className='text-ar p-cell'>{this.props.document.spinner || false ? ('') : (doc.id) }</p></div>
-            <div className={"w3-cell w3-left doc-number " + this.getHighlightedColClass('number')}><p className="text-al p-cell">{doc.number}</p></div>
-            <div className={"w3-cell w3-left doc-type " + (doc.type === -1 ? 'div-doc-norm' : 'div-doc-corr')}><p className="text-ac p-cell">{docType}</p></div>
-            <div className={"w3-cell w3-left doc-number " + this.getHighlightedColClass('date')}><p className="text-al p-cell">{doc.date}</p></div>
-            <div className={"w3-cell w3-right doc-val " + this.getHighlightedColClass('excise')}><p className="text-ar p-cell">{formatDecimal(doc.excise)}</p></div>
-            <div className={"w3-cell w3-right doc-val " + this.getHighlightedColClass('brutto')}><p className="text-ar p-cell">{formatDecimal(doc.brutto)}</p></div>
-            <div className={"w3-cell w3-right doc-val " + this.getHighlightedColClass('netto')}><p className="text-ar p-cell">{formatDecimal(doc.netto)}</p></div>
-            <div className={"w3-cell w3-right doc-nip " + this.getHighlightedColClass('custnip')}><p className="text-al p-cell">{doc.custnip}</p></div>
-            <div className={"w3-rest doc-customername1 text-al " + this.getHighlightedColClass('custname1')}><p className="p-cell" style={{minWidth: "200px"}}>{doc.custname1}</p></div>
+            <div className={openDocumentDetailAnim}><p className='text-ar p-cell whitespace'>{this.props.document.spinner || false ? ('') : (doc.id) }</p></div>
+            <div className={"w3-cell w3-left doc-number " + this.getHighlightedColClass('number')}><p className="text-al p-cell whitespace">{doc.number}</p></div>
+            <div className={"w3-cell w3-left doc-type " + (doc.type === -1 ? 'div-doc-norm' : 'div-doc-corr')}><p className="text-ac p-cell whitespace">{docType}</p></div>
+            <div className={"w3-cell w3-left doc-number " + this.getHighlightedColClass('date')}><p className="text-al p-cell whitespace">{doc.date}</p></div>
+            <div className={"w3-cell w3-right doc-val " + this.getHighlightedColClass('excise')}><p className="text-ar p-cell whitespace">{formatDecimal(doc.excise)}</p></div>
+            <div className={"w3-cell w3-right doc-val " + this.getHighlightedColClass('brutto')}><p className="text-ar p-cell whitespace">{formatDecimal(doc.brutto)}</p></div>
+            <div className={"w3-cell w3-right doc-val " + this.getHighlightedColClass('netto')}><p className="text-ar p-cell whitespace">{formatDecimal(doc.netto)}</p></div>
+            <div className={"w3-cell w3-right doc-nip " + this.getHighlightedColClass('custnip')}><p className="text-al p-cell whitespace">{doc.custnip}</p></div>
+            <div className={"w3-rest doc-customername1 text-al " + this.getHighlightedColClass('custname1')}><p className="p-cell whitespace" style={{minWidth: "200px"}}>{doc.custname1}</p></div>
           </div>
         </div>
         {(doc.opening || doc.closing) ? (<DocumentItemDetail 

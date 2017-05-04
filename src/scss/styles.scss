@@ -33,8 +33,10 @@ $document-detail-height: 400px;
 .p-cell {
   padding: 0.2em 0.2em;
   margin: 0.2em 0.4em;
-  white-space: nowrap;
   height: 1.8em;
+}
+.whitespace {
+  white-space: nowrap;
 }
 .hover-div div:hover {
   background-color: #628e2f!important;
@@ -57,7 +59,7 @@ $document-detail-height: 400px;
   width: 9em;
 }
 .doc-type {
-  width: 5.5em;
+  width: 5.8em;
   cursor: auto;
 }
 .div-doc-norm {
