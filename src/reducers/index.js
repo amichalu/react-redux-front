@@ -57,28 +57,29 @@ const updateClose = (id, items, receivedAt) => {
   })
 }
 
-const toogle = (selectedItems, items, toogleDocumentId, receivedAt ) => {
+const toggle = (selectedItems, items, toggleDocumentId, receivedAt ) => {
+    let newSelectedItems = selectedItems.slice()
     // Row is selected and will be deselected
-    if ( selectedItems[toogleDocumentId] )
-        delete(selectedItems[toogleDocumentId])
+    if ( newSelectedItems[toggleDocumentId] )
+        delete(newSelectedItems[toggleDocumentId])
     // Row is not selected and will be selected
     else 
-        selectedItems[toogleDocumentId] = true
+        newSelectedItems[toggleDocumentId] = true
 
     return {
         items: items.map( (doc) => {
-            if (doc.id === parseInt(toogleDocumentId, 10)) {
+            if (doc.id === parseInt(toggleDocumentId, 10)) {
                 return {
                     ...doc,
-                    checked: selectedItems[toogleDocumentId] ? true : false,
+                    checked: newSelectedItems[toggleDocumentId] ? true : false,
                     lastUpdated: receivedAt
                 }
             } else return doc
         }),
-        selectedItems: selectedItems
+        selectedItems: newSelectedItems
     }
 }
-const toogleAllDocuments = (items, action) => {
+const toggleAllDocuments = (items, action) => {
     var selectedItems = []
     return {
         items: items.map( (doc) => {
@@ -171,7 +172,8 @@ const documents = ( state = initialState, action ) => {
               didInvalidate: true
           }
         case TOGGLE_DOCUMENT:
-          var {items, selectedItems} = toogle( state.selectedItems, state.items, action.id, action.receivedAt )
+        
+          var {items, selectedItems} = toggle( state.selectedItems, state.items, action.id, action.receivedAt )
           return {
             ...state,
             items: items,
@@ -179,7 +181,7 @@ const documents = ( state = initialState, action ) => {
             selectedItems: selectedItems
           }
         case TOGGLE_ALL_DOCUMENTS:
-          ({items, selectedItems} = toogleAllDocuments( state.items, action ))
+          var {items, selectedItems} = toggleAllDocuments( state.items, action )
           return {
             ...state,
             items: items,
