@@ -3,6 +3,8 @@ import {formatDecimal} from '../solidity/numbers'
 
 import DocumentItemDetail from '../components/DocumentItemDetail'
 
+const CORR_DOC_TYPE = -2 // correction document type
+
 // DocumentItem  ------------------------------------------------------------------
 class DocumentItem extends Component {
   constructor(props) {
@@ -25,13 +27,16 @@ class DocumentItem extends Component {
     this.props.onCheckClick(event.target.value, event.target.checked)
   }
   getHighlightedColClass(col) {
-    return this.props.order === col && !this.props.document.checked && !this.state.hover ? 'w3-theme-l4' : ''
+    return this.props.order === col && 
+      !(this.props.document && this.props.document.checked) && 
+      !this.state.hover ? 
+      'w3-theme-l4' : ''
   }
 
   render() {
     console.log("DocumentItem.render()")
     const doc = this.props.document
-    const docType = (doc.type === -2) ? 'Corr' : 'Inv VAT'
+    const docType = (doc.type === CORR_DOC_TYPE) ? 'Corr' : 'Inv VAT'
     const openDocumentDetailAnim = 'w3-cell w3-left doc-id' + (this.props.document.spinner || false ? ' request-documentdetail-spinner' : '')
     
     return <div>

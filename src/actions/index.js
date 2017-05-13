@@ -11,6 +11,7 @@ export const TOGGLE_SPINNER = 'TOOGLE_SPINNER'
 export const OPEN_DOCUMENT = 'OPEN_DOCUMENT'
 export const CLOSE_DOCUMENT = 'CLOSE_DOCUMENT'
 export const CLOSE_ALLDOCUMENTS = 'CLOSE_ALLDOCUMENTS'
+export const FETCH_ERROR = 'FETCH_ERROR'
 
 // Document detail actions
 export const RECEIVE_DOCUMENTDETAIL = 'RECEIVE_DOCUMENTDETAIL'
@@ -24,6 +25,7 @@ export const requestDocuments = () => ({
 })
 
 const prepareDocuments = (documents) => {
+  if (!documents) return
   var even = false;
   for (var i = 0; i < documents.length; i++) {
     documents[i].even = !even;
@@ -82,6 +84,11 @@ export const prevPage = () => ({
   type: PREV_PAGE
 })
 
+export const fetchError = (status) => ({
+  type: FETCH_ERROR,
+  status: status
+})
+
 const getUrl = (state) => ("/documents/" + state.documents.order + "/" + state.documents.pageNmb + "/" + state.documents.pageSize + "/" + state.documents.dirOrder)
 
 const fetchDocuments = () => (dispatch, getState) => {
@@ -89,6 +96,10 @@ const fetchDocuments = () => (dispatch, getState) => {
   return fetch( getUrl(getState()) )
     .then(response => response.json())
     .then(json => dispatch(receiveDocuments(json)))
+    .catch(error => {
+      const status = error.response ? error.response.status : 500
+      dispatch(fetchError(status))
+    });
 }
 
 const shouldFetchDocuments = (state) => {
@@ -139,7 +150,11 @@ export const fetchDocumentDetail = (id) => (dispatch, getState) => {
     dispatch(toggleSpinner(id))
     return fetch( getUrlDocumentDetail(id) )
       .then(response => response.json())
-      .then(json => dispatch(receiveDocumentDetailActions(json, id)))      
+      .then(json => dispatch(receiveDocumentDetailActions(json, id)))
+      .catch(error => {
+        const status = error.response ? error.response.status : 500
+        dispatch(fetchError(status))
+      });  
   }
 }
 

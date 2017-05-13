@@ -133,7 +133,12 @@
   margin: 8px 8px 8px 0px; }
 
 .button-style {
-  color: #616161; }
+  color: #616161;
+  float: left; }
+
+.error_msg {
+  background-color: #ff5722;
+  color: #fff; }
 
 .request-documentdetail-spinner {
   background-image: url(../images/reload.svg);

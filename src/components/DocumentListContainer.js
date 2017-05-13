@@ -24,7 +24,9 @@ class DocumentListContainer extends Component {
 
   render() {
     console.log('DocumentListContainer.render()')
-    const reloadAnimClass = 'w3-padding-small fa fa-refresh' + ((this.props.documents.isFetching || false) ? ' w3-spin' : '')
+
+    const reloadAnimClass = 'w3-padding-small fa fa-refresh' + (this.props.documents && this.props.documents.isFetching ? ' w3-spin' : '')
+
     return <div>
 
           <div className="w3-container">
@@ -37,6 +39,7 @@ class DocumentListContainer extends Component {
                 Reload<i className={reloadAnimClass}></i></a>
               <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={this.props.onCloseAllDocuments}>
                 Close all<i className="w3-padding-small fa fa-compress"></i></a>
+              { this.props.documents.isFetchError ? <div className="button-margin w3-left w3-padding-small error_msg">Oops, no response from the server or an unexpected format received</div> : '' }
               <div className="button-margin w3-right w3-padding-small">Page: {this.props.documents.pageNmb + 1}</div>
             </div>
 
@@ -47,7 +50,7 @@ class DocumentListContainer extends Component {
               onToggle={(id)=>(this.props.onToggle(id))}
               onToggleAllDocuments={(selectAll)=>(this.props.onToggleAllDocuments(selectAll))}
               onOpenDetail={this.props.onOpenDetail}
-              onCloseDetail={(id)=>(this.props.onCloseDetail(id))}/>
+              onCloseDetail={this.props.onCloseDetail}/>
             
           </div>
 
@@ -102,8 +105,12 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = state => {
-  return state
+  return {
+    articles: state.articles,
+    documents: state.documents
+  }
 }
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

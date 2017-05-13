@@ -12,9 +12,10 @@ class DocumentItemDetail extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState( {
-      classNameAnim: nextProps.document.opening ? "doc-opening" : "doc-closing",
-    })
+    if (this.props.document.opening != nextProps.document.opening)
+      this.setState( {
+        classNameAnim: nextProps.document.opening ? "doc-opening" : "doc-closing",
+      })
   }
 
   onClose() {

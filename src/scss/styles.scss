@@ -136,6 +136,11 @@ $document-detail-height: 400px;
 }
 .button-style {
   color: #616161;
+  float: left;
+}
+.error_msg {
+  background-color:#ff5722;
+  color: #fff;
 }
 
 .request-documentdetail-spinner {

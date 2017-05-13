@@ -12,7 +12,8 @@ import {
     OPEN_DOCUMENT,
     CLOSE_DOCUMENT,
     CLOSE_ALLDOCUMENTS,
-    RECEIVE_DOCUMENTDETAIL
+    RECEIVE_DOCUMENTDETAIL,
+    FETCH_ERROR
 } from '../actions'
 
 const initialState = {
@@ -24,7 +25,9 @@ const initialState = {
     pageNmb: 0,
     pageSize: 20,
     order: 'number',
-    dirOrder: 'asc'
+    dirOrder: 'asc',
+    isFetchError: false,
+    fetchErrorStatus: 200
 }
 
 // Document list reducer
@@ -92,6 +95,7 @@ const toogleAllDocuments = (items, action) => {
 
 // Set selected documents after page change, set opened
 const updateDocumentsState = ( state, items, receivedAt ) => {
+    if (!items) return null
     let selectedItems = state.selectedItems
     let newItems = items.map( (doc) => {
         if ( selectedItems[ doc.id ] ) {
@@ -130,7 +134,9 @@ const documents = ( state = initialState, action ) => {
               isFetching: false,
               didInvalidate: false,
               items: updateDocumentsState( state, action.items, action.receivedAt ),
-              lastUpdated: action.receivedAt
+              lastUpdated: action.receivedAt,
+              isFetchError: false,
+              fetchErrorStatus: 200
           }
         case INVALIDATE_DOCUMENTS:
           return {
@@ -144,7 +150,6 @@ const documents = ( state = initialState, action ) => {
               didInvalidate: true
           }
         case PREV_PAGE:
-        console.log("PREV_PAGE reducer:", state.pageNmb)
           return {
               ...state,
               pageNmb: state.pageNmb > 0 ? state.pageNmb - 1 : state.pageNmb,
@@ -218,6 +223,13 @@ const documents = ( state = initialState, action ) => {
             }),
             lastUpdated: action.receivedAt
           }
+        case FETCH_ERROR:
+            return {
+                ...state,
+                isFetchError: true,
+                fetchErrorStatus: action.status,
+                isFetching: false
+            }
         default:
           return state
     }
