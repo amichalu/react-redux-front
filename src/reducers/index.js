@@ -58,6 +58,7 @@ const updateClose = (id, items, receivedAt) => {
 }
 
 const toggle = (selectedItems, items, toggleDocumentId, receivedAt ) => {
+    // To avoid mutability
     let newSelectedItems = selectedItems.slice()
     // Row is selected and will be deselected
     if ( newSelectedItems[toggleDocumentId] )
@@ -95,9 +96,8 @@ const toggleAllDocuments = (items, action) => {
 }
 
 // Set selected documents after page change, set opened
-const updateDocumentsState = ( state, items, receivedAt ) => {
+const updateDocumentsState = ( selectedItems, items, receivedAt ) => {
     if (!items) return null
-    let selectedItems = state.selectedItems
     let newItems = items.map( (doc) => {
         if ( selectedItems[ doc.id ] ) {
             return {
@@ -134,7 +134,7 @@ const documents = ( state = initialState, action ) => {
               ...state,
               isFetching: false,
               didInvalidate: false,
-              items: updateDocumentsState( state, action.items, action.receivedAt ),
+              items: updateDocumentsState( state.selectedItems, action.items, action.receivedAt ),
               lastUpdated: action.receivedAt,
               isFetchError: false,
               fetchErrorStatus: 200
@@ -244,7 +244,7 @@ const initialStateDocDetail = {
 const articles = ( state = initialStateDocDetail, action ) => {
     switch (action.type) {
         case RECEIVE_DOCUMENTDETAIL:
-          var newItems = state.items;
+          var newItems = state.items.slice();
           newItems[action.id] = {
               articles: action.document.articles
           }
