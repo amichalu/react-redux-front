@@ -9,7 +9,6 @@ import {
   changeOrder, 
   toggleDocument,
   toggleAllDocuments,
-  toggleSpinner,
   closeDocument, 
   closeAllDocuments,
   fetchDocumentDetail
@@ -25,36 +24,17 @@ class DocumentListContainer extends Component {
   render() {
     console.log('DocumentListContainer.render()')
 
-    const reloadAnimClass = 'w3-padding-small fa fa-refresh' + (this.props.documents && this.props.documents.isFetching ? ' w3-spin' : '')
-
-    return <div>
-
-          <div className="w3-container">
-            <div className="w3-bar">
-              <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={(e) => this.props.onPageClick(e, -1)}>
-                Backward<i className="w3-padding-small fa fa-arrow-left" aria-hidden="true"></i></a>
-              <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={(e) => this.props.onPageClick(e, 1)}>
-                Forward<i className="w3-padding-small fa fa-arrow-right"></i></a>
-              <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={this.props.onRefreshData}>
-                Reload<i className={reloadAnimClass}></i></a>
-              <a className="w3-button w3-border w3-round w3-padding-small button-margin button-style" href="#" onClick={this.props.onCloseAllDocuments}>
-                Close all<i className="w3-padding-small fa fa-compress"></i></a>
-              { this.props.documents.isFetchError ? <div className="button-margin w3-left w3-padding-small error_msg">Oops, no response from the server or an unexpected format received</div> : '' }
-              <div className="button-margin w3-right w3-padding-small">Page: {this.props.documents.pageNmb + 1}</div>
-            </div>
-
-            <DocumentList 
+    return <DocumentList 
               documents={this.props.documents}
               articles={this.props.articles}
+              onPageClick={this.props.onPageClick}
+              onRefreshData={this.props.onRefreshData}
+              onCloseAllDocuments={this.props.onCloseAllDocuments}
               onChangeOrder={(i,dir)=>(this.props.onChangeOrder(i,dir))}
               onToggle={(id)=>(this.props.onToggle(id))}
               onToggleAllDocuments={(selectAll)=>(this.props.onToggleAllDocuments(selectAll))}
               onOpenDetail={this.props.onOpenDetail}
               onCloseDetail={this.props.onCloseDetail}/>
-            
-          </div>
-
-  </div>;// root div
   }
 }
 
