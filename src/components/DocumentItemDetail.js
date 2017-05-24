@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {formatDecimal, roundFloat} from '../solidity/numbers'
+//import {formatDecimal, roundFloat} from '../solidity/numbers'
 
 import DocumentItemDetailNumber from '../components/DocumentItemDetailNumber'
 import DocumentItemDetailHeader from '../components/DocumentItemDetailHeader'
@@ -17,7 +17,7 @@ class DocumentItemDetail extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.document.opening != nextProps.document.opening)
+    if (this.props.document.opening !== nextProps.document.opening)
       this.setState( {
         classNameAnim: nextProps.document.opening ? "doc-opening" : "doc-closing",
       })

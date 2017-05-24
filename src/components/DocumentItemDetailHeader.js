@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 const HeaderItem = (props) => {
   return (
@@ -7,6 +7,13 @@ const HeaderItem = (props) => {
       <input className="w3-input w3-padding-small" type="text" defaultValue={props.value}/>
     </div>
   )
+}
+
+const HeaderItemCust = (props) => {
+  return (<div>
+    <label className="w3-text-gray">{props.label}</label>
+    <input className="w3-input w3-padding-small" type="text" defaultValue={props.value}/>
+  </div>)
 }
 
 const DocumentItemDetailHeader = (props) => {
@@ -36,14 +43,10 @@ const DocumentItemDetailHeader = (props) => {
 
       <div className="w3-cell w3-mobile w3-padding-small" style={{width: "50%"}}>
         <form className="w3-padding-small">
-          <label className="w3-text-gray">Customer Name 1</label>
-          <input className="w3-input w3-padding-small" type="text" defaultValue={props.document.custname1}/>
-          <label className="w3-text-gray">Customer Name 2</label>
-          <input className="w3-input w3-padding-small" type="text" defaultValue={props.document.custname2}/>
-          <label className="w3-text-gray">VAT ID</label>
-          <input className="w3-input w3-padding-small" type="text" defaultValue={props.document.custnip}/>
-          <label className="w3-text-gray">Internal Account Nmb</label>
-          <input className="w3-input w3-padding-small" type="text" defaultValue={props.document.custaccnmb}/>
+          <HeaderItemCust label="Customer Name 1" value={props.document.custname1}/>
+          <HeaderItemCust label="Customer Name 2" value={props.document.custname2}/>
+          <HeaderItemCust label="VAT ID" value={props.document.custnip}/>
+          <HeaderItemCust label="Internal Account Nmb" value={props.document.custaccnmb}/>
         </form>
       </div>
     </div>

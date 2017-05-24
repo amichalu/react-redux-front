@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {formatDecimal, roundFloat} from '../solidity/numbers'
+import {formatDecimal} from '../solidity/numbers'
 
 class DocumentItemDetailArticles extends Component {
 

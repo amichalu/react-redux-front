@@ -172,7 +172,6 @@ const documents = ( state = initialState, action ) => {
               didInvalidate: true
           }
         case TOGGLE_DOCUMENT:
-        
           var {items, selectedItems} = toggle( state.selectedItems, state.items, action.id, action.receivedAt )
           return {
             ...state,
@@ -181,11 +180,11 @@ const documents = ( state = initialState, action ) => {
             selectedItems: selectedItems
           }
         case TOGGLE_ALL_DOCUMENTS:
-          var {items, selectedItems} = toggleAllDocuments( state.items, action )
+          var {_items, _selectedItems} = toggleAllDocuments( state.items, action )
           return {
             ...state,
-            items: items,
-            selectedItems: selectedItems
+            items: _items,
+            selectedItems: _selectedItems
           }
         case OPEN_DOCUMENT:
           return {
