@@ -1,8 +1,8 @@
 #### The front demo app REACT + REDUX + REDUX-THUNK
 
-live demo: https://solidity.kz:9001
+Live demo: https://solidity.kz:9001
 
-This project is bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+The application was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) and designed in fulfilment of the pattern of [Presentational and Container Components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) recommended by Dan Abramov.
 
 Runtime technologies used so far:
 
@@ -18,6 +18,8 @@ Dev tools:
 * [gulp](http://gulpjs.com) &&  - [gulp-sass](https://www.npmjs.com/package/gulp-sass) for the saas transpilation
 * [redux-devtools](https://github.com/gaearon/redux-devtools) - for the browser extention
 
+![OneToManyReactAppScrSht](https://github.com/amichalu/react-redux-front/blob/master/img/main.png)
+
 #### Install
 
 npm install && npm start
@@ -28,17 +30,31 @@ In the local dev http server API calls are forwaded to "proxy": "https://solidit
 
 
 ```
- DocumentListContainer.js   - the only React container for fetching the data 
-           |                  (calls ext. REST API). 
-           |                  Tha data are afterwards stored in Redux.
-           v
-     DocumentList.js        - View component - the list of the records
-           |         
-           v
-     DocumentItem.js        - View component - the record
-           |         
-           v
-  DocumentItemDetail.js     - View component - document's detail 
-                              && fetched articles for clicked record
+                         DocumentListContainer.js    - the only React container for fetching the data 
+                                    |                  (calls ext. REST API). 
+                                    |                  The data are afterwards stored in Redux.
+                                    v
+                              DocumentList.js        - Presentational component: the list of records
+                                    |         
+                                    v
+                              DocumentItem.js        - Presentational component: the record of the invoice
+                                    |         
+                                    v
+                           DocumentItemDetail.js     - Presentational component: document's detail 
+                                                            && fetched articles for clicked record
+                                    |
+            +-----------+-----------+------------------------------+---------------------------+
+            |                       |                              |                           | 
+            v                       v                              v                           v
+DocumentItemDetailNumber.js DocumentItemDetailHeader.js DocumentItemDetailArticles.js DocumentItemDetailFooter.js
+                                    |
+                       +------------+------------+
+                       |                         |
+                       v                         v
+                  HeaderItem               HeaderItemCust   - trivial wrapper HTML/CSS components, defined in
+                                                              DocumentItemDetailHeader.js
+          
+
+
 ```
 
