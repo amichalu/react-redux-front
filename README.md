@@ -26,13 +26,12 @@ npm install && npm start
 
 In the local dev http server API calls are forwaded to "proxy": "https://solidity.kz:9001" (package.json)
 
-#### Components' structure deescription
+#### Components' structure 
 
 
 ```
-                         DocumentListContainer.js    - the only React container for fetching the data 
-                                    |                  (calls ext. REST API). 
-                                    |                  The data are afterwards stored in Redux.
+                         DocumentListContainer.js    - the only React container aware of data fetching 
+                                    |                  Data are fetched and stored in Redux
                                     v
                               DocumentList.js        - Presentational component: the list of records
                                     |         
