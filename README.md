@@ -1,6 +1,6 @@
 #### The front demo app REACT + REDUX + REDUX-THUNK
 
-Live demo: https://solidity.kz:9001
+:smile: Live demo: https://solidity.kz:9001 
 
 The application was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) and designed in fulfilment of the pattern of [Presentational and Container Components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) recommended by Dan Abramov.
 
@@ -51,10 +51,16 @@ DocumentItemDetailNumber.js DocumentItemDetailHeader.js DocumentItemDetailArticl
                        +------------+------------+
                        |                         |
                        v                         v
-                  HeaderItem               HeaderItemCust   - trivial wrapper HTML/CSS components, defined in
-                                                              DocumentItemDetailHeader.js
+                  HeaderItem               HeaderItemCust   - trivial wrapper components for HTML/CSS, 
+                                                              defined in DocumentItemDetailHeader.js
           
 
+Trivial wrapper function/class presentational components for HTML/CSS:
+
+  DocumentItemDetailNumber.js
+  DocumentItemDetailHeader.js
+  DocumentItemDetailArticles.js
+  DocumentItemDetailFooter.js 
 
 ```
 
