@@ -51,14 +51,12 @@ DocumentItemDetailNumber.js DocumentItemDetailHeader.js DocumentItemDetailArticl
                        +------------+------------+
                        |                         |
                        v                         v
-                  HeaderItem               HeaderItemCust   - trivial wrapper components for HTML/CSS, 
-                                                              defined in DocumentItemDetailHeader.js
-          
+                  HeaderItem               HeaderItemCust   
 
 Trivial wrapper function/class presentational components for HTML/CSS:
 
   DocumentItemDetailNumber.js
-  DocumentItemDetailHeader.js
+  DocumentItemDetailHeader.js + HeaderItem, HeaderItemCust (inside)
   DocumentItemDetailArticles.js
   DocumentItemDetailFooter.js 
 
