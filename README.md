@@ -1,8 +1,8 @@
 #### The front demo app REACT + REDUX + REDUX-THUNK
 
-This is the demo app, kind of invoices viewer utilizing React + Redux store, feeded with data by RESTful API app  https://github.com/amichalu/react-redux-back-flask
+This is the demo app, kind of invoices viewer utilizing React + Redux store, fed with data by RESTful API app  https://github.com/amichalu/react-redux-back-flask
 
-:smile: Live demo: https://solidity.kz:9001 
+:smile: Live demo: https://rrapp.amovile.com
 
 The application was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) and designed in fulfilment of the pattern of [Presentational and Container Components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) recommended by Dan Abramov.
 
@@ -26,7 +26,7 @@ Dev tools:
 
 npm install && npm start
 
-In the local dev http server API calls are forwaded to "proxy": "https://solidity.kz:9001" (package.json)
+In the local dev http server API calls are forwaded to "proxy": "https://rrapp.amovile.com" (package.json)
 
 #### Components' structure 
 
