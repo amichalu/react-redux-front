@@ -26,5 +26,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://solidity.kz:9001/"
+  "proxy": "https://rrapp.amovile.com/"
 }
