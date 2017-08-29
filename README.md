@@ -12,6 +12,7 @@ Runtime technologies used so far:
 * [React](https://facebook.github.io/react/)
 * [Redux](http://redux.js.org/) - as the state store
 * [redux-thunk](https://github.com/gaearon/redux-thunk) - middleware which allows some side effects in action functions like calling the external api
+* [react-ga](https://github.com/react-ga/react-ga) - Google Analytics client wrapper
 
 Dev tools:
 
