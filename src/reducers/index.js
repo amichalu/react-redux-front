@@ -20,6 +20,7 @@ const initialState = {
     isFetching: false,
     items: [],
     selectedItems: [],
+    allSelectedItems: false,
     lastUpdated: '',
     didInvalidate: true,
     pageNmb: 0,
@@ -83,7 +84,7 @@ const toggle = (selectedItems, items, toggleDocumentId, receivedAt ) => {
 const toggleAllDocuments = (items, action) => {
     var selectedItems = []
     return {
-        items: items.map( (doc) => {
+        _items: items.map( (doc) => {
             if (action.selectAll) selectedItems[doc.id] = true
             return {
                 ...doc,
@@ -91,7 +92,7 @@ const toggleAllDocuments = (items, action) => {
                 lastUpdated: action.receivedAt
             }
         }),
-        selectedItems: selectedItems
+        _selectedItems: selectedItems
     }
 }
 
@@ -148,7 +149,9 @@ const documents = ( state = initialState, action ) => {
           return {
               ...state,
               pageNmb: state.pageNmb + 1,
-              didInvalidate: true
+              didInvalidate: true,
+              allSelectedItems: false,
+              selectedItems: state.allSelectedItems ? [] : state.selectedItems
           }
         case PREV_PAGE:
           return {
@@ -177,14 +180,16 @@ const documents = ( state = initialState, action ) => {
             ...state,
             items: items,
             lastUpdated: action.receivedAt,
-            selectedItems: selectedItems
+            selectedItems: selectedItems,
+            allSelectedItems: false
           }
         case TOGGLE_ALL_DOCUMENTS:
           var {_items, _selectedItems} = toggleAllDocuments( state.items, action )
           return {
             ...state,
             items: _items,
-            selectedItems: _selectedItems
+            selectedItems: _selectedItems,
+            allSelectedItems: action.selectAll
           }
         case OPEN_DOCUMENT:
           return {

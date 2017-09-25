@@ -49,8 +49,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchDocumentsIfNeeded: () => {
       dispatch(fetchDocumentsIfNeeded())
     },
-    onPageClick: (e, incr) => {
-      if ( incr === -1 ) {
+    onPageClick: (e, incr, pageNmb = 0) => {
+      if ( incr === -1 && pageNmb > 0 ) {
         dispatch(prevPage())
         dispatch(invalidateDocuments())
         dispatch(fetchDocumentsIfNeeded())
