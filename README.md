@@ -1,5 +1,8 @@
 #### The front demo app REACT + REDUX + REDUX-THUNK
 
+DEMO APP IS BEING REBUILT !! DONT CLONE THIS APP !!
+
+
 This is the demo app, kind of invoices viewer utilizing React + Redux store, fed with data by RESTful API app  https://github.com/amichalu/react-redux-back-flask
 
 :smile: Live demo: https://rrapp.amovile.com
@@ -25,7 +28,7 @@ Dev tools:
 
 #### Install
 
-npm install && npm start
+yarn && yarn build && yarn start
 
 In the local dev http server API calls are forwaded to "proxy": "https://rrapp.amovile.com" (package.json)
 
