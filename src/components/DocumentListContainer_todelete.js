@@ -15,7 +15,7 @@ import {
   closeAllDocuments,
   fetchDocumentDetail
  } from '../actions'
-import DocumentList from '../components/DocumentList'
+import DocumentList from './DocumentList'
 
 ReactGA.initialize('UA-105506825-2');
 
@@ -29,16 +29,17 @@ class DocumentListContainer extends Component {
     console.log('DocumentListContainer.render()')
 
     return <DocumentList 
-              documents={this.props.documents}
-              articles={this.props.articles}
-              onPageClick={this.props.onPageClick}
-              onRefreshData={this.props.onRefreshData}
-              onCloseAllDocuments={this.props.onCloseAllDocuments}
-              onChangeOrder={(i,dir)=>(this.props.onChangeOrder(i,dir))}
-              onToggle={(id)=>(this.props.onToggle(id))}
-              onToggleAllDocuments={(selectAll)=>(this.props.onToggleAllDocuments(selectAll))}
-              onOpenDetail={this.props.onOpenDetail}
-              onCloseDetail={this.props.onCloseDetail}/>
+              //documents={this.props.documents}
+              //articles={this.props.articles}
+              // onPageClick={this.props.onPageClick}
+              // onRefreshData={this.props.onRefreshData}
+              // onCloseAllDocuments={this.props.onCloseAllDocuments}
+              // onChangeOrder={(i,dir)=>(this.props.onChangeOrder(i,dir))}
+              // onToggle={(id)=>(this.props.onToggle(id))}
+              // onToggleAllDocuments={(selectAll)=>(this.props.onToggleAllDocuments(selectAll))}
+              // onOpenDetail={this.props.onOpenDetail}
+              // onCloseDetail={this.props.onCloseDetail}
+              />
   }
 }
 

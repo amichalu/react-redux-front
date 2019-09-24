@@ -17,6 +17,9 @@ const HeaderItemCust = (props) => {
 }
 
 const DocumentItemDetailHeader = (props) => {
+
+  console.log(props.document.Date1)
+
   return (    
     <div className="w3-cell-row">
   
@@ -24,18 +27,18 @@ const DocumentItemDetailHeader = (props) => {
         <form className="w3-container w3-padding-small">
 
           <div className="w3-cell-row">
-            <HeaderItem label="Document nmb" value={props.document.number}/>
-            <HeaderItem label="Place of Invoice" value={props.document.location}/>            
+            <HeaderItem label="Document nmb" value={props.document.Number}/>
+            <HeaderItem label="Place of Invoice" value={props.document.Location}/>            
           </div>
 
           <div className="w3-cell-row">
-            <HeaderItem label="Date" value={props.document.date}/>
-            <HeaderItem label="Payment" value={props.document.paymethod_name}/>
+            <HeaderItem label="Date" value={props.document.Date1}/>
+            <HeaderItem label="Payment" value={props.document.Paymethod}/>
           </div>
 
           <div className="w3-cell-row">
-            <HeaderItem label="Period from:" value={props.document.period_startdate}/>
-            <HeaderItem label="Period to:" value={props.document.period_enddate}/>
+            <HeaderItem label="Period from:" value={props.document.Period.Startdate1}/>
+            <HeaderItem label="Period to:" value={props.document.Period.Enddate1}/>
           </div>
 
         </form>
@@ -43,10 +46,10 @@ const DocumentItemDetailHeader = (props) => {
 
       <div className="w3-cell w3-mobile w3-padding-small" style={{width: "50%"}}>
         <form className="w3-padding-small">
-          <HeaderItemCust label="Customer Name 1" value={props.document.custname1}/>
-          <HeaderItemCust label="Customer Name 2" value={props.document.custname2}/>
-          <HeaderItemCust label="VAT ID" value={props.document.custnip}/>
-          <HeaderItemCust label="Internal Account Nmb" value={props.document.custaccnmb}/>
+          <HeaderItemCust label="Customer Name 1" value={props.document.Custname1}/>
+          <HeaderItemCust label="Customer Name 2" value={props.document.Custname2}/>
+          <HeaderItemCust label="VAT ID" value={props.document.Custnip}/>
+          <HeaderItemCust label="Internal Account Nmb" value={props.document.Custaccnmb}/>
         </form>
       </div>
     </div>

@@ -1,7 +1,8 @@
 var path = require('path');
 
 module.exports = {
-    mode: 'production',
+    mode: 'development',
+    devtool: 'inline-source-map',
     //entry: './index.js', // ./src/index.js is default entry
     output: { path: path.join(__dirname, 'public'), filename: 'index.js' },
     
@@ -38,6 +39,11 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, 'public'),
         compress: true,
-        port: 9000
+        port: 9000,
+        proxy: {
+          '/documents': 'http://localhost:8000',
+          '/documentarticles': 'http://localhost:8000',
+
+        }
     }
 };

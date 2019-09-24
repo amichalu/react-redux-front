@@ -7,10 +7,10 @@ class DocumentItemDetailFooter extends Component {
     var tBrutto = 0;
     var tNetto = 0;
 
-    const articles = this.props.articles.items[this.props.document.id].articles
+    const articles = this.props.articles.items[this.props.document.Id].articles
     for (var i = 0; i < articles.length; i++) {
-      tBrutto += parseFloat(articles[i].bruttovalue)
-      tNetto += parseFloat(articles[i].nettovalue)
+      tBrutto += parseFloat(articles[i].Bruttovalue)
+      tNetto += parseFloat(articles[i].Nettovalue)
     }
 
     return <table className="w3-table w3-striped"><tbody>

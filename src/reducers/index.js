@@ -34,7 +34,7 @@ const initialState = {
 // Document list reducer
 const updateOpen = (id, items, receivedAt) => {
   return items.map( (doc) => {
-    if (doc.id === id) {
+    if (doc.Id === id) {
       return {
         ...doc,
         opening: true,
@@ -47,7 +47,7 @@ const updateOpen = (id, items, receivedAt) => {
 
 const updateClose = (id, items, receivedAt) => {
   return items.map( (doc) => {
-    if (doc.id === id) {
+    if (doc.Id === id) {
       return {
         ...doc,
         opening: false,
@@ -70,7 +70,7 @@ const toggle = (selectedItems, items, toggleDocumentId, receivedAt ) => {
 
     return {
         items: items.map( (doc) => {
-            if (doc.id === parseInt(toggleDocumentId, 10)) {
+            if (doc.Id === parseInt(toggleDocumentId, 10)) {
                 return {
                     ...doc,
                     checked: newSelectedItems[toggleDocumentId] ? true : false,
@@ -85,7 +85,7 @@ const toggleAllDocuments = (items, action) => {
     var selectedItems = []
     return {
         _items: items.map( (doc) => {
-            if (action.selectAll) selectedItems[doc.id] = true
+            if (action.selectAll) selectedItems[doc.Id] = true
             return {
                 ...doc,
                 checked: action.selectAll,
@@ -100,7 +100,7 @@ const toggleAllDocuments = (items, action) => {
 const updateDocumentsState = ( selectedItems, items, receivedAt ) => {
     if (!items) return null
     let newItems = items.map( (doc) => {
-        if ( selectedItems[ doc.id ] ) {
+        if ( selectedItems[ doc.Id ] ) {
             return {
                 ...doc,
                 checked: true,
@@ -157,7 +157,9 @@ const documents = ( state = initialState, action ) => {
           return {
               ...state,
               pageNmb: state.pageNmb > 0 ? state.pageNmb - 1 : state.pageNmb,
-              didInvalidate: true
+              didInvalidate: true,
+              allSelectedItems: false,
+              selectedItems: state.allSelectedItems ? [] : state.selectedItems
           }
         case CHANGE_ORDER:
           if ( state.order === action.order) {
@@ -205,7 +207,7 @@ const documents = ( state = initialState, action ) => {
           return {
             ...state,
             items: state.items.map( (doc) => { 
-                if ( doc.id === action.id ) {
+                if ( doc.Id === action.id ) {
                     return {
                         ...doc,
                         spinner: !doc.spinner,
@@ -250,7 +252,7 @@ const articles = ( state = initialStateDocDetail, action ) => {
         case RECEIVE_DOCUMENTDETAIL:
           var newItems = state.items.slice();
           newItems[action.id] = {
-              articles: action.document.articles
+              articles: action.document
           }
           return {
               ...state,

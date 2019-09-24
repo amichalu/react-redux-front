@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+import ReactGA from 'react-ga'
 //import {formatDecimal, roundFloat} from '../solidity/numbers'
 
 import DocumentItemDetailNumber from '../components/DocumentItemDetailNumber'
 import DocumentItemDetailHeader from '../components/DocumentItemDetailHeader'
 import DocumentItemDetailArticles from '../components/DocumentItemDetailArticles'
 import DocumentItemDetailFooter from '../components/DocumentItemDetailFooter'
+import { closeDocument } from '../actions'
 
 // DocumentItemDetail  ------------------------------------------------------------------
 class DocumentItemDetail extends Component {
@@ -24,7 +28,12 @@ class DocumentItemDetail extends Component {
   }
 
   onClose() {
-    this.props.onCloseDetail(this.props.document.id);
+    ReactGA.event({
+      category: 'Document',
+      action: 'Close detail',
+      label: 'Document detail'
+    });
+    this.props.dispatch(closeDocument(this.props.document.Id))
   }
 
   render() {
@@ -48,4 +57,8 @@ class DocumentItemDetail extends Component {
   }  
 }
 
-export default DocumentItemDetail
+//export default DocumentItemDetail
+export default connect(
+  null,
+  null
+)(DocumentItemDetail)

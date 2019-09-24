@@ -7,9 +7,8 @@ import { createLogger } from 'redux-logger'
 import { Provider } from 'react-redux'
 
 import reducer from './reducers'
-import DocumentListContainer from './components/DocumentListContainer';
+import DocumentList from './components/DocumentList';
 import './css/styles.css';
-//import './css/w3.css';
 
 // Enable logger 
 const middleware = [ thunk ]
@@ -25,7 +24,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <DocumentListContainer />
+    <DocumentList />
   </Provider>,
   document.getElementById('root')
 )

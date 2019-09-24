@@ -5,16 +5,16 @@ class DocumentItemDetailArticles extends Component {
 
   renderArticles() {
       var id = 1
-      return this.props.articles.items[this.props.document.id].articles.map((art,k) => (      
+      return this.props.articles.items[this.props.document.Id].articles.map((art,k) => (      
         <tr key={k}>
           <td>{id++}</td>      
-          <td>{art.artname1}</td>
-          <td><p className="text-ar art-cell">{formatDecimal(art.artprice)}</p></td>
-          <td>{art.arttaxlabel}</td>
-          <td>{art.artunit}</td>
-          <td><p className="text-ar art-cell">{formatDecimal(art.quantity)}</p></td>
-          <td><p className="text-ar art-cell">{formatDecimal(art.nettovalue)}</p></td>
-          <td><p className="text-ar art-cell">{formatDecimal(art.bruttovalue)}</p></td>
+          <td>{art.Artname1}</td>
+          <td><p className="text-ar art-cell">{formatDecimal(art.Artprice)}</p></td>
+          <td>{art.Arttaxlabel}</td>
+          <td>{art.Artunit}</td>
+          <td><p className="text-ar art-cell">{formatDecimal(art.Quantity)}</p></td>
+          <td><p className="text-ar art-cell">{formatDecimal(art.Nettovalue)}</p></td>
+          <td><p className="text-ar art-cell">{formatDecimal(art.Bruttovalue)}</p></td>
         </tr>
       ))
     }

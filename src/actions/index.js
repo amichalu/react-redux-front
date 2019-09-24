@@ -1,3 +1,5 @@
+import ReactGA from 'react-ga';
+
 // Document's list actions
 export const REQUEST_DOCUMENTS = 'REQUEST_DOCUMENTS'
 export const RECEIVE_DOCUMENTS = 'RECEIVE_DOCUMENTS'
@@ -68,7 +70,7 @@ export const closeAllDocuments = () => ({
 
 export const receiveDocuments = (json) => ({
   type: RECEIVE_DOCUMENTS,
-  items: prepareDocuments( json.documents ),
+  items: prepareDocuments( json ),
   receivedAt: Date.now()
 })
 
@@ -77,8 +79,52 @@ export const changeOrder = ( col = 'number' ) => ({
   order: col
 })
 
+export const onRefreshData = () => {
+
+  ReactGA.event({
+    category: 'Navigation',
+    action: 'Refresh',
+    label: 'Top navigation'
+  });
+
+  return (dispatch) => {
+    dispatch(invalidateDocuments())
+    dispatch(fetchDocumentsIfNeeded())
+  }
+}
+
+export const nextPageClick = () => {
+
+  ReactGA.event({
+    category: 'Navigation',
+    action: 'Next page',
+    label: 'Top navigation'
+  });
+
+  return (dispatch) => {
+    dispatch(nextPage())
+    dispatch(invalidateDocuments())
+    dispatch(fetchDocumentsIfNeeded())
+  }
+}
+
+export const prevPageClick = () => {
+
+  ReactGA.event({
+    category: 'Navigation',
+    action: 'Prev page',
+    label: 'Top navigation'
+  });
+
+  return (dispatch) => {
+    dispatch(prevPage())
+    dispatch(invalidateDocuments())
+    dispatch(fetchDocumentsIfNeeded())
+  }
+}
+
 export const nextPage = () => ({
-    type: NEXT_PAGE
+  type: NEXT_PAGE
 })
 export const prevPage = () => ({
   type: PREV_PAGE
@@ -141,7 +187,7 @@ const getUrlDocumentDetail = (id) => ("/documentarticles/" + id)
 export const fetchDocumentDetail = (id) => (dispatch, getState) => {
   var alreadyOpened = false;
   getState().documents.items.forEach((doc) => {
-    if (doc.id === id && doc.opening) {
+    if (doc.Id === id && doc.opening) {
       alreadyOpened = true
       return
     }
