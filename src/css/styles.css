@@ -1,6 +1,6 @@
 @import url("https://www.w3schools.com/w3css/4/w3.css");
 @import url("https://www.w3schools.com/lib/w3-theme-light-green.css");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
+
 .text-ar {
   text-align: right; }
 
@@ -129,12 +129,21 @@
     height: 0px;
     visibility: hidden; } }
 
+/* TableNavigation buttons */
+
 .button-margin {
   margin: 8px 8px 8px 0px; }
 
 .button-style {
   color: #616161;
-  float: left; }
+  float: left;
+ }
+
+.button-style-dark {
+    color: #bbbbbb;
+    background: #222222;
+}
+  
 
 .error_msg {
   background-color: #ff5722;

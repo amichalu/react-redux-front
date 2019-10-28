@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 
 import reducer from './reducers'
 import DocumentList from './components/DocumentList';
+import {AppContext} from './components/app-context';
 import './css/styles.css';
 
 // Enable logger 
@@ -24,7 +25,9 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <DocumentList />
+    <AppContext.Provider value="dark">
+      <DocumentList />
+    </AppContext.Provider>
   </Provider>,
   document.getElementById('root')
 )

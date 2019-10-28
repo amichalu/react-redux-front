@@ -62,7 +62,7 @@ class DocumentItem extends Component {
   render() {
     console.log("DocumentItem.render()")
     const doc = this.props.document
-    const docType = (doc.type === CORR_DOC_TYPE) ? 'Corr' : 'Inv VAT'
+    const docType = (doc.Type === CORR_DOC_TYPE) ? 'Corr' : 'Inv VAT'
     const openDocumentDetailAnim = 'w3-cell w3-left doc-id' + (this.props.document.spinner || false ? ' request-documentdetail-spinner' : '')
     
     return <div>
@@ -73,7 +73,7 @@ class DocumentItem extends Component {
           <div onClick={ ()=>{this.onOpenDetail(doc.Id)} }>    
             <div className={openDocumentDetailAnim}><p className='text-ar p-cell whitespace'>{this.props.document.spinner || false ? ('') : (doc.Id) }</p></div>
             <div className={"w3-cell w3-left doc-number " + this.getHighlightedColClass('number')}><p className="text-al p-cell whitespace">{doc.Number}</p></div>
-            <div className={"w3-cell w3-left doc-type " + (doc.type === -1 ? 'div-doc-norm' : 'div-doc-corr')}><p className="text-ac p-cell whitespace">{docType}</p></div>
+            <div className={"w3-cell w3-left doc-type " + (doc.Type === -1 ? 'div-doc-norm' : 'div-doc-corr')}><p className="text-ac p-cell whitespace">{docType}</p></div>
             <div className={"w3-cell w3-left doc-number " + this.getHighlightedColClass('date')}><p className="text-al p-cell whitespace">{doc.Date1}</p></div>
             <div className={"w3-cell w3-right doc-val " + this.getHighlightedColClass('excise')}><p className="text-ar p-cell whitespace">{formatDecimal(doc.Excise)}</p></div>
             <div className={"w3-cell w3-right doc-val " + this.getHighlightedColClass('brutto')}><p className="text-ar p-cell whitespace">{formatDecimal(doc.Brutto)}</p></div>

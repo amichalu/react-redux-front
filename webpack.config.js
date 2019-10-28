@@ -1,5 +1,8 @@
 var path = require('path');
 
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+
 module.exports = {
     mode: 'development',
     devtool: 'inline-source-map',
@@ -11,6 +14,13 @@ module.exports = {
         chunks: 'all'
         }
     },
+
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: 'index.html'
+      }),
+      new FaviconsWebpackPlugin('./favicon.png')
+    ],
 
     module: {
         rules: [
@@ -26,7 +36,7 @@ module.exports = {
                 use: ['style-loader', 'css-loader'],
             },
             {
-                test: /\.(png|jpe?g|gif|svg)$/i,
+                test: /\.(woff(2)?|ttf|eot|png|jpe?g|gif|svg)$/i,
                 use: [
                   {
                     loader: 'file-loader',

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import {AppContext} from './app-context';
 import { connect } from 'react-redux'
-
 import ReactGA from 'react-ga';
 
 import { 
@@ -9,7 +9,6 @@ import {
   invalidateDocuments,
   fetchDocumentsIfNeeded
  } from '../actions'
-
 
 // TableHeader component  ------------------------------------------------------------------
 class TableHeader extends Component {
@@ -54,11 +53,14 @@ class TableHeader extends Component {
   render() {
     console.log("DocumentList.render()")
     const reloadAnimClass = 'w3-padding-small fa fa-refresh' + (this.props.documents && this.props.documents.isFetching ? ' w3-spin' : '')
+    
+    let theme = this.context.theme;
+    const mainClass = theme.thead + ' w3-row  w3-text-white'
 
-    return  <div className="w3-row w3-theme-d1 w3-text-white">
+    return  <div className={mainClass}>
               <div className="w3-col w3-left doc-check"><input type="checkbox" className="input-checkbox" name="" value="" checked={this.props.documents.allSelectedItems} onChange={(e)=>(this.onToogleAllDocuments(e))}/></div>
               <div className="w3-col w3-left doc-id"><p className="text-ar p-cell">id</p></div>
-              <div className="hover-div"><div className={"w3-col w3-left doc-number " + this.getHighlightedColClass('number')}  onClick={()=>this.onChangeOrder('number')}><p className="text-al p-cell">Inv Nmb {this.getOrderElement('number')} </p></div></div>
+              <div className="hover-div"><div className={"w3-col w3-left doc-number " + this.getHighlightedColClass('number')} onClick={()=>this.onChangeOrder('number')}><p className="text-al p-cell">Inv Nmb {this.getOrderElement('number')} </p></div></div>
               <div className="w3-col w3-left doc-type"><p className="text-ac p-cell">Inv Type</p></div>
               <div className="hover-div"><div className={"w3-col w3-left doc-number " + this.getHighlightedColClass('date')} onClick={()=>this.onChangeOrder('date')}><p className="text-al p-cell">Date {this.getOrderElement('date')}</p></div></div>
               <div className="hover-div"><div className={"w3-col w3-right doc-val " + this.getHighlightedColClass('excise')} onClick={()=>this.onChangeOrder('excise')}><p className="text-al p-cell">Excise {this.getOrderElement('excise')}</p></div></div>
@@ -69,6 +71,8 @@ class TableHeader extends Component {
             </div>;
   }
 }
+
+TableHeader.contextType = AppContext;
 
 export default connect(
   (state) => {
