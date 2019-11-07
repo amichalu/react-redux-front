@@ -37,7 +37,7 @@ In the local dev http server API calls are forwaded to "proxy": "https://rrapp.a
 
 ```
                          DocumentListContainer.js    - the only React container aware of data fetching 
-                                    |                  Data are fetched and stored in Redux
+                                    |
                                     v
                               DocumentList.js        - Presentational component: the list of records
                                     |         
