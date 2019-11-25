@@ -5,8 +5,6 @@ import DocumentItemDetail from '../components/DocumentItemDetail'
 
 import { connect } from 'react-redux'
 
-import ReactGA from 'react-ga';
-
 import { toggleDocument,
   fetchDocumentDetail 
 } from '../actions/index'
@@ -34,21 +32,10 @@ class DocumentItem extends Component {
     this.setState({ hover: false })
   }
   onCheckClick(event) {
-    ReactGA.event({
-      category: 'Documents',
-      action: 'Toggle document',
-      label: ''
-    });
     this.props.dispatch(toggleDocument(event.target.value))
   }
 
   onOpenDetail(id) {
-    ReactGA.event({
-      category: 'Document',
-      action: 'Open detail',
-      label: 'Document detail'
-    });
-
     this.props.dispatch(fetchDocumentDetail(id))
   }
 

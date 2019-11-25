@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 // Application components
-import DocumentItem from '../components/DocumentItem'
-import TableNavigation from '../components/TableNavigation'
-import TableHeader from '../components/TableHeader'
+import DocumentItem from './DocumentItem'
+import TableNavigation from './TableNavigation'
+import TableHeader from './TableHeader'
 
+// Context object definition
 import {AppContext, themes} from './app-context';
 
 import '@fortawesome/fontawesome-free/css/all.css'
 
-
-
-// DocumentList main container component  ------------------------------------------------------------------
-class DocumentList extends Component {
+// Container of other components ------------------------------------------------------------------
+// can change the theme through toogleTheme()
+class Container extends Component {
 
   constructor(props) {
     super(props)
@@ -36,7 +36,7 @@ class DocumentList extends Component {
   }
 
   render() {
-    console.log("DocumentList.render()")
+    console.log("Container.render()")
 
     document.body.style.backgroundColor = this.state.context.theme.background; // let's change background color
 
@@ -46,19 +46,22 @@ class DocumentList extends Component {
         <button style={{backgroundColor: this.state.context.theme.background}} onClick={this.toggleTheme}>
           <i className="fas fa-moon" aria-hidden="true"> dark mode</i>
         </button>
-
+          
+        {/* context allows to avoid data to be passed top-down (parent to child) via props */}
         <AppContext.Provider value={this.state.context}>
-
+      
           <TableNavigation/>
 
           <div className="w3-border w3-round">
 
+              {/* */}
               <TableHeader/>
 
-              {/* List of documents */}
+              {/* Create list of DocumentItem components */}
               { this.props.documents.items.map( (document)=>(
                 <DocumentItem key={document.Id} document={document}/>
               ))}
+
           </div>
 
         </AppContext.Provider>
@@ -67,10 +70,12 @@ class DocumentList extends Component {
   </div>;
   }
 }
-
-export default connect(
+// connect() returns wrapped component and merge state.documents and dispatch() to props
+// so you can use this.props.documents in your render()
+// and this.props.dispatch(action_id) e.g. in your onClick()
+export default connect( 
   (state) => {
     return {
       documents: state.documents
     }}
-)(DocumentList)
+)(Container)

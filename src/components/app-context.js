@@ -3,7 +3,7 @@ import React from 'react';
 export const themes = {
   light: {
     foreground: '#000000',
-    background: '#eeeeee',
+    background: '#fff',
     tnav_fore:  '#616161',
     tnav_back:  '#eeeeee',
     err_msg_fore: '#fff',
@@ -22,6 +22,4 @@ export const themes = {
   },
 };
 
-export const AppContext = React.createContext(
-  //themes.light // default value
-);
+export const AppContext = React.createContext();

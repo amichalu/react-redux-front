@@ -7,14 +7,15 @@ import { createLogger } from 'redux-logger'
 import { Provider } from 'react-redux'
 
 import reducer from './reducers'
-import DocumentList from './components/DocumentList';
-import {AppContext} from './components/app-context';
+import Container from './components/Container';
+
+import 'w3-css/w3.css';
 import './css/styles.css';
 
 // Enable logger 
 const middleware = [ thunk ]
 if ( process.env.NODE_ENV !== 'production') {
-  middleware.push(createLogger())
+  middleware.push(createLogger()) // logger enables verbose info of prev and current state once action has been fired
 }
 
 // Redux store
@@ -24,10 +25,8 @@ const store = createStore(
 )
 
 ReactDOM.render(
-  <Provider store={store}>
-    <AppContext.Provider value="dark">
-      <DocumentList />
-    </AppContext.Provider>
+  <Provider store={store}> {/* Redux store will be available to any nested components if wrapped by connect() */}    
+    <Container/>
   </Provider>,
   document.getElementById('root')
 )

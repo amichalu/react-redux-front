@@ -1,4 +1,3 @@
-import ReactGA from 'react-ga';
 
 // Document's list actions
 export const REQUEST_DOCUMENTS = 'REQUEST_DOCUMENTS'
@@ -80,13 +79,6 @@ export const changeOrder = ( col = 'number' ) => ({
 })
 
 export const onRefreshData = () => {
-
-  ReactGA.event({
-    category: 'Navigation',
-    action: 'Refresh',
-    label: 'Top navigation'
-  });
-
   return (dispatch) => {
     dispatch(invalidateDocuments())
     dispatch(fetchDocumentsIfNeeded())
@@ -94,13 +86,6 @@ export const onRefreshData = () => {
 }
 
 export const nextPageClick = () => {
-
-  ReactGA.event({
-    category: 'Navigation',
-    action: 'Next page',
-    label: 'Top navigation'
-  });
-
   return (dispatch) => {
     dispatch(nextPage())
     dispatch(invalidateDocuments())
@@ -109,13 +94,6 @@ export const nextPageClick = () => {
 }
 
 export const prevPageClick = () => {
-
-  ReactGA.event({
-    category: 'Navigation',
-    action: 'Prev page',
-    label: 'Top navigation'
-  });
-
   return (dispatch) => {
     dispatch(prevPage())
     dispatch(invalidateDocuments())

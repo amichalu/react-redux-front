@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {AppContext} from './app-context';
 import { connect } from 'react-redux'
-import ReactGA from 'react-ga';
 
 import { 
   changeOrder, 
@@ -10,25 +9,21 @@ import {
   fetchDocumentsIfNeeded
  } from '../actions'
 
-// TableHeader component  ------------------------------------------------------------------
+// TableHeader component ------------------------------------------------------------------
 class TableHeader extends Component {
 
   constructor(props) {
     super(props)
-    this.onChangeOrder = this.onChangeOrder.bind(this)
-    this.onToogleAllDocuments = this.onToogleAllDocuments.bind(this)
-  }
 
-  onChangeOrder(col) {
-    ReactGA.event({
-      category: 'Documents',
-      action: 'Change order: ' + col,
-      label: 'Sorting'
-    });
-
-    this.props.dispatch(changeOrder(col))
-    this.props.dispatch(invalidateDocuments())
-    this.props.dispatch(fetchDocumentsIfNeeded())
+    this.onChangeOrder = (col) => {
+      this.props.dispatch(changeOrder(col))
+      this.props.dispatch(invalidateDocuments())
+      this.props.dispatch(fetchDocumentsIfNeeded())
+    }
+  
+    this.onToogleAllDocuments = (event) => {
+      this.props.dispatch(toggleAllDocuments(event.target.checked))
+    }  
   }
 
   getOrderElement(order) {
@@ -36,17 +31,7 @@ class TableHeader extends Component {
     if (!el) return ''
     return el === 1 ? <i className="fa fa-sort-amount-asc w3-padding-small" style={{ float: "right"}}aria-hidden="true"></i> : <i className="fa fa-sort-amount-desc w3-padding-small" style={{ float: "right"}}aria-hidden="true"></i>
   }
-
-  onToogleAllDocuments(event) {
-    ReactGA.event({
-      category: 'Documents',
-      action: 'Toggle all documents',
-      label: ''
-    });
-
-    this.props.dispatch(toggleAllDocuments(event.target.checked))
-  }
-
+  
   getHighlightedColClass(col) {
     return this.props.documents.order === col ? 'w3-theme-d2' : ''
   }

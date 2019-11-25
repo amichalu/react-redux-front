@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import ReactGA from 'react-ga'
 //import {formatDecimal, roundFloat} from '../solidity/numbers'
 
 import DocumentItemDetailNumber from '../components/DocumentItemDetailNumber'
@@ -28,18 +27,11 @@ class DocumentItemDetail extends Component {
   }
 
   onClose() {
-    ReactGA.event({
-      category: 'Document',
-      action: 'Close detail',
-      label: 'Document detail'
-    });
     this.props.dispatch(closeDocument(this.props.document.Id))
   }
 
   render() {
     console.log("DocumentItemDetail.render()")
-    
-    //const d = this.props.document
 
     return <div className={"w3-card w3-leftbar w3-border-grey div-detail " + this.state.classNameAnim}>
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {AppContext} from './app-context';
 import { connect } from 'react-redux'
-import ReactGA from 'react-ga';
 import classNames from 'classnames'
 import '@fortawesome/fontawesome-free/css/all.css'
 
@@ -20,43 +19,20 @@ class TableNavigation extends Component {
     super(props)
 
     this.onPrevPageClick = () => {
-      ReactGA.event({
-        category: 'Navigation',
-        action: 'Prev page',
-        label: 'Top navigation'
-      });
       this.props.dispatch(prevPage())
       this.refreshData()
     }
 
-    this.onNextPageClick = () => {
-      ReactGA.event({
-        category: 'Navigation',
-        action: 'Next page',
-        label: 'Top navigation'
-      });
-  
+    this.onNextPageClick = () => {  
       this.props.dispatch(nextPage())
       this.refreshData()
     }
     
-    this.onCloseAllDocuments = () => {
-      ReactGA.event({
-        category: 'Document',
-        action: 'Close all documents',
-        label: 'Document detail'
-      });
-  
+    this.onCloseAllDocuments = () => {  
       this.props.dispatch(closeAllDocuments())
     }
   
     this.onRefreshClick = () => {
-      ReactGA.event({
-        category: 'Navigation',
-        action: 'Refresh',
-        label: 'Top navigation'
-      });
-  
       this.refreshData()
     }
 
